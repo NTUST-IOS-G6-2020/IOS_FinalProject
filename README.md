@@ -11,5 +11,8 @@ https://www.youtube.com/watch?v=0fXR-Ksuqo4&list=PLHDMmeIMXj8VH2Q-ASaS__bwIV7vpy
 ### Tinder Using Firebase With SwiftUI - Part 1 - Tinder Swipe In SwiftUI - Tinder Design In SwiftUI
 https://www.youtube.com/watch?v=lrh2xUQ4w0k&list=PLimqJDzPI-H8YOzYfUEmX1_WY6lebNAiX
 
+### Firebase implement
+https://www.appcoda.com.tw/firebase-login-signup/
+
 ## Trello Todo
 https://trello.com/b/cf21tMQf/ios%E6%9C%9F%E6%9C%AB
