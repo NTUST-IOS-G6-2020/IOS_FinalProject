@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="1">
+ <tileset firstgid="1" source="background02.tsx"/>
+ <tileset firstgid="151" source="background01.tsx"/>
+ <layer id="4" name="backGround" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6HzWf8+JmJfSFg1VVVVVVX19QApqhVT
+  </data>
+ </layer>
+ <layer id="5" name="地形" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlTEOwjAMRXsuVrrCzEpPRVmAGaQMGbkcqSCSVcXBqe0kVfOkLxicfOfHSruuwWUQqtHmvFFvKqk9Yndaw11j1NBbiVmgeGLZ7CQbifhosnfqCXUl54PifXA6Ku4fWyOdzUlonzW8rTW8O42GFE+nEciA/zl5ON2Bbgv2sEDm9/sS6e6LRI+pmAwepYEzaDP7XoGmrLnz8mb4ey3pwWc4rS0xM3YmTo4+w9A5/Dnnma2R0P1juYVqDXEttRf4HZB8NzG/0Dm0fTWReD9qYAvfnH+MTVXpwlwbUkp9rA9sf4ovtU47x9QzfAAbdrn3
+  </data>
+ </layer>
+</map>
