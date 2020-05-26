@@ -19,9 +19,13 @@
 		4B349C50247BACE1002C8AB2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B349C4F247BACE1002C8AB2 /* LoginViewController.swift */; };
 		4B7F363A247CF5A100695696 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7F3639247CF5A100695696 /* Default-568h@2x.png */; };
 		4B7F363E247CF72500695696 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B7F363D247CF72500695696 /* GoogleService-Info.plist */; };
+		7A02BE8044BB9A2DAE47EA0E /* Pods_JMatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3910FD36C612A36D8D5B0027 /* Pods_JMatch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23BCA051D42963BA1D38AF18 /* Pods-JMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMatch.debug.xcconfig"; path = "Target Support Files/Pods-JMatch/Pods-JMatch.debug.xcconfig"; sourceTree = "<group>"; };
+		3910FD36C612A36D8D5B0027 /* Pods_JMatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JMatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4753A5CB07C7C5D67E7FE089 /* Pods-JMatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMatch.release.xcconfig"; path = "Target Support Files/Pods-JMatch/Pods-JMatch.release.xcconfig"; sourceTree = "<group>"; };
 		4B048A1C247BF3AB006D4055 /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		4B048A1E247BFFA0006D4055 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4B048A20247C1FBB006D4055 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -43,18 +47,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A02BE8044BB9A2DAE47EA0E /* Pods_JMatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B8450C4211468BFD630D2B3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				23BCA051D42963BA1D38AF18 /* Pods-JMatch.debug.xcconfig */,
+				4753A5CB07C7C5D67E7FE089 /* Pods-JMatch.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		4B349C2F247BAB40002C8AB2 = {
 			isa = PBXGroup;
 			children = (
 				4B7F3639247CF5A100695696 /* Default-568h@2x.png */,
 				4B349C3A247BAB40002C8AB2 /* JMatch */,
 				4B349C39247BAB40002C8AB2 /* Products */,
+				2B8450C4211468BFD630D2B3 /* Pods */,
+				74211B66152252E91C884668 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +102,14 @@
 			path = JMatch;
 			sourceTree = "<group>";
 		};
+		74211B66152252E91C884668 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3910FD36C612A36D8D5B0027 /* Pods_JMatch.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -92,9 +117,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4B349C4C247BAB40002C8AB2 /* Build configuration list for PBXNativeTarget "JMatch" */;
 			buildPhases = (
+				68EB62BEE843F7C58F616D71 /* [CP] Check Pods Manifest.lock */,
 				4B349C34247BAB40002C8AB2 /* Sources */,
 				4B349C35247BAB40002C8AB2 /* Frameworks */,
 				4B349C36247BAB40002C8AB2 /* Resources */,
+				B0F62AAABFFEA3FC71D7A4CC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -153,6 +180,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68EB62BEE843F7C58F616D71 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JMatch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0F62AAABFFEA3FC71D7A4CC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JMatch/Pods-JMatch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JMatch/Pods-JMatch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JMatch/Pods-JMatch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4B349C34247BAB40002C8AB2 /* Sources */ = {
@@ -306,6 +375,7 @@
 		};
 		4B349C4D247BAB40002C8AB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23BCA051D42963BA1D38AF18 /* Pods-JMatch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -323,6 +393,7 @@
 		};
 		4B349C4E247BAB40002C8AB2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4753A5CB07C7C5D67E7FE089 /* Pods-JMatch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
