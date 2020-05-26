@@ -1,5 +1,6 @@
 *.rar
 *.zip
+.DS_Store
 
 # Created by https://www.gitignore.io/api/xcode,swift
 # Edit at https://www.gitignore.io/?templates=xcode,swift
