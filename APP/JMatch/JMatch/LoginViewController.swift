@@ -16,8 +16,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var login_btn: UIButton!
     
-    @IBOutlet weak var warnUser: UILabel!
-    @IBOutlet weak var warnPassword: UILabel!
+    @IBOutlet weak var WarnText: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,9 +25,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func Login(_ sender: UIButton) {
-        if checkInputValidation(TextField: UserName) && checkInputValidation(TextField: Password){
-            
-        }
+        // Test Sign Up Info View
+//       let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SignUpInfoVC")
+//        navigationController?.pushViewController(vc, animated: true)
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func DismissAction(_ sender: UIButton) {
@@ -43,9 +44,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: - SET UI
     func setupUI() {
         
-        // Background color to be gradient
-//        createGradientLayer()
-        
         // login btn
         login_btn.layer.cornerRadius = 22.0
         
@@ -57,8 +55,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         setTextField(TextField: Password, keyboardType: .default, returnKeyType: .done)
         
         // Warning text
-        warnUser.isHidden = true
-        warnPassword.isHidden = true
+        WarnText.isHidden = true
     }
     
     func createGradientLayer(){
@@ -72,7 +69,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func setTextField(TextField : UITextField, keyboardType: UIKeyboardType, returnKeyType: UIReturnKeyType) {
-        
         TextField.delegate = self
         
         TextField.borderStyle = .roundedRect
@@ -80,40 +76,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         TextField.keyboardType = keyboardType
         TextField.returnKeyType = returnKeyType
         TextField.textColor = UIColor.systemPink
-    }
-    
-    // MARK: - input Validate
-    func checkInputValidation(TextField: UITextField) -> Bool {
-        
-        if TextField == UserName {
-            warnUser.isHidden = true
-            guard let email = UserName.text, UserName.text?.count != 0 else {
-                warnUser.isHidden = false
-                warnUser.text = "Please Enter User Email"
-                return false
-            }
-            
-            if !isValidEmail(emailID: email) {
-                warnUser.isHidden = false
-                warnUser.text = "Please Enter Valid Email Address"
-                return false
-            }
-        }
-        else if TextField == Password {
-            warnPassword.isHidden = true
-            guard let _ = Password.text, Password.text?.count != 0 else{
-                       warnPassword.isHidden = false
-                       warnPassword.text = "Please Enter Password"
-                       return false
-            }
-        }
-        return true
-    }
-    
-    func isValidEmail(emailID: String) -> Bool{
-        let emailRegEx = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,}"
-        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: emailID)
     }
     
     // MARK: - UITextField
@@ -125,23 +87,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         else if textField == Password{
             textField.resignFirstResponder()
         }
-        checkInputValidation(TextField: textField)
         return true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

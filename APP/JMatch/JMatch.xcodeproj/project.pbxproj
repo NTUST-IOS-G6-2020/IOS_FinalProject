@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,8 @@
 		4B349C50247BACE1002C8AB2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B349C4F247BACE1002C8AB2 /* LoginViewController.swift */; };
 		4B7F363A247CF5A100695696 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7F3639247CF5A100695696 /* Default-568h@2x.png */; };
 		4B7F363E247CF72500695696 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B7F363D247CF72500695696 /* GoogleService-Info.plist */; };
+		4BFFF062247D42EC001D13AD /* SignUpInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFF061247D42EC001D13AD /* SignUpInfoViewController.swift */; };
+		4BFFF064247D744E001D13AD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFF063247D744E001D13AD /* MainViewController.swift */; };
 		7A02BE8044BB9A2DAE47EA0E /* Pods_JMatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3910FD36C612A36D8D5B0027 /* Pods_JMatch.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +42,8 @@
 		4B349C4F247BACE1002C8AB2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4B7F3639247CF5A100695696 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4B7F363D247CF72500695696 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4BFFF061247D42EC001D13AD /* SignUpInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfoViewController.swift; sourceTree = "<group>"; };
+		4BFFF063247D744E001D13AD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +64,6 @@
 				23BCA051D42963BA1D38AF18 /* Pods-JMatch.debug.xcconfig */,
 				4753A5CB07C7C5D67E7FE089 /* Pods-JMatch.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -98,6 +101,8 @@
 				4B048A1E247BFFA0006D4055 /* SignUpViewController.swift */,
 				4B048A20247C1FBB006D4055 /* WelcomeViewController.swift */,
 				4B048A24247C5038006D4055 /* ResetPasswordViewController.swift */,
+				4BFFF061247D42EC001D13AD /* SignUpInfoViewController.swift */,
+				4BFFF063247D744E001D13AD /* MainViewController.swift */,
 			);
 			path = JMatch;
 			sourceTree = "<group>";
@@ -230,10 +235,12 @@
 			files = (
 				4B349C50247BACE1002C8AB2 /* LoginViewController.swift in Sources */,
 				4B048A21247C1FBB006D4055 /* WelcomeViewController.swift in Sources */,
+				4BFFF062247D42EC001D13AD /* SignUpInfoViewController.swift in Sources */,
 				4B349C3C247BAB40002C8AB2 /* AppDelegate.swift in Sources */,
 				4B048A25247C5038006D4055 /* ResetPasswordViewController.swift in Sources */,
 				4B048A1F247BFFA0006D4055 /* SignUpViewController.swift in Sources */,
 				4B349C3E247BAB40002C8AB2 /* SceneDelegate.swift in Sources */,
+				4BFFF064247D744E001D13AD /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
