@@ -19,6 +19,10 @@
 		4B349C50247BACE1002C8AB2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B349C4F247BACE1002C8AB2 /* LoginViewController.swift */; };
 		4B7F363A247CF5A100695696 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7F3639247CF5A100695696 /* Default-568h@2x.png */; };
 		4B7F363E247CF72500695696 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B7F363D247CF72500695696 /* GoogleService-Info.plist */; };
+		4BE2E4EB247E2E9000D2289B /* LoginUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE2E4EA247E2E9000D2289B /* LoginUI.swift */; };
+		4BE2E4ED247E2F9B00D2289B /* SignUpUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE2E4EC247E2F9B00D2289B /* SignUpUI.swift */; };
+		4BE2E4EF247E308800D2289B /* ResetPasswordUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE2E4EE247E308800D2289B /* ResetPasswordUI.swift */; };
+		4BE2E4F1247E30D200D2289B /* SignUpInfoUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE2E4F0247E30D200D2289B /* SignUpInfoUI.swift */; };
 		4BFFF062247D42EC001D13AD /* SignUpInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFF061247D42EC001D13AD /* SignUpInfoViewController.swift */; };
 		4BFFF064247D744E001D13AD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFF063247D744E001D13AD /* MainViewController.swift */; };
 		7A02BE8044BB9A2DAE47EA0E /* Pods_JMatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3910FD36C612A36D8D5B0027 /* Pods_JMatch.framework */; };
@@ -42,6 +46,10 @@
 		4B349C4F247BACE1002C8AB2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4B7F3639247CF5A100695696 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4B7F363D247CF72500695696 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4BE2E4EA247E2E9000D2289B /* LoginUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUI.swift; sourceTree = "<group>"; };
+		4BE2E4EC247E2F9B00D2289B /* SignUpUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUI.swift; sourceTree = "<group>"; };
+		4BE2E4EE247E308800D2289B /* ResetPasswordUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUI.swift; sourceTree = "<group>"; };
+		4BE2E4F0247E30D200D2289B /* SignUpInfoUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfoUI.swift; sourceTree = "<group>"; };
 		4BFFF061247D42EC001D13AD /* SignUpInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfoViewController.swift; sourceTree = "<group>"; };
 		4BFFF063247D744E001D13AD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +111,10 @@
 				4B048A24247C5038006D4055 /* ResetPasswordViewController.swift */,
 				4BFFF061247D42EC001D13AD /* SignUpInfoViewController.swift */,
 				4BFFF063247D744E001D13AD /* MainViewController.swift */,
+				4BE2E4EA247E2E9000D2289B /* LoginUI.swift */,
+				4BE2E4EC247E2F9B00D2289B /* SignUpUI.swift */,
+				4BE2E4EE247E308800D2289B /* ResetPasswordUI.swift */,
+				4BE2E4F0247E30D200D2289B /* SignUpInfoUI.swift */,
 			);
 			path = JMatch;
 			sourceTree = "<group>";
@@ -234,13 +246,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B349C50247BACE1002C8AB2 /* LoginViewController.swift in Sources */,
+				4BE2E4F1247E30D200D2289B /* SignUpInfoUI.swift in Sources */,
 				4B048A21247C1FBB006D4055 /* WelcomeViewController.swift in Sources */,
 				4BFFF062247D42EC001D13AD /* SignUpInfoViewController.swift in Sources */,
+				4BE2E4EB247E2E9000D2289B /* LoginUI.swift in Sources */,
+				4BE2E4EF247E308800D2289B /* ResetPasswordUI.swift in Sources */,
 				4B349C3C247BAB40002C8AB2 /* AppDelegate.swift in Sources */,
 				4B048A25247C5038006D4055 /* ResetPasswordViewController.swift in Sources */,
 				4B048A1F247BFFA0006D4055 /* SignUpViewController.swift in Sources */,
 				4B349C3E247BAB40002C8AB2 /* SceneDelegate.swift in Sources */,
 				4BFFF064247D744E001D13AD /* MainViewController.swift in Sources */,
+				4BE2E4ED247E2F9B00D2289B /* SignUpUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
