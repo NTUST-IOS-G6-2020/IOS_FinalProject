@@ -27,14 +27,12 @@
 		4BE2E4F1247E30D200D2289B /* SignUpInfoUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE2E4F0247E30D200D2289B /* SignUpInfoUI.swift */; };
 		4BFFF062247D42EC001D13AD /* SignUpInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFF061247D42EC001D13AD /* SignUpInfoViewController.swift */; };
 		4BFFF064247D744E001D13AD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFF063247D744E001D13AD /* MainViewController.swift */; };
-<<<<<<< HEAD
 		7A02BE8044BB9A2DAE47EA0E /* Pods_JMatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3910FD36C612A36D8D5B0027 /* Pods_JMatch.framework */; };
 		EFF36E4D247EA46D00511BD8 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF36E4C247EA46D00511BD8 /* MessageTableViewController.swift */; };
 		EFF36E4F247EAA8D00511BD8 /* FriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF36E4E247EAA8D00511BD8 /* FriendTableViewController.swift */; };
 		EFF36E51247EB2E000511BD8 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF36E50247EB2E000511BD8 /* MessageTableViewCell.swift */; };
 		EFF36E53247EBD4800511BD8 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF36E52247EBD4800511BD8 /* FriendTableViewCell.swift */; };
-=======
->>>>>>> 052bb117ac73f16aba68013883db99da0fec0010
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,14 +59,11 @@
 		4BE2E4F0247E30D200D2289B /* SignUpInfoUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfoUI.swift; sourceTree = "<group>"; };
 		4BFFF061247D42EC001D13AD /* SignUpInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfoViewController.swift; sourceTree = "<group>"; };
 		4BFFF063247D744E001D13AD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		EFF36E4C247EA46D00511BD8 /* MessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		EFF36E4E247EAA8D00511BD8 /* FriendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewController.swift; sourceTree = "<group>"; };
 		EFF36E50247EB2E000511BD8 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		EFF36E52247EBD4800511BD8 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
-=======
 		D8480E250387913EF97BBC3B /* Pods-JMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMatch.debug.xcconfig"; path = "Target Support Files/Pods-JMatch/Pods-JMatch.debug.xcconfig"; sourceTree = "<group>"; };
->>>>>>> 052bb117ac73f16aba68013883db99da0fec0010
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,14 +127,11 @@
 				4BE2E4EC247E2F9B00D2289B /* SignUpUI.swift */,
 				4BE2E4EE247E308800D2289B /* ResetPasswordUI.swift */,
 				4BE2E4F0247E30D200D2289B /* SignUpInfoUI.swift */,
-<<<<<<< HEAD
 				EFF36E4C247EA46D00511BD8 /* MessageTableViewController.swift */,
 				EFF36E50247EB2E000511BD8 /* MessageTableViewCell.swift */,
 				EFF36E4E247EAA8D00511BD8 /* FriendTableViewController.swift */,
 				EFF36E52247EBD4800511BD8 /* FriendTableViewCell.swift */,
-=======
 				4BDEB448247EA0410057D276 /* CustomHUD.swift */,
->>>>>>> 052bb117ac73f16aba68013883db99da0fec0010
 			);
 			path = JMatch;
 			sourceTree = "<group>";
