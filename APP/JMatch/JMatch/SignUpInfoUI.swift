@@ -19,12 +19,13 @@ extension UIAlertAction {
     }
 }
 
-extension SignUpInfoViewController: UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+extension SignUpInfoViewController {
     // MARK: - SET UI
     func setUI() {
         // Gender Button
         genderMan_btn.isSelected = true
         genderWoman_btn.isSelected = false
+        gender = genderMan_btn.titleLabel?.text
         
         // Avatar
         setAvatar()
@@ -37,11 +38,58 @@ extension SignUpInfoViewController: UITextFieldDelegate, UIImagePickerController
         signUp_btn.layer.cornerRadius = 25
         
         // Date Picker
-        txtDatePicker.delegate = self
+        txtBirthday.delegate = self
         showDatePicker()
     }
+    
+    // MARK: - BIRTHDAY PICKER
+    func showDatePicker(){
+        //Formate Date
+        datePicker.datePickerMode = .date
+        
+        // Set Max and Min Date
+        let calender = Calendar(identifier: .gregorian)
+        var comps = DateComponents()
+        comps.year = 0
+        let maxDate = calender.date(byAdding: comps, to: Date())
+        comps.year = -110
+        let minDate = calender.date(byAdding: comps, to: Date())
+        datePicker.maximumDate = maxDate
+        datePicker.minimumDate = minDate
+        
 
+        //ToolBar
+        let toolbar = UIToolbar();
+        toolbar.sizeToFit()
+        toolbar.backgroundColor = .white
+        
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donedatePicker));
+        
+        toolbar.setItems([cancelButton,spaceButton,doneButton], animated: false)
+        
+        txtBirthday.inputAccessoryView = toolbar
+        txtBirthday.inputAccessoryView?.backgroundColor = .white
+        txtBirthday.inputView?.backgroundColor = .white
+        txtBirthday.inputView = datePicker
+    }
 
+    @objc func donedatePicker(){
+        let dateValue = DateFormatter()
+        dateValue.dateFormat = "MM/dd/yyyy"
+        txtBirthday.text = dateValue.string(from: datePicker.date)
+        self.view.endEditing(true)
+    }
+
+    @objc func cancelDatePicker(){
+        self.view.endEditing(true)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     // MARK: - SET AVATAR
     func setAvatar () {
         Avatar.layer.cornerRadius = 70
@@ -56,6 +104,8 @@ extension SignUpInfoViewController: UITextFieldDelegate, UIImagePickerController
     @objc func presentPicker() {
         let photoSourceRequestController = UIAlertController(title: "", message: "選擇加入圖片方式", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "相機", style: .default) { (action) in
+            // Custom Load HUD
+            let load_hud = CustomHUD().LoadHUD(view: self.view)
             if UIImagePickerController.isSourceTypeAvailable(.camera){
                 let imagePicker = UIImagePickerController()
                 imagePicker.allowsEditing = false
@@ -64,11 +114,14 @@ extension SignUpInfoViewController: UITextFieldDelegate, UIImagePickerController
                 imagePicker.allowsEditing = true
                 imagePicker.delegate = self
                 
+                load_hud.hide(animated: true)
                 self.present(imagePicker, animated: true, completion: nil)
             }
         }
         
         let photoLibAction = UIAlertAction(title: "圖片庫", style: .default) { (action) in
+            // Custom Load HUD
+            let load_hud = CustomHUD().LoadHUD(view: self.view)
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
                 let imagePicker = UIImagePickerController()
                 imagePicker.allowsEditing = false
@@ -77,62 +130,46 @@ extension SignUpInfoViewController: UITextFieldDelegate, UIImagePickerController
                 imagePicker.allowsEditing = true
                 imagePicker.delegate = self
                 
+                load_hud.hide(animated: true)
                 self.present(imagePicker, animated: true, completion: nil)
             }
         }
-        
         let cancleAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         cancleAction.titleTextColor = UIColor.red
         photoSourceRequestController.addAction(cameraAction)
         photoSourceRequestController.addAction(photoLibAction)
         photoSourceRequestController.addAction(cancleAction)
         
-        
         present(photoSourceRequestController, animated: true, completion: nil)
+    }
+}
+
+
+// MARK:- Extension UIImagePickerController
+extension SignUpInfoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-    }
-
-    // MARK: - BIRTHDAY PICKER
-    func showDatePicker(){
-        //Formate Date
-        datePicker.datePickerMode = .date
-
-        //ToolBar
-        let toolbar = UIToolbar();
-        toolbar.sizeToFit()
-        toolbar.backgroundColor = .white
+        if let editImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            image = editImage
+            Avatar.image = editImage
+        }
         
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donedatePicker));
-        
-        toolbar.setItems([cancelButton,spaceButton,doneButton], animated: false)
-        
-        txtDatePicker.inputAccessoryView = toolbar
-        txtDatePicker.inputAccessoryView?.backgroundColor = .white
-        txtDatePicker.inputView?.backgroundColor = .white
-        txtDatePicker.inputView = datePicker
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            image = selectedImage
+            Avatar.image = selectedImage
+        }
+        dismiss(animated: true, completion: nil)
     }
+    
+}
 
-    @objc func donedatePicker(){
-        let dateValue = DateFormatter()
-        dateValue.dateFormat = "MM/dd/yyyy"
-        txtDatePicker.text = dateValue.string(from: datePicker.date)
-        self.view.endEditing(true)
-    }
-
-    @objc func cancelDatePicker(){
-        self.view.endEditing(true)
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-
-    // MARK: - Extension UITextField
+// MARK: - Extension UITextField
+extension SignUpInfoViewController: UITextFieldDelegate {
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) ->Bool {
         // Textfields cannot input, edit by the keyboard. It just can set text by code.
-        if textField == txtDatePicker{
+        if textField == txtBirthday{
             return false
         }
         return true
@@ -141,19 +178,6 @@ extension SignUpInfoViewController: UITextFieldDelegate, UIImagePickerController
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-
-// MARK:- Extension UIImagePickerController
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if let editImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            Avatar.image = editImage
-        }
-        
-        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            Avatar.image = selectedImage
-        }
-        dismiss(animated: true, completion: nil)
     }
 }
 

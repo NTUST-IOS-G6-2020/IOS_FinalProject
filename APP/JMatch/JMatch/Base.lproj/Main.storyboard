@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wZA-rx-ouV">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eRv-7U-Iwc">
+>>>>>>> 052bb117ac73f16aba68013883db99da0fec0010
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -190,10 +194,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="XG8-PT-gyF"/>
                     <connections>
-                        <outlet property="Password" destination="zOf-H1-elU" id="paj-5Y-KiO"/>
-                        <outlet property="UserName" destination="mCZ-E7-hci" id="Dtr-9e-Tav"/>
                         <outlet property="WarnText" destination="lyU-1m-Dil" id="6S8-EL-kJZ"/>
                         <outlet property="login_btn" destination="UOT-ee-zYW" id="Nq4-QX-1B0"/>
+                        <outlet property="txtEmail" destination="mCZ-E7-hci" id="wqx-Qw-7at"/>
+                        <outlet property="txtPassword" destination="zOf-H1-elU" id="BDv-PS-96R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -246,7 +250,7 @@
                                     <action selector="DismissAction:" destination="wCh-Vm-zmJ" eventType="touchUpInside" id="mf3-BE-lte"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSg-77-Lyd">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSg-77-Lyd">
                                 <rect key="frame" x="56" y="311" width="303" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -321,7 +325,7 @@
                                     <segue destination="wCh-Vm-zmJ" kind="show" id="OxP-dL-P4i"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uup-WJ-rmB">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uup-WJ-rmB">
                                 <rect key="frame" x="56" y="294" width="302" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -513,7 +517,7 @@
                                                 <rect key="frame" x="43" y="4" width="23" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="circle" catalog="system"/>
+                                                <state key="normal" title="Man" image="circle" catalog="system"/>
                                                 <state key="selected" image="checkmark.circle.fill" catalog="system"/>
                                                 <connections>
                                                     <action selector="GenderManCheck:" destination="mpc-kE-dSK" eventType="touchUpInside" id="FQ2-sj-aeK"/>
@@ -538,7 +542,7 @@
                                                 <rect key="frame" x="41" y="4" width="25" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.96699744460000003" green="0.42008142320000003" blue="0.42802645519999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" image="circle" catalog="system"/>
+                                                <state key="normal" title="Woman" image="circle" catalog="system"/>
                                                 <state key="selected" image="checkmark.circle.fill" catalog="system"/>
                                                 <connections>
                                                     <action selector="GenderWoman_bnt:" destination="mpc-kE-dSK" eventType="touchUpInside" id="Lpv-co-UM0"/>
@@ -611,7 +615,7 @@
                         <outlet property="genderMan_btn" destination="QJm-Pm-PC0" id="6XO-XH-frD"/>
                         <outlet property="genderWoman_btn" destination="1DR-Iu-iv5" id="F4S-W4-fiF"/>
                         <outlet property="signUp_btn" destination="80g-3N-9r8" id="Uht-4L-D2x"/>
-                        <outlet property="txtDatePicker" destination="vqt-k8-hBT" id="0aJ-Zb-0kP"/>
+                        <outlet property="txtBirthday" destination="vqt-k8-hBT" id="QiV-Ax-1RN"/>
                         <outlet property="txtName" destination="1XQ-t9-pBL" id="kgL-WE-HI5"/>
                     </connections>
                 </viewController>
@@ -924,9 +928,16 @@
             <point key="canvasLocation" x="4083" y="1341"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow.left" catalog="system" width="64" height="48"/>
+        <image name="checkmark.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="circle" catalog="system" width="64" height="60"/>
+        <image name="person.circle" catalog="system" width="64" height="60"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LDP-2Q-Bhh"/>
     </inferredMetricsTieBreakers>
+<<<<<<< HEAD
     <resources>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
@@ -938,4 +949,6 @@
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="photo" catalog="system" width="128" height="93"/>
     </resources>
+=======
+>>>>>>> 052bb117ac73f16aba68013883db99da0fec0010
 </document>

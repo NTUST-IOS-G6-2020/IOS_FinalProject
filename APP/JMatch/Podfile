@@ -6,9 +6,9 @@ target 'JMatch' do
   use_frameworks!
 
   # Pods for JMatch
-  pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
+  pod 'MBProgressHUD', '~> 1.1.0'
 end
