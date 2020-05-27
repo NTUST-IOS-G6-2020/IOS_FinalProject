@@ -33,55 +33,38 @@ class SignUpViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func validateFields() {
+    func validateFields() -> Bool {
         guard let email = txtEmail.text, !email.isEmpty else {
-            print("Please Enter an Email Address")
-            return
+            CustomHUD().ErrorHUD(view: self.view, Message: "Please Enter an Email Address")
+            return false
         }
         
         guard let password = txtPassword.text, !password.isEmpty else {
-            print("Please Enter a Password")
-            return
+            CustomHUD().ErrorHUD(view: self.view, Message: "Please Enter your Password")
+            return false
         }
+        return true
     }
     
-    // MARK: - To Firebase
     @IBAction func CreateAccount(_ sender: UIButton) {
         self.view.endEditing(true)
-        validateFields()
-        
-        Auth.auth().createUser(withEmail: txtEmail.text!, password: txtPassword.text!) {
-            (user, error) in
+        if validateFields() {
             
-            if error == nil {
-                print("You have successfully signed up")
-                
-                //Goes to the Setup page which lets the user take a photo for theirprofilepicture and also chose a username
-                let vc = UIStoryboard(name: "Main",bundle:nil).instantiateViewController(withIdentifier: "SignUpInfoVC")
-                self.navigationController?.pushViewController(vc, animated: true)
-                
-            } else {
-                let alertController = UIAlertController(title: "Error",message:error?.localizedDescription, preferredStyle: .alert)
-                
-                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                alertController.addAction(defaultAction)
-                
-                self.present(alertController, animated: true, completion: nil)
-                
-                if let errCode = AuthErrorCode(rawValue: error!._code) {
-                    switch errCode {
-                    case .invalidEmail:
-                        print("invalid email")
-                    case .emailAlreadyInUse:
-                        print("in use")
-                    default:
-                        print("Create User Error: \(error!)")
-                    }
+            let load_hud = CustomHUD().LoadHUD(view: self.view)
+            Auth.auth().createUser(withEmail: txtEmail.text!, password: txtPassword.text!) {
+                (user, error) in
+                // Hide Custom Load HUD
+                load_hud.hide(animated: true)
+                if error == nil {
+                    // Show the Setup page which lets the user take a photo for theirprofilepicture and also chose      username
+                    let vc = UIStoryboard(name: "Main",bundle:nil).instantiateViewController(withIdentifier: "SignUpInfoVC")
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                } else {
+                    CustomHUD().ErrorHUD(view: self.view, Message: error!.localizedDescription)
                 }
             }
         }
     }
-    
-    
     
 }

@@ -190,10 +190,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="XG8-PT-gyF"/>
                     <connections>
-                        <outlet property="Password" destination="zOf-H1-elU" id="paj-5Y-KiO"/>
-                        <outlet property="UserName" destination="mCZ-E7-hci" id="Dtr-9e-Tav"/>
                         <outlet property="WarnText" destination="lyU-1m-Dil" id="6S8-EL-kJZ"/>
                         <outlet property="login_btn" destination="UOT-ee-zYW" id="Nq4-QX-1B0"/>
+                        <outlet property="txtEmail" destination="mCZ-E7-hci" id="wqx-Qw-7at"/>
+                        <outlet property="txtPassword" destination="zOf-H1-elU" id="BDv-PS-96R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -246,7 +246,7 @@
                                     <action selector="DismissAction:" destination="wCh-Vm-zmJ" eventType="touchUpInside" id="mf3-BE-lte"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSg-77-Lyd">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSg-77-Lyd">
                                 <rect key="frame" x="56" y="311" width="303" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -321,7 +321,7 @@
                                     <segue destination="wCh-Vm-zmJ" kind="show" id="OxP-dL-P4i"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uup-WJ-rmB">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uup-WJ-rmB">
                                 <rect key="frame" x="56" y="294" width="302" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>

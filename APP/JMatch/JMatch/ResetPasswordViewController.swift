@@ -22,27 +22,25 @@ class ResetPasswordViewController: UIViewController {
     @IBAction func DismissAction(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
+    
+    func validateFields() -> Bool {
+        guard let email = txtEmail.text, !email.isEmpty else {
+            CustomHUD().ErrorHUD(view: self.view, Message: "Please Enter an Email Address")
+            return false
+        }
+        return true
+    }
 
     @IBAction func ResetPassword(_ sender: UIButton) {
-        Auth.auth().sendPasswordReset(withEmail: txtEmail.text!) { (error) in
-            var title = ""
-            var message = ""
-            
-            if error == nil {
-                title = "Success!"
-                message = "Password reset email sent."
+        if validateFields() {
+            Auth.auth().sendPasswordReset(withEmail: txtEmail.text!) { (error) in
+                if error != nil {
+                    CustomHUD().ErrorHUD(view: self.view, Message: error!.localizedDescription)
+                    return
+                }
                 self.txtEmail.text = ""
-                
-            } else {
-                title = "Error!"
-                message = (error?.localizedDescription)!
+                CustomHUD().SuccessHUD(view: self.view, Message: "Send!")
             }
-            
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(action)
-            
-            self.present(alertController, animated: true, completion: nil)
         }
     }
     

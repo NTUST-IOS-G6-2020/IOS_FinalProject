@@ -93,6 +93,8 @@ extension SignUpInfoViewController {
     @objc func presentPicker() {
         let photoSourceRequestController = UIAlertController(title: "", message: "選擇加入圖片方式", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "相機", style: .default) { (action) in
+            // Custom Load HUD
+            let load_hud = CustomHUD().LoadHUD(view: self.view)
             if UIImagePickerController.isSourceTypeAvailable(.camera){
                 let imagePicker = UIImagePickerController()
                 imagePicker.allowsEditing = false
@@ -101,11 +103,14 @@ extension SignUpInfoViewController {
                 imagePicker.allowsEditing = true
                 imagePicker.delegate = self
                 
+                load_hud.hide(animated: true)
                 self.present(imagePicker, animated: true, completion: nil)
             }
         }
         
         let photoLibAction = UIAlertAction(title: "圖片庫", style: .default) { (action) in
+            // Custom Load HUD
+            let load_hud = CustomHUD().LoadHUD(view: self.view)
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
                 let imagePicker = UIImagePickerController()
                 imagePicker.allowsEditing = false
@@ -114,10 +119,10 @@ extension SignUpInfoViewController {
                 imagePicker.allowsEditing = true
                 imagePicker.delegate = self
                 
+                load_hud.hide(animated: true)
                 self.present(imagePicker, animated: true, completion: nil)
             }
         }
-        
         let cancleAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         cancleAction.titleTextColor = UIColor.red
         photoSourceRequestController.addAction(cameraAction)

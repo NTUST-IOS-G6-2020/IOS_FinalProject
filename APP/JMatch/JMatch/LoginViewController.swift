@@ -13,8 +13,8 @@ class LoginViewController: UIViewController {
 
     var gradientLayer: CAGradientLayer!
     
-    @IBOutlet weak var UserName: UITextField!
-    @IBOutlet weak var Password: UITextField!
+    @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var login_btn: UIButton!
     @IBOutlet weak var WarnText: UILabel!
     
@@ -22,21 +22,6 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         // Set up Login UI
         setupUI()
-    }
-    
-    @IBAction func Login(_ sender: UIButton) {
-        self.view.endEditing(true)
-        
-        Auth.auth().signIn(withEmail: UserName.text!, password: Password.text!) { (user, error) in
-            if error == nil{
-//                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
-//                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            else {
-                // Error
-                print(error?.localizedDescription)
-            }
-        }
     }
     
     @IBAction func DismissAction(_ sender: UIButton) {
@@ -48,4 +33,40 @@ class LoginViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func validateFields() -> Bool {
+        guard let email = txtEmail.text, !email.isEmpty else {
+            CustomHUD().ErrorHUD(view: self.view, Message: "Please Enter an Email Address")
+            return false
+        }
+        
+        guard let password = txtPassword.text, !password.isEmpty else {
+            CustomHUD().ErrorHUD(view: self.view, Message: "Please Enter your Password")
+            return false
+        }
+        return true
+    }
+        
+    @IBAction func Login(_ sender: UIButton) {
+        self.view.endEditing(true)
+        if validateFields(){
+            // Custom Load HUD
+            let load_hud = CustomHUD().LoadHUD(view: self.view)
+            Auth.auth().signIn(withEmail: txtEmail.text!, password: txtPassword.text!) { (user, error) in
+                load_hud.hide(animated: true)
+                if error != nil{
+                    CustomHUD().ErrorHUD(view: self.view, Message: error!.localizedDescription)
+                }
+                
+                // Login in to New MainScene
+//                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
+//                present(vc, animated: true, completion: nil)
+                
+                self.navigationController?.popToRootViewController(animated: false)
+                // Clear Navigation
+//                self.navigationController?.viewControllers.removeAll()
+            }
+        }
+        
+    }
+        
 }

@@ -16,10 +16,10 @@ extension LoginViewController {
         
         // TextField //
         // Email
-        setTextField(TextField: UserName, keyboardType: .emailAddress, returnKeyType: .continue)
+        setTextField(TextField: txtEmail, keyboardType: .emailAddress, returnKeyType: .continue)
         // Password
-        Password.isSecureTextEntry = true
-        setTextField(TextField: Password, keyboardType: .default, returnKeyType: .done)
+        txtPassword.isSecureTextEntry = true
+        setTextField(TextField: txtPassword, keyboardType: .default, returnKeyType: .done)
         
         // Warning text
         WarnText.isHidden = true
@@ -49,11 +49,11 @@ extension LoginViewController {
 // MARK: - Extension UITextField
 extension LoginViewController: UITextFieldDelegate  {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == UserName{
+        if textField == txtEmail{
             textField.resignFirstResponder()
-            Password.becomeFirstResponder()
+            txtPassword.becomeFirstResponder()
         }
-        else if textField == Password{
+        else if textField == txtPassword{
             textField.resignFirstResponder()
         }
         return true

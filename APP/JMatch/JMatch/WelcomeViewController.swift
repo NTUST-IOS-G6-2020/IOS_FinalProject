@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class WelcomeViewController: UIViewController {
 
     var gradientLayer: CAGradientLayer!
@@ -20,7 +19,6 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         login_btn.layer.cornerRadius = 30.0
         signup_btn.layer.cornerRadius = 30.0
     }
