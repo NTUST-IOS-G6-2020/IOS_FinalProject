@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Firebase
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController {
 
     var gradientLayer: CAGradientLayer!
     
@@ -28,8 +29,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Test Sign Up Info View
 //       let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SignUpInfoVC")
 //        navigationController?.pushViewController(vc, animated: true)
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
-        navigationController?.pushViewController(vc, animated: true)
+        
+        Auth.auth().signIn(withEmail: UserName.text!, password: Password.text!) { (user, error) in
+            if error == nil{
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            else {
+                // Error
+                print(error?.localizedDescription)
+            }
+        }
     }
     
     @IBAction func DismissAction(_ sender: UIButton) {
@@ -41,57 +51,4 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    // MARK: - SET UI
-    func setupUI() {
-        
-        // login btn
-        login_btn.layer.cornerRadius = 22.0
-        
-        // TextField //
-        // Email
-        setTextField(TextField: UserName, keyboardType: .emailAddress, returnKeyType: .continue)
-        // Password
-        Password.isSecureTextEntry = true
-        setTextField(TextField: Password, keyboardType: .default, returnKeyType: .done)
-        
-        // Warning text
-        WarnText.isHidden = true
-    }
-    
-    func createGradientLayer(){
-        gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.view.bounds
-        gradientLayer.colors = [UIColor.systemPink.cgColor, UIColor.orange.cgColor]
-        gradientLayer.locations = [0.0, 2.0]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-    func setTextField(TextField : UITextField, keyboardType: UIKeyboardType, returnKeyType: UIReturnKeyType) {
-        TextField.delegate = self
-        
-        TextField.borderStyle = .roundedRect
-        TextField.clearButtonMode = .whileEditing
-        TextField.keyboardType = keyboardType
-        TextField.returnKeyType = returnKeyType
-        TextField.textColor = UIColor.systemPink
-    }
-    
-    // MARK: - UITextField
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == UserName{
-            textField.resignFirstResponder()
-            Password.becomeFirstResponder()
-        }
-        else if textField == Password{
-            textField.resignFirstResponder()
-        }
-        return true
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-
 }

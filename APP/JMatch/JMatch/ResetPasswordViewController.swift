@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Firebase
 
-class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
+class ResetPasswordViewController: UIViewController {
 
     @IBOutlet weak var reset_btn: UIButton!
     @IBOutlet weak var txtEmail: UITextField!
@@ -21,36 +22,28 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     @IBAction func DismissAction(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
-    
-    // MARK: - Set UI
-    func setupUI (){
-        // reset btn
-        reset_btn.layer.cornerRadius = 30.0
-        
-        // TextField
-        setTextField(TextField: txtEmail, keyboardType: .emailAddress, returnKeyType: .done)
-        
-        // Warn text
-    }
-    
-    func setTextField(TextField : UITextField, keyboardType: UIKeyboardType, returnKeyType: UIReturnKeyType) {
-        TextField.delegate = self
-        TextField.borderStyle = .roundedRect
-        TextField.clearButtonMode = .whileEditing
-        TextField.keyboardType = keyboardType
-        TextField.returnKeyType = returnKeyType
-        TextField.textColor = UIColor.systemPink
-    }
-    
-    // MARK: - UITextField
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
 
+    @IBAction func ResetPassword(_ sender: UIButton) {
+        Auth.auth().sendPasswordReset(withEmail: txtEmail.text!) { (error) in
+            var title = ""
+            var message = ""
+            
+            if error == nil {
+                title = "Success!"
+                message = "Password reset email sent."
+                self.txtEmail.text = ""
+                
+            } else {
+                title = "Error!"
+                message = (error?.localizedDescription)!
+            }
+            
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(action)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
 }
