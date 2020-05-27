@@ -16,7 +16,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var UserName: UITextField!
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var login_btn: UIButton!
-    
     @IBOutlet weak var WarnText: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,14 +25,12 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func Login(_ sender: UIButton) {
-        // Test Sign Up Info View
-//       let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SignUpInfoVC")
-//        navigationController?.pushViewController(vc, animated: true)
+        self.view.endEditing(true)
         
         Auth.auth().signIn(withEmail: UserName.text!, password: Password.text!) { (user, error) in
             if error == nil{
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
-                self.navigationController?.pushViewController(vc, animated: true)
+//                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
+//                self.navigationController?.pushViewController(vc, animated: true)
             }
             else {
                 // Error

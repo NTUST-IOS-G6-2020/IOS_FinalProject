@@ -8,8 +8,6 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
-import FirebaseDatabase
 
 class SignUpViewController: UIViewController {
     
@@ -35,20 +33,29 @@ class SignUpViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    // MARK: - TO Firebase
-    var uid = ""
+    func validateFields() {
+        guard let email = txtEmail.text, !email.isEmpty else {
+            print("Please Enter an Email Address")
+            return
+        }
+        
+        guard let password = txtPassword.text, !password.isEmpty else {
+            print("Please Enter a Password")
+            return
+        }
+    }
     
+    // MARK: - To Firebase
     @IBAction func CreateAccount(_ sender: UIButton) {
+        self.view.endEditing(true)
+        validateFields()
         
         Auth.auth().createUser(withEmail: txtEmail.text!, password: txtPassword.text!) {
             (user, error) in
             
             if error == nil {
-                if let user = Auth.auth().currentUser{
-                    self.uid = user.uid
-                }
-            Database.database().reference(withPath:"ID/\(self.uid)/Profile/Safety-Check").setValue("ON")
                 print("You have successfully signed up")
+                
                 //Goes to the Setup page which lets the user take a photo for theirprofilepicture and also chose a username
                 let vc = UIStoryboard(name: "Main",bundle:nil).instantiateViewController(withIdentifier: "SignUpInfoVC")
                 self.navigationController?.pushViewController(vc, animated: true)

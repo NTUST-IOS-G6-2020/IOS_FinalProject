@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension ResetPasswordViewController: UITextFieldDelegate {
+extension ResetPasswordViewController {
     // MARK: - Set UI
     func setupUI (){
         // reset btn
@@ -28,8 +28,11 @@ extension ResetPasswordViewController: UITextFieldDelegate {
         TextField.returnKeyType = returnKeyType
         TextField.textColor = UIColor.systemPink
     }
+}
+
+// MARK: - Extension UITextField
+extension ResetPasswordViewController: UITextFieldDelegate {
     
-    // MARK: - UITextField
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

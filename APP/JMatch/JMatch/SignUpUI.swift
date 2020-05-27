@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension SignUpViewController: UITextFieldDelegate {
+extension SignUpViewController {
     
     // MARK: - SET UI
     func setupUI() {
@@ -45,16 +45,12 @@ extension SignUpViewController: UITextFieldDelegate {
         TextField.textColor = UIColor.systemPink
     }
     
-    // MARK: - input Validate
-    func checkEmptyInput(TextField: UITextField) -> Bool {
-        
-        guard let _ = TextField.text, TextField.text?.count != 0 else{
-            return false
-        }
-        return true
-    }
+}
+
+
+// MARK: - Extension UITextField
+extension SignUpViewController: UITextFieldDelegate {
     
-    // MARK: - UITextField
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if textField == txtEmail{

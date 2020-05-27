@@ -8,8 +8,7 @@
 
 import UIKit
 
-extension LoginViewController: UITextFieldDelegate  {
-    
+extension LoginViewController {
     // MARK: - SET UI
     func setupUI() {
         // login btn
@@ -45,8 +44,10 @@ extension LoginViewController: UITextFieldDelegate  {
         TextField.returnKeyType = returnKeyType
         TextField.textColor = UIColor.systemPink
     }
-    
-    // MARK: - UITextField
+}
+
+// MARK: - Extension UITextField
+extension LoginViewController: UITextFieldDelegate  {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == UserName{
             textField.resignFirstResponder()

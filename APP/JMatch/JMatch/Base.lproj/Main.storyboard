@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eRv-7U-Iwc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eRv-7U-Iwc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -513,7 +513,7 @@
                                                 <rect key="frame" x="43" y="4" width="23" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="circle" catalog="system"/>
+                                                <state key="normal" title="Man" image="circle" catalog="system"/>
                                                 <state key="selected" image="checkmark.circle.fill" catalog="system"/>
                                                 <connections>
                                                     <action selector="GenderManCheck:" destination="mpc-kE-dSK" eventType="touchUpInside" id="FQ2-sj-aeK"/>
@@ -538,7 +538,7 @@
                                                 <rect key="frame" x="41" y="4" width="25" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.96699744460000003" green="0.42008142320000003" blue="0.42802645519999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" image="circle" catalog="system"/>
+                                                <state key="normal" title="Woman" image="circle" catalog="system"/>
                                                 <state key="selected" image="checkmark.circle.fill" catalog="system"/>
                                                 <connections>
                                                     <action selector="GenderWoman_bnt:" destination="mpc-kE-dSK" eventType="touchUpInside" id="Lpv-co-UM0"/>
@@ -611,7 +611,7 @@
                         <outlet property="genderMan_btn" destination="QJm-Pm-PC0" id="6XO-XH-frD"/>
                         <outlet property="genderWoman_btn" destination="1DR-Iu-iv5" id="F4S-W4-fiF"/>
                         <outlet property="signUp_btn" destination="80g-3N-9r8" id="Uht-4L-D2x"/>
-                        <outlet property="txtDatePicker" destination="vqt-k8-hBT" id="0aJ-Zb-0kP"/>
+                        <outlet property="txtBirthday" destination="vqt-k8-hBT" id="QiV-Ax-1RN"/>
                         <outlet property="txtName" destination="1XQ-t9-pBL" id="kgL-WE-HI5"/>
                     </connections>
                 </viewController>
@@ -673,6 +673,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wZA-rx-ouV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="saI-DI-2mo">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -685,13 +686,13 @@
             <point key="canvasLocation" x="3173.913043478261" y="85.714285714285708"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow.left" catalog="system" width="64" height="48"/>
+        <image name="checkmark.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="circle" catalog="system" width="64" height="60"/>
+        <image name="person.circle" catalog="system" width="64" height="60"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LDP-2Q-Bhh"/>
     </inferredMetricsTieBreakers>
-    <resources>
-        <image name="arrow.left" catalog="system" width="128" height="98"/>
-        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="circle" catalog="system" width="128" height="121"/>
-        <image name="person.circle" catalog="system" width="128" height="121"/>
-    </resources>
 </document>
