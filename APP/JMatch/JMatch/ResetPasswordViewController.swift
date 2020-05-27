@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ResetPasswordViewController: UIViewController {
 
@@ -22,4 +23,27 @@ class ResetPasswordViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+    @IBAction func ResetPassword(_ sender: UIButton) {
+        Auth.auth().sendPasswordReset(withEmail: txtEmail.text!) { (error) in
+            var title = ""
+            var message = ""
+            
+            if error == nil {
+                title = "Success!"
+                message = "Password reset email sent."
+                self.txtEmail.text = ""
+                
+            } else {
+                title = "Error!"
+                message = (error?.localizedDescription)!
+            }
+            
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(action)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
 }

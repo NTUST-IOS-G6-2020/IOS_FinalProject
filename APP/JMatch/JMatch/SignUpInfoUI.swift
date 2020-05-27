@@ -19,7 +19,6 @@ extension UIAlertAction {
     }
 }
 
-
 extension SignUpInfoViewController: UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     // MARK: - SET UI
     func setUI() {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
@@ -28,8 +29,17 @@ class LoginViewController: UIViewController {
         // Test Sign Up Info View
 //       let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SignUpInfoVC")
 //        navigationController?.pushViewController(vc, animated: true)
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
-        navigationController?.pushViewController(vc, animated: true)
+        
+        Auth.auth().signIn(withEmail: UserName.text!, password: Password.text!) { (user, error) in
+            if error == nil{
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            else {
+                // Error
+                print(error?.localizedDescription)
+            }
+        }
     }
     
     @IBAction func DismissAction(_ sender: UIButton) {

@@ -40,7 +40,8 @@ class SignUpViewController: UIViewController {
     
     @IBAction func CreateAccount(_ sender: UIButton) {
         
-        Auth.auth().createUser(withEmail: txtEmail.text!, password: txtPassword.text!) { (user, error) in
+        Auth.auth().createUser(withEmail: txtEmail.text!, password: txtPassword.text!) {
+            (user, error) in
             
             if error == nil {
                 if let user = Auth.auth().currentUser{
