@@ -55,15 +55,19 @@ class LoginViewController: UIViewController {
                 load_hud.hide(animated: true)
                 if error != nil{
                     CustomHUD().ErrorHUD(view: self.view, Message: error!.localizedDescription)
+                    return
                 }
-                
                 // Login in to New MainScene
 //                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
 //                present(vc, animated: true, completion: nil)
-                
-                self.navigationController?.popToRootViewController(animated: false)
                 // Clear Navigation
 //                self.navigationController?.viewControllers.removeAll()
+                
+                CustomHUD().SuccessHUD(view: self.view, Message: "LOGIN")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
+                    // Delay 1.1 Sec and delegate
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
             }
         }
         

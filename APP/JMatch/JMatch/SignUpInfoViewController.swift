@@ -113,14 +113,16 @@ class SignUpInfoViewController: UIViewController {
                             return
                         }
                         load_hud.hide(animated: true)
-                        CustomHUD().SuccessHUD(view: self.view, Message: "Sign UP Success")
                     }
-                    
                 }
             })
         }
         // Navigation
-        navigationController?.popToRootViewController(animated: true)        
+        CustomHUD().SuccessHUD(view: self.view, Message: "Success")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
+            // Delay 1.1 sec then navigate
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     @IBAction func GenderManCheck(_ sender: UIButton) {

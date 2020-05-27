@@ -46,6 +46,17 @@ extension SignUpInfoViewController {
     func showDatePicker(){
         //Formate Date
         datePicker.datePickerMode = .date
+        
+        // Set Max and Min Date
+        let calender = Calendar(identifier: .gregorian)
+        var comps = DateComponents()
+        comps.year = 0
+        let maxDate = calender.date(byAdding: comps, to: Date())
+        comps.year = -110
+        let minDate = calender.date(byAdding: comps, to: Date())
+        datePicker.maximumDate = maxDate
+        datePicker.minimumDate = minDate
+        
 
         //ToolBar
         let toolbar = UIToolbar();
