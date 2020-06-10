@@ -57,17 +57,24 @@ class LoginViewController: UIViewController {
                     CustomHUD().ErrorHUD(view: self.view, Message: error!.localizedDescription)
                     return
                 }
+                
+                
                 // Login in to New MainScene
 //                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC")
 //                present(vc, animated: true, completion: nil)
                 // Clear Navigation
 //                self.navigationController?.viewControllers.removeAll()
                 
+                // MessageTableViewController
+                
                 CustomHUD().SuccessHUD(view: self.view, Message: "LOGIN")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
                     // Delay 1.1 Sec and delegate
-                    self.navigationController?.popToRootViewController(animated: true)
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarVC")
+                    self.present(vc, animated: true, completion: nil)
+                    self.navigationController?.viewControllers.removeAll()
                 }
+                
             }
         }
         

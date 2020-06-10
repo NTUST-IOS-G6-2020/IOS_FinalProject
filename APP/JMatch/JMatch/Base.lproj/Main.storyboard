@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wZA-rx-ouV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eRv-7U-Iwc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -622,7 +622,7 @@
         <!--Message Table View Controller-->
         <scene sceneID="qqA-Iq-awm">
             <objects>
-                <tableViewController storyboardIdentifier="MessageTableView" id="ZGK-Rt-dJ8" customClass="MessageTableViewController" customModule="JMatch" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MessageVC" id="ZGK-Rt-dJ8" customClass="MessageTableViewController" customModule="JMatch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pBM-O6-6NC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -692,7 +692,7 @@
         <!--Message-->
         <scene sceneID="9Z8-Ua-XxL">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qBI-bv-YCg" sceneMemberID="viewController">
+                <navigationController wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" id="qBI-bv-YCg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Message" image="message" catalog="system" id="9j6-ZC-BWK">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
                     </tabBarItem>
@@ -851,7 +851,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Kca-1M-FUC">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wZA-rx-ouV" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarVC" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="wZA-rx-ouV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="saI-DI-2mo">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -872,7 +872,7 @@
         <!--Friends-->
         <scene sceneID="Qnz-Tc-qdC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fwH-bD-3T4" sceneMemberID="viewController">
+                <navigationController wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" id="fwH-bD-3T4" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="person.3" catalog="system" id="bfE-ah-Ryg">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
                     </tabBarItem>
@@ -894,7 +894,7 @@
         <!--Match-->
         <scene sceneID="QQJ-vJ-exI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T3h-IB-XiA" sceneMemberID="viewController">
+                <navigationController wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" id="T3h-IB-XiA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Match" image="link" catalog="system" id="6VK-Q4-E82">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="5"/>
                     </tabBarItem>
