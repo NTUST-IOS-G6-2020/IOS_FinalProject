@@ -11,8 +11,12 @@ import UIKit
 class MessageTableViewCell: UITableViewCell {
     
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var genderLabel: UILabel!
-    @IBOutlet var userImgView: UIImageView!
+    @IBOutlet var userImgView: UIImageView! {
+        didSet{
+            userImgView.layer.cornerRadius = userImgView.bounds.width / 2
+            userImgView.clipsToBounds = true
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
