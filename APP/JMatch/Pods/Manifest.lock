@@ -84,6 +84,9 @@ PODS:
   - GoogleUtilities/UserDefaults (6.6.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.4.0)
+  - JSQMessagesViewController (7.3.5):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - leveldb-library (1.22)
   - MBProgressHUD (1.1.0)
   - nanopb (1.30905.0):
@@ -98,6 +101,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - JSQMessagesViewController
   - MBProgressHUD (~> 1.1.0)
 
 SPEC REPOS:
@@ -117,6 +121,8 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - GTMSessionFetcher
+    - JSQMessagesViewController
+    - JSQSystemSoundPlayer
     - leveldb-library
     - MBProgressHUD
     - nanopb
@@ -138,11 +144,13 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: d70a561f7d236af529fee598835caad5e25f6d3d
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
 
-PODFILE CHECKSUM: aae39100110abe1c411594033b5e9d4d52f21e99
+PODFILE CHECKSUM: c8df13c9fdea95fecfde4d997d4e1193758370a4
 
 COCOAPODS: 1.9.2
