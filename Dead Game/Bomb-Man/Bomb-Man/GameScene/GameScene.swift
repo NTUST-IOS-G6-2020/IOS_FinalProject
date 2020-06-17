@@ -3,12 +3,12 @@ import GameplayKit
 
 class GameScene: SKScene {
     
+    
+    
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
     private var lastUpdateTime : TimeInterval = 0
-    
-    
     
     override func sceneDidLoad() {
 
@@ -16,12 +16,24 @@ class GameScene: SKScene {
         
     }
     
-    
     override func didMove(to view: SKView) {
-        GamePad().setupControls(camera: camera!, scene: scene!)
+        // Add GamePlay Control
+        self.addGamePad()
+        
+        // Set up State Machine
+        if let player = childNode(withName: "Player") {
+            (player as! CharacterNode).setUpStateMachine()
+        }
+        
     }
     
-    
+    func addGamePad() {
+        let entity = GKEntity()
+        print(entity)
+        entity.addComponent(GamePad())
+        entity.component(ofType: GamePad.self)?.setupControls(camera: camera!, scene: self)
+        entities.append(entity)
+    }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
@@ -41,4 +53,5 @@ class GameScene: SKScene {
         
         self.lastUpdateTime = currentTime
     }
+    
 }

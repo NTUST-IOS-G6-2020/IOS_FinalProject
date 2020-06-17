@@ -1,5 +1,4 @@
 import SpriteKit
-import Foundation
 
 class TouchControlInputNode: SKSpriteNode {
     
@@ -158,16 +157,7 @@ class TouchControlInputNode: SKSpriteNode {
             let previousLocation = touch.previousLocation(in: parent!)
             
             for button in [buttonDirUp, buttonDirDown, buttonDirRight, buttonDirLeft, buttonA, buttonB, buttonX, buttonY] {
-                if button.contains(location) {
-                    let index = pressedButtons.firstIndex(of: button)
-                    if index != nil {
-                        pressedButtons.remove(at: index!)
-                        if ((inputDelegate) != nil) {
-                            inputDelegate?.follow(command: "stop \(String(describing: button.name!))")
-                        }
-                    }
-                }
-                else if (button.contains(previousLocation)) {
+                if button.contains(location) || button.contains(previousLocation) {
                     let index = pressedButtons.firstIndex(of: button)
                     if index != nil {
                         pressedButtons.remove(at: index!)
