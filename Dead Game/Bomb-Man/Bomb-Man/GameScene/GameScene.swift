@@ -17,23 +17,21 @@ class GameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        // Add GamePlay Control
-        self.addGamePad()
         
-        // Set up State Machine
-        if let player = childNode(withName: "Player") {
-            (player as! CharacterNode).setUpStateMachine()
+        if let player = childNode(withName: "Player") as? SKSpriteNode {
+            let entity = GKEntity()
+            // Set up Player
+            let nodeComponent : GKSKNodeComponent = GKSKNodeComponent(node: player)
+            entity.addComponent(nodeComponent)
+            // Add GamePlay Control
+            entity.addComponent(GamePad())
+            entity.component(ofType: GamePad.self)?.setupControls(camera: camera!, scene: self)
+            entities.append(entity)
+            // setup State Machine
+            (player as? CharacterNode)?.setUpStateMachine()
         }
-        
     }
     
-    func addGamePad() {
-        let entity = GKEntity()
-        print(entity)
-        entity.addComponent(GamePad())
-        entity.component(ofType: GamePad.self)?.setupControls(camera: camera!, scene: self)
-        entities.append(entity)
-    }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered

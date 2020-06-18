@@ -11,18 +11,36 @@ import SpriteKit
 
 class GamePad: GKComponent, ControlInputDelegate {
     
-    // XCode component need
-    override class var supportsSecureCoding: Bool { true }
-    
     var touchControlNode: TouchControlInputNode?
     var cNode : CharacterNode?
+    
+    // XCode component need
+    override class var supportsSecureCoding: Bool { true }
+    //Get the Character
+    lazy var node: SKSpriteNode! = self.entity!.component(ofType: GKSKNodeComponent.self)?.node as? SKSpriteNode
     
     // Control the Character movement
     func follow(command: String?) {
         print("FOLLOW")
         if cNode != nil {
-            print("NOT NIL")
+            switch command {
+            case "left":
+                cNode?.left = true
+            case "cancle left", "stop left":
+                cNode?.left = false
+            case "right":
+                cNode?.right = true
+            case "cancle right", "stop right":
+                cNode?.right = false
+            default:
+                print("command: \(String(describing: command!))")
+            }
         }
+    }
+    
+    override func update(deltaTime seconds: TimeInterval) {
+        super.update(deltaTime: seconds)
+        cNode?.stateMachine?.update(deltaTime: seconds)
     }
     
     func setupControls(camera: SKCameraNode, scene: SKScene){
@@ -33,10 +51,9 @@ class GamePad: GKComponent, ControlInputDelegate {
         camera.addChild(touchControlNode!)
         
         if cNode == nil {
-            print("cNode nil")
-            
+            cNode = node as? CharacterNode
+            print(cNode as Any)
         }
-        
     }
     
 }
