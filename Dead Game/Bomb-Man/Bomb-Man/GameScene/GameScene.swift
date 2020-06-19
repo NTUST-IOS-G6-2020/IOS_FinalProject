@@ -29,7 +29,12 @@ class GameScene: SKScene {
             // Add GamePlay Control
             entity.addComponent(GamePad())
             entity.component(ofType: GamePad.self)?.setupControls(camera: camera!, scene: self)
+            // Add Animation Component
+            entity.addComponent(Animation())
+            
+            // Append entity
             entities.append(entity)
+            
             // setup State Machine
             (thePlayer as? CharacterNode)?.setUpStateMachine()
         }
