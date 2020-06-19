@@ -38,4 +38,5 @@ class CharacterNode: SKSpriteNode {
         stateMachine = GKStateMachine(states: [idleState])
         stateMachine?.enter(IdleState.self)
     }
+    
 }

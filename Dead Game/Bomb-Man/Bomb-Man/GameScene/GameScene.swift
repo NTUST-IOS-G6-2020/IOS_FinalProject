@@ -22,6 +22,7 @@ class GameScene: SKScene {
         // Player
         if self.childNode(withName: "Player") != nil {
             thePlayer = (self.childNode(withName: "Player") as! SKSpriteNode)
+            
             let entity = GKEntity()
             // Set up Player
             let nodeComponent : GKSKNodeComponent = GKSKNodeComponent(node: thePlayer)

@@ -17,6 +17,7 @@ enum ColliderType {
 class PhysicDetection: NSObject, SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
+        
         let collision: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         if collision == ColliderType.PLAYER | ColliderType.GROUND {
