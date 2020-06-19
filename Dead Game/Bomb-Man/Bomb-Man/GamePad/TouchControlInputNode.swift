@@ -14,10 +14,10 @@ class TouchControlInputNode: SKSpriteNode {
     let buttonDirDown = SKSpriteNode(imageNamed: "button_down")
     let buttonDirRight = SKSpriteNode(imageNamed: "button_right")
     
-    let buttonA = SKSpriteNode(imageNamed: "button_cross")
-    let buttonB = SKSpriteNode(imageNamed: "button_circle")
-    let buttonX = SKSpriteNode(imageNamed: "button_triangle")
-    let buttonY = SKSpriteNode(imageNamed: "button_square")
+    let buttonX = SKSpriteNode(imageNamed: "button_cross")
+    let buttonO = SKSpriteNode(imageNamed: "button_circle")
+    let buttonT = SKSpriteNode(imageNamed: "button_triangle")
+    let buttonS = SKSpriteNode(imageNamed: "button_square")
     
     //7: calling the ControlInputDelegate to receive the buttons
     var inputDelegate: ControlInputDelegate?
@@ -52,21 +52,21 @@ class TouchControlInputNode: SKSpriteNode {
                   position: CGPoint(x: -(size.width / 3 ) + 90, y: -size.height / 4),
                   name: "right",
                   scale: 0.2)
-        addButton(button: buttonX,
+        addButton(button: buttonT,
                   position: CGPoint(x: (size.width / 3 ), y: -size.height / 4 + 90),
+                  name: "T",
+                  scale: 0.17)
+        addButton(button: buttonS,
+                  position: CGPoint(x: (size.width / 3 ) - 90, y: -size.height / 4),
+                  name: "S",
+                  scale: 0.17)
+        addButton(button: buttonX,
+                  position: CGPoint(x: (size.width / 3 ), y: -size.height / 4 - 90),
                   name: "X",
                   scale: 0.17)
-        addButton(button: buttonY,
-                  position: CGPoint(x: (size.width / 3 ) - 90, y: -size.height / 4),
-                  name: "Y",
-                  scale: 0.17)
-        addButton(button: buttonB,
-                  position: CGPoint(x: (size.width / 3 ), y: -size.height / 4 - 90),
-                  name: "B",
-                  scale: 0.17)
-        addButton(button: buttonA,
+        addButton(button: buttonO,
                   position: CGPoint(x: (size.width / 3 ) + 90, y: -size.height / 4),
-                  name: "A",
+                  name: "O",
                   scale: 0.17)
     }
     
@@ -86,7 +86,7 @@ class TouchControlInputNode: SKSpriteNode {
         for t in touches {
             let location = t.location(in: parent!)
             // for all buttons
-            for button in [buttonDirUp, buttonDirDown, buttonDirRight, buttonDirLeft, buttonA, buttonB, buttonX, buttonY] {
+            for button in [buttonDirUp, buttonDirDown, buttonDirRight, buttonDirLeft, buttonT, buttonS, buttonX, buttonO] {
                 // check if a button is already registered in the list and check if a button is not on the list.. like it was just pressed, add it to the list
                 if button.contains(location) && pressedButtons.firstIndex(of: button) == nil {
                     pressedButtons.append(button)
@@ -111,7 +111,7 @@ class TouchControlInputNode: SKSpriteNode {
             let location = t.location(in: parent!)
             let previousLocation = t.previousLocation(in: parent!)
             
-            for button in [buttonDirUp, buttonDirDown, buttonDirRight, buttonDirLeft, buttonA, buttonB, buttonX, buttonY] {
+            for button in [buttonDirUp, buttonDirDown, buttonDirRight, buttonDirLeft, buttonT, buttonS, buttonX, buttonO] {
                 // if i get off the button where my finger was before
                 if button.contains(previousLocation) && !button.contains(location) {
                     // i remove it from the list
@@ -156,7 +156,7 @@ class TouchControlInputNode: SKSpriteNode {
             let location = touch.location(in: parent!)
             let previousLocation = touch.previousLocation(in: parent!)
             
-            for button in [buttonDirUp, buttonDirDown, buttonDirRight, buttonDirLeft, buttonA, buttonB, buttonX, buttonY] {
+            for button in [buttonDirUp, buttonDirDown, buttonDirRight, buttonDirLeft, buttonT, buttonS, buttonX, buttonO] {
                 if button.contains(location) || button.contains(previousLocation) {
                     let index = pressedButtons.firstIndex(of: button)
                     if index != nil {

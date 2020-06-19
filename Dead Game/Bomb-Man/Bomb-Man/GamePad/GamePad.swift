@@ -21,7 +21,6 @@ class GamePad: GKComponent, ControlInputDelegate {
     
     // Control the Character movement
     func follow(command: String?) {
-        print("FOLLOW")
         if cNode != nil {
             switch command {
             case "left":
@@ -32,6 +31,10 @@ class GamePad: GKComponent, ControlInputDelegate {
                 cNode?.right = true
             case "cancle right", "stop right":
                 cNode?.right = false
+            case "X":
+                cNode?.jump = true
+            case "stop X", "cancel X":
+                cNode?.jump = false
             default:
                 print("command: \(String(describing: command!))")
             }
@@ -52,8 +55,6 @@ class GamePad: GKComponent, ControlInputDelegate {
         
         if cNode == nil {
             cNode = node as? CharacterNode
-            print(cNode as Any)
         }
     }
-    
 }
