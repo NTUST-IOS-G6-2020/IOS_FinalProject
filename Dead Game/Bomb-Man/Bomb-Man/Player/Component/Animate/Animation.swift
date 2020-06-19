@@ -68,21 +68,27 @@ class Animation : GKComponent {
             // In the air
             else {
                 if (cNode?.physicsBody?.velocity.dy)! > 30.0 {
+                    
                     if (cNode?.action(forKey: "JumpUp") == nil) {
                         cNode?.removeAllActions()
-                        cNode?.run(idleAnimation!, withKey: "JumpUp")
+                        cNode?.run(jumpUpAnimation!, withKey: "JumpUp")
+                        print("UP")
                     }
                 }
-                else if (cNode?.physicsBody?.velocity.dy)! < 1.0 {
+                else if (cNode?.physicsBody?.velocity.dy)! < -450 {
+                    
                     if (cNode?.action(forKey: "JumpLand") == nil) {
                         cNode?.removeAllActions()
-                        cNode?.run(idleAnimation!, withKey: "JumpLand")
+                        cNode?.run(jumpLandAnimation!, withKey: "JumpLand")
+                        print("Jump Land")
                     }
                 }
                 else if (cNode?.physicsBody?.velocity.dy)! < 30.0 {
+                    
                     if (cNode?.action(forKey: "JumpDown") == nil) {
                         cNode?.removeAllActions()
-                        cNode?.run(idleAnimation!, withKey: "JumpDown")
+                        cNode?.run(jumpDownAnimation!, withKey: "JumpDown")
+                        print("jump down")
                     }
                 }
             }
