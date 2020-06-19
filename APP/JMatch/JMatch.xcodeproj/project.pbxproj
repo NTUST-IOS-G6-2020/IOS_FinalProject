@@ -27,6 +27,9 @@
 		4BE2E4F1247E30D200D2289B /* SignUpInfoUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE2E4F0247E30D200D2289B /* SignUpInfoUI.swift */; };
 		4BFFF062247D42EC001D13AD /* SignUpInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFF061247D42EC001D13AD /* SignUpInfoViewController.swift */; };
 		4BFFF064247D744E001D13AD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFFF063247D744E001D13AD /* MainViewController.swift */; };
+		EF6F0D1C2499FEDC002FB729 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6F0D1B2499FEDC002FB729 /* ChatViewController.swift */; };
+		EF6F0D1E2499FF4C002FB729 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6F0D1D2499FF4C002FB729 /* Chat.swift */; };
+		EF6F0D202499FF5F002FB729 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6F0D1F2499FF5F002FB729 /* Message.swift */; };
 		EFF36E4D247EA46D00511BD8 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF36E4C247EA46D00511BD8 /* MessageTableViewController.swift */; };
 		EFF36E4F247EAA8D00511BD8 /* FriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF36E4E247EAA8D00511BD8 /* FriendTableViewController.swift */; };
 		EFF36E51247EB2E000511BD8 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF36E50247EB2E000511BD8 /* MessageTableViewCell.swift */; };
@@ -58,6 +61,9 @@
 		4BFFF061247D42EC001D13AD /* SignUpInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfoViewController.swift; sourceTree = "<group>"; };
 		4BFFF063247D744E001D13AD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D8480E250387913EF97BBC3B /* Pods-JMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMatch.debug.xcconfig"; path = "Target Support Files/Pods-JMatch/Pods-JMatch.debug.xcconfig"; sourceTree = "<group>"; };
+		EF6F0D1B2499FEDC002FB729 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		EF6F0D1D2499FF4C002FB729 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		EF6F0D1F2499FF5F002FB729 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		EFF36E4C247EA46D00511BD8 /* MessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		EFF36E4E247EAA8D00511BD8 /* FriendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewController.swift; sourceTree = "<group>"; };
 		EFF36E50247EB2E000511BD8 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -118,6 +124,9 @@
 				4B349C49247BAB40002C8AB2 /* Info.plist */,
 				4B7F363D247CF72500695696 /* GoogleService-Info.plist */,
 				4BDEB448247EA0410057D276 /* CustomHUD.swift */,
+				EF6F0D1B2499FEDC002FB729 /* ChatViewController.swift */,
+				EF6F0D1D2499FF4C002FB729 /* Chat.swift */,
+				EF6F0D1F2499FF5F002FB729 /* Message.swift */,
 			);
 			path = JMatch;
 			sourceTree = "<group>";
@@ -278,6 +287,7 @@
 			files = (
 				4B349C50247BACE1002C8AB2 /* LoginViewController.swift in Sources */,
 				4BE2E4F1247E30D200D2289B /* SignUpInfoUI.swift in Sources */,
+				EF6F0D1E2499FF4C002FB729 /* Chat.swift in Sources */,
 				4B048A21247C1FBB006D4055 /* WelcomeViewController.swift in Sources */,
 				EFF36E4F247EAA8D00511BD8 /* FriendTableViewController.swift in Sources */,
 				4BFFF062247D42EC001D13AD /* SignUpInfoViewController.swift in Sources */,
@@ -292,6 +302,8 @@
 				4BFFF064247D744E001D13AD /* MainViewController.swift in Sources */,
 				4BDEB449247EA0410057D276 /* CustomHUD.swift in Sources */,
 				4BE2E4ED247E2F9B00D2289B /* SignUpUI.swift in Sources */,
+				EF6F0D202499FF5F002FB729 /* Message.swift in Sources */,
+				EF6F0D1C2499FEDC002FB729 /* ChatViewController.swift in Sources */,
 				EFF36E53247EBD4800511BD8 /* FriendTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
