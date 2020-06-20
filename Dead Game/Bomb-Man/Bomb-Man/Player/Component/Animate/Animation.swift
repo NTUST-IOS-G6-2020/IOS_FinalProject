@@ -83,7 +83,7 @@ class Animation : GKComponent {
                         print("Jump Land")
                     }
                 }
-                else if (cNode?.physicsBody?.velocity.dy)! < 30.0 {
+                else if (cNode?.physicsBody?.velocity.dy)! < -300.0 {
                     
                     if (cNode?.action(forKey: "JumpDown") == nil) {
                         cNode?.removeAllActions()
