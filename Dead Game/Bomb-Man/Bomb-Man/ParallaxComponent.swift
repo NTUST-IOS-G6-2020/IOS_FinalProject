@@ -18,13 +18,13 @@ class ParallaxComponent: GKComponent {
     var previousPosition : CGPoint?
     
     func prepareWith(camera: SKCameraNode?) {
+        
         if camera != nil {
             self.camera = camera
             previousPosition = camera?.position
         }
         
         if let nodeComponent = self.entity?.component(ofType: GKSKNodeComponent.self) {
-            print("Node COMponent")
             node = nodeComponent.node
         }
         
@@ -57,11 +57,11 @@ class ParallaxComponent: GKComponent {
     
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
-        
-        let difX = (camera?.position.x)! - (previousPosition?.x)! / dX
-        let difY = (camera?.position.y)! - (previousPosition?.y)! / dY
+        let difX = ((camera?.position.x)! - (previousPosition?.x)!) / dX
+        let difY = ((camera?.position.y)! - (previousPosition?.y)!) / dY
         
         node?.position = CGPoint(x: (node?.position.x)! + difX, y: (node?.position.y)! + difY)
+        
         previousPosition = camera?.position
     }
     

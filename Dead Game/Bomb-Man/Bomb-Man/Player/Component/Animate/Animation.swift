@@ -50,7 +50,7 @@ class Animation : GKComponent {
         
         // Change State
         if cNode?.stateMachine?.currentState is IdleState {
-            // On th floor
+            // On the floor
             if (cNode?.grounded)! {
                 if (cNode?.left)! || (cNode?.right)! {
                     if (cNode?.action(forKey: "Run") == nil){

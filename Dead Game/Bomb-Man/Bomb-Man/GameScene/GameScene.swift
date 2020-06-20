@@ -19,8 +19,34 @@ class GameScene: SKScene {
         self.lastUpdateTime = 0
     }
     
+    func addNode(name: String, layer: Int) {
+        if self.childNode(withName: name) != nil {
+            let node = self.childNode(withName: name) as! SKSpriteNode
+            
+            let entity = GKEntity()
+            let nodeComponent: GKSKNodeComponent = GKSKNodeComponent(node: node)
+            entity.addComponent(nodeComponent)
+            let paraComponent = ParallaxComponent()
+            paraComponent.layer = layer
+            entity.addComponent(paraComponent)
+            entities.append(entity)
+        }
+    }
+    
+    // 幫背景 node 加入 component
+    func setupParallaxBG () {
+        addNode(name: "sCloud1", layer: 1)
+        addNode(name: "sCloud2", layer: 1)
+        addNode(name: "sCloud3", layer: 1)
+        addNode(name: "sCloud4", layer: 1)
+        addNode(name: "sCloud5", layer: 1)
+    }
+    
     // Setup all the shit
     override func didMove(to view: SKView) {
+        
+        // 背景 node 加入 entity
+        setupParallaxBG()
         
         // Set background parallax
         parallaxComponentSystem = GKComponentSystem.init(componentClass: ParallaxComponent.self)
@@ -63,7 +89,10 @@ class GameScene: SKScene {
         self.camera = theCamera
         
         // Set tilemap physics
-        if let tilemap = childNode(withName: "ForegroundMap") as? SKTileMapNode {
+        if let tilemap = childNode(withName: "ForegroundMap1") as? SKTileMapNode {
+            giveTilemapPhysicsBody(map: tilemap)
+        }
+        if let tilemap = childNode(withName: "ForegroundMap2") as? SKTileMapNode {
             giveTilemapPhysicsBody(map: tilemap)
         }
         
@@ -135,13 +164,26 @@ class GameScene: SKScene {
                             tileNode.physicsBody?.contactTestBitMask = 0
                             tileNode.physicsBody?.fieldBitMask = 0
                             tileNode.physicsBody?.collisionBitMask = 0
-                                                    
-                            if isEdgeTile == 1{
+                            
+                            // Floor
+                            if isEdgeTile == 1 {
+                                print("Floor")
                                 tileNode.physicsBody?.restitution = 0.0
                                 tileNode.physicsBody?.contactTestBitMask = ColliderType.PLAYER
+                                tileNode.physicsBody?.categoryBitMask = ColliderType.GROUND
+                            }
+                            // Wall
+                            else if isEdgeTile == 2{
+                                print("Wall")
+                                tileNode.physicsBody?.restitution = 0.0
+                                tileNode.physicsBody?.categoryBitMask = ColliderType.WALL
+                                tileNode.physicsBody?.contactTestBitMask = ColliderType.PLAYER
+                            }
+                            else {
+                                print("Not set")
+                                tileNode.physicsBody?.categoryBitMask = ColliderType.GROUND
                             }
                             
-                            tileNode.physicsBody?.categoryBitMask = ColliderType.GROUND
                             tileMap.addChild(tileNode)
                         }
                     }

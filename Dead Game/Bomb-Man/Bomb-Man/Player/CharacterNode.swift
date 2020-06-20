@@ -11,6 +11,8 @@ import GameplayKit
 
 class CharacterNode: SKSpriteNode {
     
+    var life : Int = 3
+    
     var left = false
     var right = false
     var down = false
@@ -39,7 +41,7 @@ class CharacterNode: SKSpriteNode {
         stateMachine?.enter(IdleState.self)
     }
     
-    // 為什麼手尻？ 因為他媽的xocde scene editor有他媽得bug
+    // 為什麼手尻？ 因為他的xocde scene editor有他得bug
     func createPhysics() {
         self.physicsBody = SKPhysicsBody(texture: self.texture!, size: CGSize(width: 150, height: 151))
         physicsBody?.affectedByGravity = true
@@ -47,7 +49,7 @@ class CharacterNode: SKSpriteNode {
         physicsBody?.restitution = 0.0
         physicsBody?.friction = 0.0087
         physicsBody?.categoryBitMask = ColliderType.PLAYER
-        physicsBody?.collisionBitMask = ColliderType.GROUND
+        physicsBody?.collisionBitMask = (ColliderType.GROUND | ColliderType.WALL | ColliderType.BOUNDARY)
         // Not needed
         physicsBody?.contactTestBitMask = ColliderType.GROUND
     }
