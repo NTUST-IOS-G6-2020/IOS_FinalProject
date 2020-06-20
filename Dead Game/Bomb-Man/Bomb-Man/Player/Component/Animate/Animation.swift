@@ -72,7 +72,6 @@ class Animation : GKComponent {
                     if (cNode?.action(forKey: "JumpUp") == nil) {
                         cNode?.removeAllActions()
                         cNode?.run(jumpUpAnimation!, withKey: "JumpUp")
-                        print("UP")
                     }
                 }
                 else if (cNode?.physicsBody?.velocity.dy)! < -450 {
@@ -80,7 +79,6 @@ class Animation : GKComponent {
                     if (cNode?.action(forKey: "JumpLand") == nil) {
                         cNode?.removeAllActions()
                         cNode?.run(jumpLandAnimation!, withKey: "JumpLand")
-                        print("Jump Land")
                     }
                 }
                 else if (cNode?.physicsBody?.velocity.dy)! < -300.0 {
@@ -88,7 +86,6 @@ class Animation : GKComponent {
                     if (cNode?.action(forKey: "JumpDown") == nil) {
                         cNode?.removeAllActions()
                         cNode?.run(jumpDownAnimation!, withKey: "JumpDown")
-                        print("jump down")
                     }
                 }
             }

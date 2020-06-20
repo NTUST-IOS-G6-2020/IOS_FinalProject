@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,7 @@
 		4B9CFE8B2499FA35003E8EF4 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CFE8A2499FA35003E8EF4 /* IdleState.swift */; };
 		4BCECA9B249C060100C90692 /* PhysicDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCECA9A249C060100C90692 /* PhysicDetection.swift */; };
 		4BD5F5D6249D362900E28871 /* TerrainTile.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4BD5F5D5249D362900E28871 /* TerrainTile.sks */; };
+		4BFEDD9B249E0EE60004D933 /* ParallaxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEDD9A249E0EE60004D933 /* ParallaxComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		4B9CFE8A2499FA35003E8EF4 /* IdleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
 		4BCECA9A249C060100C90692 /* PhysicDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicDetection.swift; sourceTree = "<group>"; };
 		4BD5F5D5249D362900E28871 /* TerrainTile.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TerrainTile.sks; sourceTree = "<group>"; };
+		4BFEDD9A249E0EE60004D933 /* ParallaxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				4B55874B24938AB80029B457 /* LaunchScreen.storyboard */,
 				4B55874E24938AB80029B457 /* Info.plist */,
 				4BD5F5D5249D362900E28871 /* TerrainTile.sks */,
+				4BFEDD9A249E0EE60004D933 /* ParallaxComponent.swift */,
 			);
 			path = "Bomb-Man";
 			sourceTree = "<group>";
@@ -186,7 +189,7 @@
 				};
 			};
 			buildConfigurationList = 4B55873424938AB70029B457 /* Build configuration list for PBXProject "Bomb-Man" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.4";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BFEDD9B249E0EE60004D933 /* ParallaxComponent.swift in Sources */,
 				4B4B13C9249392ED00B0237F /* TouchControlInputNode.swift in Sources */,
 				4B9CFE892499F9D9003E8EF4 /* CharacterNode.swift in Sources */,
 				4B61FB152493AE0A00808953 /* GamePad.swift in Sources */,
@@ -377,15 +381,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8BCC6X8752;
 				INFOPLIST_FILE = "Bomb-Man/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "NTUST-CSIE.Bomb-Man";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -394,15 +401,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8BCC6X8752;
 				INFOPLIST_FILE = "Bomb-Man/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "NTUST-CSIE.Bomb-Man";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

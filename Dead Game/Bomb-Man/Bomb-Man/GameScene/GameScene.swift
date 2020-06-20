@@ -12,12 +12,26 @@ class GameScene: SKScene {
     var theCamera: SKCameraNode = SKCameraNode()
     var physicsDelegate = PhysicDetection()
     
+    // 背景捲軸
+    var parallaxComponentSystem : GKComponentSystem<ParallaxComponent>?
+    
     override func sceneDidLoad() {
         self.lastUpdateTime = 0
     }
     
     // Setup all the shit
     override func didMove(to view: SKView) {
+        
+        // Set background parallax
+        parallaxComponentSystem = GKComponentSystem.init(componentClass: ParallaxComponent.self)
+        
+        for entity in self.entities {
+            parallaxComponentSystem?.addComponent(foundIn: entity)
+        }
+        
+        for component in (parallaxComponentSystem?.components)! {
+            component.prepareWith(camera: camera)
+        }
         
         // Player
         if self.childNode(withName: "Player") != nil {
@@ -36,8 +50,10 @@ class GameScene: SKScene {
             // Append entity
             entities.append(entity)
             
-            // setup State Machine
+            // Setup Player State Machine
             (thePlayer as? CharacterNode)?.setUpStateMachine()
+            // Setup Player Physics
+            (thePlayer as? CharacterNode)?.createPhysics()
         }
         
         // Camera
@@ -55,59 +71,17 @@ class GameScene: SKScene {
         self.physicsWorld.contactDelegate = physicsDelegate
     }
     
-    func giveTilemapPhysicsBody (map: SKTileMapNode) {
-        let tileMap = map
-        let tileSize = tileMap.tileSize
-        let halfWidth = CGFloat(tileMap.numberOfColumns) / 2.0 * tileSize.width
-        let halfHeight = CGFloat(tileMap.numberOfRows) / 2.0 * tileSize.height
-        
-        for col in 0..<tileMap.numberOfColumns {
-            for row in 0..<tileMap.numberOfRows {
-                if let tileDefinition = tileMap.tileDefinition(atColumn: col, row: row) {
-                    let isEdgeTile = tileDefinition.userData?["AddBody"] as? Int
-                    if isEdgeTile != 0 {
-                        let tileArray = tileDefinition.textures
-                        let tileTexture = tileArray[0]
-                        let x = CGFloat(col) * tileSize.width - halfWidth + (tileSize.width/2)
-                        let y = CGFloat(row) * tileSize.height - halfHeight + (tileSize.height/2)
-                        _ = CGRect(x: 0, y: 0, width: tileSize.width, height: tileSize.height)
-                        let tileNode = SKNode()
-                        
-                        tileNode.position = CGPoint(x: x, y: y)
-//                        tileNode.physicsBody = SKPhysicsBody(texture: tileTexture, size: CGSize(width: tileTexture.size().width, height: tileTexture.size().height))
-                        tileNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tileTexture.size().width, height: tileTexture.size().height))
-                        tileNode.physicsBody?.linearDamping = 0
-                        tileNode.physicsBody?.affectedByGravity = false
-                        tileNode.physicsBody?.allowsRotation = false
-                        tileNode.physicsBody?.restitution = 0
-                        tileNode.physicsBody?.isDynamic = false
-                        tileNode.physicsBody?.friction = 20.0
-                        tileNode.physicsBody?.mass = 30.0
-                        tileNode.physicsBody?.contactTestBitMask = 0
-                        tileNode.physicsBody?.fieldBitMask = 0
-                        tileNode.physicsBody?.collisionBitMask = 0
-                        
-                        
-                        if isEdgeTile == 1{
-                            print("IS1")
-                            tileNode.physicsBody?.restitution = 0.0
-                            tileNode.physicsBody?.contactTestBitMask = ColliderType.PLAYER
-                        }
-                        
-                        tileNode.physicsBody?.categoryBitMask = ColliderType.GROUND
-                        tileMap.addChild(tileNode)
-                    }
-                }
-            }
-        }
+    // Camera Follow
+    func cameraOnNode(node: SKNode) {
+        theCamera.run(SKAction.move(to: CGPoint(x: node.position.x, y: node.position.y + 100), duration: 0.5))
     }
     
+    override func didFinishUpdate() {
+        cameraOnNode(node: thePlayer);
+    }
     
     // Called before each frame is rendered
     override func update(_ currentTime: TimeInterval) {
-        
-        // Camera Follow the player x position
-        theCamera.position.x = thePlayer.position.x
         
         
         // Initialize _lastUpdateTime if it has not already been
@@ -123,7 +97,56 @@ class GameScene: SKScene {
             entity.update(deltaTime: dt)
         }
         
+        // Update parallax background
+        parallaxComponentSystem?.update(deltaTime: currentTime)
+        
         self.lastUpdateTime = currentTime
     }
+    
+    // MARK:- Tile Map Physics
+    func giveTilemapPhysicsBody (map: SKTileMapNode) {
+            let tileMap = map
+            let tileSize = tileMap.tileSize
+            let halfWidth = CGFloat(tileMap.numberOfColumns) / 2.0 * tileSize.width
+            let halfHeight = CGFloat(tileMap.numberOfRows) / 2.0 * tileSize.height
+            
+            for col in 0..<tileMap.numberOfColumns {
+                for row in 0..<tileMap.numberOfRows {
+                    if let tileDefinition = tileMap.tileDefinition(atColumn: col, row: row) {
+                        let isEdgeTile = tileDefinition.userData?["AddBody"] as? Int
+                        if isEdgeTile != 0 {
+                            let tileArray = tileDefinition.textures
+                            let tileTexture = tileArray[0]
+                            let x = CGFloat(col) * tileSize.width - halfWidth + (tileSize.width/2)
+                            let y = CGFloat(row) * tileSize.height - halfHeight + (tileSize.height/2)
+                            _ = CGRect(x: 0, y: 0, width: tileSize.width, height: tileSize.height)
+                            let tileNode = SKNode()
+                            
+                            tileNode.position = CGPoint(x: x, y: y)
+    //                        tileNode.physicsBody = SKPhysicsBody(texture: tileTexture, size: CGSize(width: tileTexture.size().width, height: tileTexture.size().height))
+                            tileNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tileTexture.size().width, height: tileTexture.size().height))
+                            tileNode.physicsBody?.linearDamping = 0
+                            tileNode.physicsBody?.affectedByGravity = false
+                            tileNode.physicsBody?.allowsRotation = false
+                            tileNode.physicsBody?.restitution = 0
+                            tileNode.physicsBody?.isDynamic = false
+                            tileNode.physicsBody?.friction = 20.0
+                            tileNode.physicsBody?.mass = 30.0
+                            tileNode.physicsBody?.contactTestBitMask = 0
+                            tileNode.physicsBody?.fieldBitMask = 0
+                            tileNode.physicsBody?.collisionBitMask = 0
+                                                    
+                            if isEdgeTile == 1{
+                                tileNode.physicsBody?.restitution = 0.0
+                                tileNode.physicsBody?.contactTestBitMask = ColliderType.PLAYER
+                            }
+                            
+                            tileNode.physicsBody?.categoryBitMask = ColliderType.GROUND
+                            tileMap.addChild(tileNode)
+                        }
+                    }
+                }
+            }
+        }
     
 }

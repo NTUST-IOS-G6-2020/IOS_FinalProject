@@ -39,4 +39,17 @@ class CharacterNode: SKSpriteNode {
         stateMachine?.enter(IdleState.self)
     }
     
+    // 為什麼手尻？ 因為他媽的xocde scene editor有他媽得bug
+    func createPhysics() {
+        self.physicsBody = SKPhysicsBody(texture: self.texture!, size: CGSize(width: 150, height: 151))
+        physicsBody?.affectedByGravity = true
+        physicsBody?.allowsRotation = false
+        physicsBody?.restitution = 0.0
+        physicsBody?.friction = 0.0087
+        physicsBody?.categoryBitMask = ColliderType.PLAYER
+        physicsBody?.collisionBitMask = ColliderType.GROUND
+        // Not needed
+        physicsBody?.contactTestBitMask = ColliderType.GROUND
+    }
+    
 }
