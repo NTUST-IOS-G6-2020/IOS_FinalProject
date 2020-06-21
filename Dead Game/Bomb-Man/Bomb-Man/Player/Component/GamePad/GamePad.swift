@@ -25,16 +25,20 @@ class GamePad: GKComponent, ControlInputDelegate {
             switch command {
             case "left":
                 cNode?.left = true
-            case "cancle left", "stop left":
+            case "cance left", "stop left":
                 cNode?.left = false
             case "right":
                 cNode?.right = true
-            case "cancle right", "stop right":
+            case "cance right", "stop right":
                 cNode?.right = false
             case "X":
                 cNode?.jump = true
             case "stop X", "cancel X":
                 cNode?.jump = false
+            case "O":
+                cNode?.attack = true
+            case "stop O", "cancel O":
+                cNode?.attack = false
             default:
                 print("command: \(String(describing: command!))")
             }

@@ -77,6 +77,18 @@ class IdleState: GKState {
             cNode.landed = false
         }
         
+        // Attack
+        if cNode.attack {
+            self.stateMachine?.enter(AttackState.self)
+        }
+        
+        // Hit
+        if cNode.takeDamage {
+            squashAndStretch(xScale: 1.3, yScale: 1.3)
+            self.stateMachine?.enter(DamageState.self)
+        }
+        
+        
         // Animation
         cNode.xScale = approach(start: cNode.xScale, end: cNode.facing, shift: 0.05)
         cNode.yScale = approach(start: cNode.yScale, end: 1, shift: 0.05)

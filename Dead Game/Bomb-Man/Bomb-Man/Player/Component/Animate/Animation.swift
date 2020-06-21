@@ -12,34 +12,27 @@ import GameplayKit
 class Animation : GKComponent {
     
     var cNode : CharacterNode?
+    
     //Get the Character
     lazy var node: SKSpriteNode! = self.entity!.component(ofType: GKSKNodeComponent.self)?.node as? SKSpriteNode
     
     // Animation
-    var idleAnimation: SKAction?
-    var runAnimation: SKAction?
-    var jumpUpAnimation: SKAction?
-    var jumpDownAnimation: SKAction?
-    var jumpLandAnimation: SKAction?
-//    var attackAnimation: SKAction?
+    let animationName = ["Idle", "Run", "JumpUp", "JumpDown", "JumpLand", "Attack", "AttackReady", "Damage"]
+    var actions = [String : SKAction]()
     
     override init() {
         super.init()
-        idleAnimation = SKAction(named: "Idle")
-        runAnimation = SKAction(named: "Run")
-        jumpUpAnimation = SKAction(named: "JumpUp")
-        jumpDownAnimation = SKAction(named: "JumpDown")
-        jumpLandAnimation = SKAction(named: "JumpLand")
         
+        for name in animationName {
+            actions[name] = SKAction(named: name)
+        }
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        idleAnimation = SKAction(named: "Idle")
-        runAnimation = SKAction(named: "Run")
-        jumpUpAnimation = SKAction(named: "JumpUp")
-        jumpDownAnimation = SKAction(named: "JumpDown")
-        jumpLandAnimation = SKAction(named: "JumpLand")
+        for name in animationName {
+            actions[name] = SKAction(named: name)
+        }
     }
     
     override func update(deltaTime seconds: TimeInterval) {
@@ -53,44 +46,40 @@ class Animation : GKComponent {
             // On the floor
             if (cNode?.grounded)! {
                 if (cNode?.left)! || (cNode?.right)! {
-                    if (cNode?.action(forKey: "Run") == nil){
-                        cNode?.removeAllActions()
-                        cNode?.run(runAnimation!, withKey: "Run")
-                    }
+                    playAnimation(with: "Run")
                 }
                 else {
-                    if (cNode?.action(forKey: "Idle") == nil) {
-                        cNode?.removeAllActions()
-                        cNode?.run(idleAnimation!, withKey: "Idle")
-                    }
+                    playAnimation(with: "Idle")
                 }
             }
             // In the air
             else {
                 if (cNode?.physicsBody?.velocity.dy)! > 30.0 {
-                    
-                    if (cNode?.action(forKey: "JumpUp") == nil) {
-                        cNode?.removeAllActions()
-                        cNode?.run(jumpUpAnimation!, withKey: "JumpUp")
-                    }
+                    playAnimation(with: "JumpUp")
                 }
                 else if (cNode?.physicsBody?.velocity.dy)! < -450 {
-                    
-                    if (cNode?.action(forKey: "JumpLand") == nil) {
-                        cNode?.removeAllActions()
-                        cNode?.run(jumpLandAnimation!, withKey: "JumpLand")
-                    }
+                    playAnimation(with: "JumpLand")
                 }
                 else if (cNode?.physicsBody?.velocity.dy)! < -300.0 {
-                    
-                    if (cNode?.action(forKey: "JumpDown") == nil) {
-                        cNode?.removeAllActions()
-                        cNode?.run(jumpDownAnimation!, withKey: "JumpDown")
-                    }
+                    playAnimation(with: "JumoDown")
                 }
             }
         }
+        else if cNode?.stateMachine?.currentState is AttackState {
+            if (cNode?.attack)! {
+                playAnimation(with: "Attack")
+            }
+        }
         
+    }
+    
+    func playAnimation (with name:String) {
+        if (cNode?.action(forKey: name) == nil) {
+            cNode?.removeAllActions()
+            if actions[name] != nil {
+                cNode?.run(actions[name]!, withKey: name)
+            }
+        }
     }
     
     

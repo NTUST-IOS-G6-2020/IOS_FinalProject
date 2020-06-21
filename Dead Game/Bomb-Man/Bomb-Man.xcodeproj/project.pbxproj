@@ -23,6 +23,8 @@
 		4BCECA9B249C060100C90692 /* PhysicDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCECA9A249C060100C90692 /* PhysicDetection.swift */; };
 		4BD5F5D6249D362900E28871 /* TerrainTile.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4BD5F5D5249D362900E28871 /* TerrainTile.sks */; };
 		4BFEDD9B249E0EE60004D933 /* ParallaxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEDD9A249E0EE60004D933 /* ParallaxComponent.swift */; };
+		4BFEDD9D249F51730004D933 /* AttackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEDD9C249F51730004D933 /* AttackState.swift */; };
+		4BFEDD9F249F551B0004D933 /* DamageState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEDD9E249F551B0004D933 /* DamageState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		4BCECA9A249C060100C90692 /* PhysicDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicDetection.swift; sourceTree = "<group>"; };
 		4BD5F5D5249D362900E28871 /* TerrainTile.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TerrainTile.sks; sourceTree = "<group>"; };
 		4BFEDD9A249E0EE60004D933 /* ParallaxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxComponent.swift; sourceTree = "<group>"; };
+		4BFEDD9C249F51730004D933 /* AttackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackState.swift; sourceTree = "<group>"; };
+		4BFEDD9E249F551B0004D933 /* DamageState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamageState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,16 @@
 			path = "Bomb-Man";
 			sourceTree = "<group>";
 		};
+		4B902E80249F5C67001D474F /* StateMachine */ = {
+			isa = PBXGroup;
+			children = (
+				4B9CFE8A2499FA35003E8EF4 /* IdleState.swift */,
+				4BFEDD9C249F51730004D933 /* AttackState.swift */,
+				4BFEDD9E249F551B0004D933 /* DamageState.swift */,
+			);
+			path = StateMachine;
+			sourceTree = "<group>";
+		};
 		4B9CFE862499F95C003E8EF4 /* GamePad */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				4B9CFE882499F9D9003E8EF4 /* CharacterNode.swift */,
-				4B9CFE8A2499FA35003E8EF4 /* IdleState.swift */,
+				4B902E80249F5C67001D474F /* StateMachine */,
 				4B0DFBB4249CFC9A00B108DB /* Component */,
 				4B0EC67D249CE652003190CE /* Actions */,
 				4BCECA99249C05BA00C90692 /* Physics */,
@@ -230,10 +244,12 @@
 				4BFEDD9B249E0EE60004D933 /* ParallaxComponent.swift in Sources */,
 				4B4B13C9249392ED00B0237F /* TouchControlInputNode.swift in Sources */,
 				4B9CFE892499F9D9003E8EF4 /* CharacterNode.swift in Sources */,
+				4BFEDD9D249F51730004D933 /* AttackState.swift in Sources */,
 				4B61FB152493AE0A00808953 /* GamePad.swift in Sources */,
 				4B55874324938AB70029B457 /* GameScene.swift in Sources */,
 				4B9CFE8B2499FA35003E8EF4 /* IdleState.swift in Sources */,
 				4B55874524938AB70029B457 /* GameViewController.swift in Sources */,
+				4BFEDD9F249F551B0004D933 /* DamageState.swift in Sources */,
 				4B55873D24938AB70029B457 /* AppDelegate.swift in Sources */,
 				4B0DFBB3249CF6EF00B108DB /* Animation.swift in Sources */,
 				4BCECA9B249C060100C90692 /* PhysicDetection.swift in Sources */,

@@ -167,20 +167,20 @@ class GameScene: SKScene {
                             
                             // Floor
                             if isEdgeTile == 1 {
-                                print("Floor")
+//                                print("Floor")
                                 tileNode.physicsBody?.restitution = 0.0
                                 tileNode.physicsBody?.contactTestBitMask = ColliderType.PLAYER
                                 tileNode.physicsBody?.categoryBitMask = ColliderType.GROUND
                             }
                             // Wall
                             else if isEdgeTile == 2{
-                                print("Wall")
+//                                print("Wall")
                                 tileNode.physicsBody?.restitution = 0.0
                                 tileNode.physicsBody?.categoryBitMask = ColliderType.WALL
                                 tileNode.physicsBody?.contactTestBitMask = ColliderType.PLAYER
                             }
                             else {
-                                print("Not set")
+//                                print("Not set")
                                 tileNode.physicsBody?.categoryBitMask = ColliderType.GROUND
                             }
                             

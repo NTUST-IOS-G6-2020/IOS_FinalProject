@@ -37,35 +37,35 @@ class TouchControlInputNode: SKSpriteNode {
     //5: Method used to add all buttons
     func setUpControls(size: CGSize) {
         addButton(button: buttonDirUp,
-                  position: CGPoint(x: -(size.width / 3 ),y: -size.height / 4 + 90),
+                  position: CGPoint(x: -(size.width / 3 ),y: -size.height / 4.5 + 90),
                   name: "up",
                   scale: 0.2)
         addButton(button: buttonDirLeft,
-                  position: CGPoint(x: -(size.width / 3 ) - 90, y: -size.height / 4),
+                  position: CGPoint(x: -(size.width / 3 ) - 90, y: -size.height / 4.5),
                   name: "left",
                   scale: 0.2)
         addButton(button: buttonDirDown,
-                  position: CGPoint(x: -(size.width / 3 ), y: -size.height / 4 - 90),
+                  position: CGPoint(x: -(size.width / 3 ), y: -size.height / 4.5 - 90),
                   name: "down",
                   scale: 0.2)
         addButton(button: buttonDirRight,
-                  position: CGPoint(x: -(size.width / 3 ) + 90, y: -size.height / 4),
+                  position: CGPoint(x: -(size.width / 3 ) + 90, y: -size.height / 4.5),
                   name: "right",
                   scale: 0.2)
         addButton(button: buttonT,
-                  position: CGPoint(x: (size.width / 3 ), y: -size.height / 4 + 90),
+                  position: CGPoint(x: (size.width / 3 ), y: -size.height / 4.5 + 90),
                   name: "T",
                   scale: 0.17)
         addButton(button: buttonS,
-                  position: CGPoint(x: (size.width / 3 ) - 90, y: -size.height / 4),
+                  position: CGPoint(x: (size.width / 3 ) - 90, y: -size.height / 4.5),
                   name: "S",
                   scale: 0.17)
         addButton(button: buttonX,
-                  position: CGPoint(x: (size.width / 3 ), y: -size.height / 4 - 90),
+                  position: CGPoint(x: (size.width / 3 ), y: -size.height / 4.5 - 90),
                   name: "X",
                   scale: 0.17)
         addButton(button: buttonO,
-                  position: CGPoint(x: (size.width / 3 ) + 90, y: -size.height / 4),
+                  position: CGPoint(x: (size.width / 3 ) + 90, y: -size.height / 4.5),
                   name: "O",
                   scale: 0.17)
     }
@@ -112,9 +112,9 @@ class TouchControlInputNode: SKSpriteNode {
             let previousLocation = t.previousLocation(in: parent!)
             
             for button in [buttonDirUp, buttonDirDown, buttonDirRight, buttonDirLeft, buttonT, buttonS, buttonX, buttonO] {
-                // if i get off the button where my finger was before
+                // Get off the button where my finger was before
                 if button.contains(previousLocation) && !button.contains(location) {
-                    // i remove it from the list
+                    // Remove it from the list
                     let index = pressedButtons.firstIndex(of: button)
                     
                     if index != nil {
@@ -126,7 +126,7 @@ class TouchControlInputNode: SKSpriteNode {
                     }
                 }// if the button does not contain the previous location, and contains the current location and if it's already in the list
                 else if !button.contains(previousLocation) && button.contains(location) && pressedButtons.firstIndex(of: button) == nil {
-                    // i add it to the list
+                    // Add it to the list
                     pressedButtons.append(button)
                     
                     if ((inputDelegate) != nil) {
