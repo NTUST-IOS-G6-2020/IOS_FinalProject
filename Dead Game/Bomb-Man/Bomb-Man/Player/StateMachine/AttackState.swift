@@ -27,6 +27,10 @@ class AttackState : GKState {
         
         // If attack button click animate and create Bomb
         if activeTime >= 0 {
+            if activeTime == 1.0 {
+                cNode?.setNewBomb()
+                cNode?.throwBomb(strength: CGVector(dx: 1600, dy: 1100))
+            }
             activeTime = activeTime - lastUpdateTime
         }
         else {
@@ -36,6 +40,5 @@ class AttackState : GKState {
         
         lastUpdateTime = seconds
     }
-    
     
 }

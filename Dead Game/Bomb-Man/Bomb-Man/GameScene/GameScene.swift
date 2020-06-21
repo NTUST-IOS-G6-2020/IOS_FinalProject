@@ -96,6 +96,7 @@ class GameScene: SKScene {
             giveTilemapPhysicsBody(map: tilemap)
         }
         
+        
         // Physics
         self.physicsWorld.contactDelegate = physicsDelegate
     }
@@ -152,7 +153,6 @@ class GameScene: SKScene {
                             let tileNode = SKNode()
                             
                             tileNode.position = CGPoint(x: x, y: y)
-    //                        tileNode.physicsBody = SKPhysicsBody(texture: tileTexture, size: CGSize(width: tileTexture.size().width, height: tileTexture.size().height))
                             tileNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tileTexture.size().width, height: tileTexture.size().height))
                             tileNode.physicsBody?.linearDamping = 0
                             tileNode.physicsBody?.affectedByGravity = false

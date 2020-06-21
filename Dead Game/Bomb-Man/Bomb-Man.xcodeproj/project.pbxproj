@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4B0DFBB3249CF6EF00B108DB /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0DFBB2249CF6EF00B108DB /* Animation.swift */; };
 		4B0EC681249CF1D1003190CE /* PlayerActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4B0EC680249CF1D1003190CE /* PlayerActions.sks */; };
+		4B39C664249F8A0400589A0C /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B39C663249F8A0400589A0C /* Bomb.swift */; };
+		4B39C666249F8B9100589A0C /* BombActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4B39C665249F8B9100589A0C /* BombActions.sks */; };
 		4B4B13C5249392BF00B0237F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4B4B13C4249392BF00B0237F /* GameScene.sks */; };
 		4B4B13C9249392ED00B0237F /* TouchControlInputNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B13C7249392ED00B0237F /* TouchControlInputNode.swift */; };
 		4B55873D24938AB70029B457 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B55873C24938AB70029B457 /* AppDelegate.swift */; };
@@ -30,6 +32,8 @@
 /* Begin PBXFileReference section */
 		4B0DFBB2249CF6EF00B108DB /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		4B0EC680249CF1D1003190CE /* PlayerActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerActions.sks; sourceTree = "<group>"; };
+		4B39C663249F8A0400589A0C /* Bomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
+		4B39C665249F8B9100589A0C /* BombActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BombActions.sks; sourceTree = "<group>"; };
 		4B4B13C4249392BF00B0237F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		4B4B13C7249392ED00B0237F /* TouchControlInputNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchControlInputNode.swift; sourceTree = "<group>"; };
 		4B55873924938AB70029B457 /* Bomb-Man.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bomb-Man.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +90,15 @@
 			path = Actions;
 			sourceTree = "<group>";
 		};
+		4B39C662249F89F200589A0C /* Bomb */ = {
+			isa = PBXGroup;
+			children = (
+				4B39C663249F8A0400589A0C /* Bomb.swift */,
+				4B39C665249F8B9100589A0C /* BombActions.sks */,
+			);
+			path = Bomb;
+			sourceTree = "<group>";
+		};
 		4B55873024938AB70029B457 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +118,7 @@
 		4B55873B24938AB70029B457 /* Bomb-Man */ = {
 			isa = PBXGroup;
 			children = (
+				4B39C662249F89F200589A0C /* Bomb */,
 				4BBEE6CF249BFDAE00A524EF /* Player */,
 				4B9CFE872499F995003E8EF4 /* GameScene */,
 				4B55873C24938AB70029B457 /* AppDelegate.swift */,
@@ -229,6 +243,7 @@
 				4B4B13C5249392BF00B0237F /* GameScene.sks in Resources */,
 				4B55874A24938AB80029B457 /* Assets.xcassets in Resources */,
 				4BD5F5D6249D362900E28871 /* TerrainTile.sks in Resources */,
+				4B39C666249F8B9100589A0C /* BombActions.sks in Resources */,
 				4B0EC681249CF1D1003190CE /* PlayerActions.sks in Resources */,
 				4B55874D24938AB80029B457 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -253,6 +268,7 @@
 				4B55873D24938AB70029B457 /* AppDelegate.swift in Sources */,
 				4B0DFBB3249CF6EF00B108DB /* Animation.swift in Sources */,
 				4BCECA9B249C060100C90692 /* PhysicDetection.swift in Sources */,
+				4B39C664249F8A0400589A0C /* Bomb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

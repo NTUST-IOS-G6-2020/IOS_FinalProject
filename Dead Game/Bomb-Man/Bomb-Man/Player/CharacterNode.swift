@@ -18,6 +18,17 @@ class CharacterNode: SKSpriteNode {
     var readyToAttack = false
     var attack = false
     var hitStun: CGFloat = 3
+    // Throw
+//    var prevThrowPower = 100.0
+//    var pervThrowAngle = 0.0
+//    var currentPower = 100.0
+//    var currentAngle = 0.0
+//    var powerMeterNode: SKSpriteNode? = nil
+//    var powerMeterFilledNode: SKSpriteNode? = nil
+    
+    // Bomb
+    var pinBombToPlayer : SKPhysicsJointFixed?
+    var bombReady = false
     
     // Take Damage
     var takeDamage = false
@@ -25,7 +36,6 @@ class CharacterNode: SKSpriteNode {
     // Move
     var left = false
     var right = false
-//    var down = false
     
     // Jumps
     var landed = false
@@ -67,8 +77,51 @@ class CharacterNode: SKSpriteNode {
         physicsBody?.friction = 0.0087
         physicsBody?.categoryBitMask = ColliderType.PLAYER
         physicsBody?.collisionBitMask = (ColliderType.GROUND | ColliderType.WALL | ColliderType.BOUNDARY)
-        // Not needed
         physicsBody?.contactTestBitMask = ColliderType.GROUND
     }
     
+    // MARK:- Bomb Section
+    func setNewBomb () {
+        // New a custom SKSpriteNode
+        let bomb = Bomb(imageNamed: "bomb_on_1")
+        bomb.name = "bomb"
+        bomb.alpha = bomb.image_alpha
+        bomb.setScale(1.7)
+        bomb.zPosition = 2
+        // Bomb Position 
+        bomb.position = CGPoint(x: bomb.xOffset, y: bomb.yOffset)
+        // SKAction
+        bomb.run(bomb.actionOn, withKey: "bombOn")
+        
+        // Make bomb Physics
+        bomb.physicsBody = SKPhysicsBody(circleOfRadius: 26, center: CGPoint(x: bomb.position.x - 60, y: bomb.position.y - 30))
+        bomb.physicsBody?.affectedByGravity = false
+        bomb.physicsBody?.mass = 1.0
+        bomb.physicsBody?.categoryBitMask = ColliderType.BOMB
+        bomb.physicsBody?.collisionBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER
+        bomb.physicsBody?.contactTestBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER
+        self.addChild(bomb)
+
+        if let _ = self.physicsBody {
+            bombReady = true
+        }
+        
+    }
+    
+    func throwBomb (strength: CGVector) {
+        if bombReady {
+            if let bomb = childNode(withName: "bomb") {
+                let toss = SKAction.run() {
+                    bomb.physicsBody?.applyImpulse(strength)
+                    bomb.physicsBody?.affectedByGravity = true
+                    bomb.physicsBody?.applyAngularImpulse(0.2125)
+                    self.bombReady = false
+                }
+                bomb.run(SKAction.sequence([toss]))
+            }
+        }
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touch")
+    }
 }

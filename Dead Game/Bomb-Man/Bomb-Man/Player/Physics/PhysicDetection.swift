@@ -14,6 +14,7 @@ enum ColliderType {
     static let GROUND: UInt32 = 0x1 << 1    // 2
     static let WALL : UInt32 = 0x1 << 2     // 4
     static let BOUNDARY: UInt32 = 0x1  << 3     // 8
+    static let BOMB : UInt32 = 0x1 << 4     //16
 }
 
 class PhysicDetection: NSObject, SKPhysicsContactDelegate {
@@ -54,7 +55,34 @@ class PhysicDetection: NSObject, SKPhysicsContactDelegate {
                 player.life = 0
             }
         }
-        
+        // Bomb
+        else if collision == ColliderType.BOMB | ColliderType.WALL {
+            print("Boom!!")
+            if let bomb = contact.bodyA.node as? Bomb {
+                bomb.explode(isWall: true)
+            }
+            else if let bomb = contact.bodyB.node as? Bomb {
+                bomb.explode(isWall: true)
+            }
+        }
+        else if collision == ColliderType.BOMB | ColliderType.GROUND {
+            print("Boom!!")
+            if let bomb = contact.bodyA.node as? Bomb {
+                bomb.explode(isWall: false)
+            }
+            else if let bomb = contact.bodyB.node as? Bomb {
+                bomb.explode(isWall: false)
+            }
+        }
+        else if collision == ColliderType.BOMB | ColliderType.PLAYER {
+            print("Boom!!")
+            if let bomb = contact.bodyA.node as? Bomb {
+                bomb.explode(isWall: false)
+            }
+            else if let bomb = contact.bodyB.node as? Bomb {
+                bomb.explode(isWall: false)
+            }
+        }
         
     }
     
