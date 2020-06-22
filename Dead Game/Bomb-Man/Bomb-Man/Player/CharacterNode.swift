@@ -19,12 +19,10 @@ class CharacterNode: SKSpriteNode {
     var attack = false
     var hitStun: CGFloat = 3
     // Throw
-//    var prevThrowPower = 100.0
-//    var pervThrowAngle = 0.0
-//    var currentPower = 100.0
-//    var currentAngle = 0.0
-//    var powerMeterNode: SKSpriteNode? = nil
-//    var powerMeterFilledNode: SKSpriteNode? = nil
+    var prevThrowPower = 100.0
+    var prevThrowAngle = 0.0
+    var currentPower = 100.0
+    var currentAngle = 0.0
     
     // Bomb
     var pinBombToPlayer : SKPhysicsJointFixed?
@@ -118,10 +116,11 @@ class CharacterNode: SKSpriteNode {
                     self.bombReady = false
                 }
                 bomb.run(SKAction.sequence([toss]))
+                // Update power and Angle
+                prevThrowPower = 0
+                prevThrowAngle = currentAngle
             }
         }
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch")
-    }
+    
 }

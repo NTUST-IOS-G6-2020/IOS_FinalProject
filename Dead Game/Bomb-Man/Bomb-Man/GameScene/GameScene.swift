@@ -8,9 +8,14 @@ class GameScene: SKScene {
     
     private var lastUpdateTime : TimeInterval = 0
     
+    // player and camera
     var thePlayer: SKSpriteNode = SKSpriteNode()
     var theCamera: SKCameraNode = SKCameraNode()
     var physicsDelegate = PhysicDetection()
+    
+    // throw power bar
+    var powerMeterNode: SKSpriteNode? = nil
+    var powerMeterFilledNode: SKSpriteNode? = nil
     
     // 背景捲軸
     var parallaxComponentSystem : GKComponentSystem<ParallaxComponent>?
@@ -44,7 +49,6 @@ class GameScene: SKScene {
     
     // Setup all the shit
     override func didMove(to view: SKView) {
-        
         // 背景 node 加入 entity
         setupParallaxBG()
         
@@ -99,6 +103,13 @@ class GameScene: SKScene {
         
         // Physics
         self.physicsWorld.contactDelegate = physicsDelegate
+        
+        // Add throwPower Bar
+        addThrowPowerBar()
+        
+        // Add UIPanGesture
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dragShoot))
+        view.addGestureRecognizer(panRecognizer)
     }
     
     // Camera Follow
@@ -131,6 +142,88 @@ class GameScene: SKScene {
         parallaxComponentSystem?.update(deltaTime: currentTime)
         
         self.lastUpdateTime = currentTime
+    }
+    
+    // MARK:- Throw Power Bar
+    func addThrowPowerBar () {
+        powerMeterNode = SKSpriteNode(imageNamed: "barout")
+        powerMeterNode?.name = "arrow-power-meter"
+        powerMeterNode?.anchorPoint = CGPoint(x: 0.043, y: 0.5)
+        powerMeterNode?.size = CGSize(width: 512, height: 43)
+        powerMeterNode?.position = CGPoint(x: 5, y: 7)
+        powerMeterNode?.zPosition = 7
+        self.camera?.addChild(powerMeterNode!)
+        
+        powerMeterFilledNode = SKSpriteNode(imageNamed: "barin")
+        powerMeterFilledNode?.name = "arrow-power-meter-filled"
+        powerMeterFilledNode?.anchorPoint = CGPoint(x: 0.043, y: 0.5)
+        powerMeterFilledNode?.position = CGPoint(x: 8, y: 0)
+        powerMeterFilledNode?.size = CGSize(width: 498, height: 28)
+        powerMeterFilledNode?.zPosition = 8
+        powerMeterFilledNode?.xScale = 0
+        powerMeterNode?.addChild(powerMeterFilledNode!)
+    }
+    
+    func updatePowerBar (translation: CGPoint) {
+        if childNode(withName: "Player") != nil {
+            let thePlayer = childNode(withName: "Player") as! CharacterNode
+            
+            let changePower = -translation.x
+            let changeAngle = -translation.y
+            print(translation)
+            
+            let powerScale = 2.0
+            let angleScale = -150.0
+            
+            var power = Float(thePlayer.prevThrowPower) + Float(changePower) / Float(powerScale)
+            var angle = Float(thePlayer.prevThrowAngle) + Float(changeAngle) / Float(angleScale)
+            
+            power = min(power, 100)
+            power = max(power, 0)
+            angle = min(angle, .pi/2)
+            angle = max(angle, 0)
+                        
+            print(power)
+            powerMeterFilledNode?.xScale = CGFloat(power/100.0)
+            powerMeterNode?.zRotation = CGFloat(angle)
+            
+            thePlayer.currentPower = Double(power)
+            thePlayer.currentAngle = Double(angle)
+        }
+    }
+    
+    // MARK:- Bomb drag and shoot
+    @objc func dragShoot (recognizer: UIPanGestureRecognizer) {
+        if recognizer.state == UIGestureRecognizer.State.began {
+            // do any initialization
+        }
+        
+        if recognizer.state == UIGestureRecognizer.State.changed {
+            let viewLocation = recognizer.translation(in: self.view)
+            print("x: \(viewLocation.x)  y: \(viewLocation.y)")
+            // position drag has moved
+            let translation = recognizer.translation(in: self.view)
+            updatePowerBar(translation: translation)
+        }
+        
+        if recognizer.state == UIGestureRecognizer.State.ended {
+            // finish up
+            let player = (thePlayer as! CharacterNode)
+            
+            let maxPowerImpluse = 2500.0
+            let currentImpluse = maxPowerImpluse * player.currentPower/100.0
+            
+            let strength = CGVector(dx: currentImpluse * cos(player.currentAngle), dy: currentImpluse * sin(player.currentAngle))
+            
+            // Throw Bomb
+            player.setNewBomb()
+            player.throwBomb(strength: strength)
+            
+            // Return powerBar to zero
+            let pause = SKAction.wait(forDuration: 0.5)
+            let zeroOut = SKAction.scaleX(to: 0, duration: 0.387)
+            powerMeterFilledNode?.run(SKAction.sequence([pause, zeroOut]))
+        }
     }
     
     // MARK:- Tile Map Physics
