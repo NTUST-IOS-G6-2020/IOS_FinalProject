@@ -50,12 +50,12 @@ class GamePad: GKComponent, ControlInputDelegate {
         cNode?.stateMachine?.update(deltaTime: seconds)
     }
     
-    func setupControls(camera: SKCameraNode, scene: SKScene){
-        touchControlNode = TouchControlInputNode(frame: scene.frame)
-        touchControlNode?.position = CGPoint.zero
-        touchControlNode?.inputDelegate = self
-        
-        camera.addChild(touchControlNode!)
+    func setupControls(camera: SKCameraNode, scene: SKScene) {
+//        touchControlNode = TouchControlInputNode(frame: scene.frame)
+//        touchControlNode?.position = CGPoint.zero
+//        touchControlNode?.inputDelegate = self
+//        
+//        camera.addChild(touchControlNode!)
         
         if cNode == nil {
             cNode = node as? CharacterNode

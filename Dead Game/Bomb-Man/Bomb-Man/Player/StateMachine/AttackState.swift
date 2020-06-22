@@ -20,7 +20,6 @@ class AttackState : GKState {
     
     init(with node: CharacterNode) {
         cNode = node
-        print("Attack state")
     }
     
     override func update(deltaTime seconds: TimeInterval) {
@@ -32,12 +31,13 @@ class AttackState : GKState {
         // 讓動畫飛一會
         if activeTime >= animationTime {
             activeTime = 0.0
-            self.stateMachine?.enter(IdleState.self)
+            if cNode?.childNode(withName: "bomb") == nil {
+                self.stateMachine?.enter(IdleState.self)
+            }
         }
         else if activeTime < animationTime {
             activeTime = activeTime + lastUpdateTime
         }
-        
         
         lastUpdateTime = seconds
     }

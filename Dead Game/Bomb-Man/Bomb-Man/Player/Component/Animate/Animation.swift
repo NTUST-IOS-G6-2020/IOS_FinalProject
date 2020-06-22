@@ -61,13 +61,12 @@ class Animation : GKComponent {
                     playAnimation(with: "JumpLand")
                 }
                 else if (cNode?.physicsBody?.velocity.dy)! < -300.0 {
-                    playAnimation(with: "JumoDown")
+                    playAnimation(with: "JumpDown")
                 }
             }
         }
         else if cNode?.stateMachine?.currentState is AimState {
             if (cNode?.aim)! && (cNode?.bombReady)! == false {
-//                playAnimation(with: "Attack")
                 playAnimation(with: "AttackReady")
             }
         }

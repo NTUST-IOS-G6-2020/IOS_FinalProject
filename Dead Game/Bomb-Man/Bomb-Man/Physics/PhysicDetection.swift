@@ -25,6 +25,7 @@ class PhysicDetection: NSObject, SKPhysicsContactDelegate {
         
         let collision: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
+        // Player1
         if collision == ColliderType.PLAYER | ColliderType.GROUND {
             if let player = contact.bodyA.node as? CharacterNode {
                 player.grounded = true
@@ -56,6 +57,38 @@ class PhysicDetection: NSObject, SKPhysicsContactDelegate {
                 player.life = 0
             }
         }
+        // Player2
+        else if collision == ColliderType.PLAYER2 | ColliderType.GROUND {
+            if let player = contact.bodyA.node as? CharacterNode {
+                player.grounded = true
+            }
+            else if let player = contact.bodyB.node as? CharacterNode {
+                player.grounded = true
+            }
+        }
+        else if collision == ColliderType.PLAYER2 | ColliderType.WALL {
+            if let player = contact.bodyA.node as? CharacterNode {
+                if player.jump == true {
+                    player.grounded = false
+                    player.landed = false
+                }
+            }
+            else if let player = contact.bodyB.node as? CharacterNode {
+                if player.jump == true {
+                    player.grounded = false
+                    player.landed = false
+                }
+            }
+        }
+        else if collision == ColliderType.PLAYER2 | ColliderType.BOUNDARY {
+            print("OUT of range")
+            if let player = contact.bodyA.node as? CharacterNode {
+                player.life = 0
+            }
+            else if let player = contact.bodyB.node as? CharacterNode {
+                player.life = 0
+            }
+        }
         // Bomb
         else if collision == ColliderType.BOMB | ColliderType.WALL {
             print("Boom!!")
@@ -76,6 +109,15 @@ class PhysicDetection: NSObject, SKPhysicsContactDelegate {
             }
         }
         else if collision == ColliderType.BOMB | ColliderType.PLAYER {
+            print("Boom!!")
+            if let bomb = contact.bodyA.node as? Bomb {
+                bomb.explode(isWall: false)
+            }
+            else if let bomb = contact.bodyB.node as? Bomb {
+                bomb.explode(isWall: false)
+            }
+        }
+        else if collision == ColliderType.BOMB | ColliderType.PLAYER2 {
             print("Boom!!")
             if let bomb = contact.bodyA.node as? Bomb {
                 bomb.explode(isWall: false)

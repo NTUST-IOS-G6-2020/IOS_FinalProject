@@ -40,13 +40,7 @@ class AimState : GKState {
         
         // If bomb throws
         if cNode?.aim == false && cNode?.bombReady == false {
-            
-            // remove bomb if exist
-//            if let bomb =  cNode?.childNode(withName: "bomb") {
-//                bomb.removeFromParent()
-//            }
             self.stateMachine?.enter(AttackState.self)
-            print("Attack??")
         }
         
         lastUpdateTime = seconds

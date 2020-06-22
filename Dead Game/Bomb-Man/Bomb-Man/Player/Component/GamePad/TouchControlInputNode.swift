@@ -1,12 +1,20 @@
+//
+//  TouchControlInputNode.swift
+//  Bomb-Man
+//
+//  Created by shungfu on 2020/6/12.
+//  Copyright © 2020 IOS-G6. All rights reserved.
+//
+
 import SpriteKit
 
 class TouchControlInputNode: SKSpriteNode {
     
-    // 1:this two varaible are used to show the transperancy of the button
+    // This two varaible are used to show the transperancy of the button
     var alphaUnpressed: CGFloat = 0.5
     var alphaPressed: CGFloat = 0.9
     
-    // 2:declear an array to hold all the buttons you need
+    // Declear an array to hold all the buttons you need
     var pressedButtons = [SKSpriteNode]()
     
     let buttonDirUp = SKSpriteNode(imageNamed: "button_up")
@@ -19,10 +27,10 @@ class TouchControlInputNode: SKSpriteNode {
     let buttonT = SKSpriteNode(imageNamed: "button_triangle")
     let buttonS = SKSpriteNode(imageNamed: "button_square")
     
-    //7: calling the ControlInputDelegate to receive the buttons
+    // Calling the ControlInputDelegate to receive the buttons
     var inputDelegate: ControlInputDelegate?
     
-    //3: creating the rectangle of the size of the screen
+    // Creating the rectangle of the size of the screen
     init(frame: CGRect) {
         super.init(texture: nil, color: UIColor.clear, size: frame.size)
         //6: calling the setUp controls
@@ -70,7 +78,7 @@ class TouchControlInputNode: SKSpriteNode {
                   scale: 0.17)
     }
     
-    //4: Method used to initialize the buttons
+    // Method used to initialize the buttons
     func addButton(button: SKSpriteNode, position: CGPoint, name: String, scale: CGFloat) {
         button.position = position
         button.setScale(scale)
@@ -80,8 +88,7 @@ class TouchControlInputNode: SKSpriteNode {
         self.addChild(button)
     }
     
-    
-    //8: Handinling the touch events
+    // Handinling the touch events
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             let location = t.location(in: parent!)
@@ -105,7 +112,6 @@ class TouchControlInputNode: SKSpriteNode {
         }
     }
     
-    //9:
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             let location = t.location(in: parent!)

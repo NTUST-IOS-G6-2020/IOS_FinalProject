@@ -8,10 +8,20 @@ class GameScene: SKScene {
     
     private var lastUpdateTime : TimeInterval = 0
     
+    // Turn Base
+    var TurnBase : TurnBaseNode?
+    // Timer
+    var timer:Float = 0.0
+    
     // player and camera
     var thePlayer: SKSpriteNode = SKSpriteNode()
     var theCamera: SKCameraNode = SKCameraNode()
     var physicsDelegate = PhysicDetection()
+    
+    // p1 and p2
+    var Player1: SKSpriteNode = SKSpriteNode()
+    var Player2: SKSpriteNode = SKSpriteNode()
+    var touchControlNode: TouchControlInputNode?
     
     // throw power bar
     var powerMeterNode: SKSpriteNode? = nil
@@ -66,13 +76,16 @@ class GameScene: SKScene {
             component.prepareWith(camera: camera)
         }
         
-        // Player
-        if self.childNode(withName: "Player") != nil {
-            thePlayer = (self.childNode(withName: "Player") as! SKSpriteNode)
+        // Setup Controllers
+        setupComtrollers()
+        
+        // Player1
+        if self.childNode(withName: "P1") != nil {
+            Player1 = (self.childNode(withName: "P1") as! SKSpriteNode)
             
             let entity = GKEntity()
             // Set up Player
-            let nodeComponent : GKSKNodeComponent = GKSKNodeComponent(node: thePlayer)
+            let nodeComponent : GKSKNodeComponent = GKSKNodeComponent(node: Player1)
             entity.addComponent(nodeComponent)
             // Add GamePlay Control
             entity.addComponent(GamePad())
@@ -80,14 +93,46 @@ class GameScene: SKScene {
             // Add Animation Component
             entity.addComponent(Animation())
             
+            // Set touchInputDelegate default Player1
+            touchControlNode?.inputDelegate = entity.component(ofType: GamePad.self)
+            
             // Append entity
             entities.append(entity)
             
             // Setup Player State Machine
-            (thePlayer as? CharacterNode)?.setUpStateMachine()
+            (Player1 as? CharacterNode)?.setUpStateMachine()
             // Setup Player Physics
-            (thePlayer as? CharacterNode)?.createPhysics()
+            (Player1 as? CharacterNode)?.createPhysics(categoryBitMask: ColliderType.PLAYER)
+            
+            thePlayer = Player1
         }
+        
+        // Player2
+        if self.childNode(withName: "P2") != nil {
+            Player2 = (self.childNode(withName: "P2") as! SKSpriteNode)
+            
+            let entity = GKEntity()
+            // Set up Player
+            let nodeComponent : GKSKNodeComponent = GKSKNodeComponent(node: Player2)
+            entity.addComponent(nodeComponent)
+            // Add GamePlay Control
+            entity.addComponent(GamePad())
+            entity.component(ofType: GamePad.self)?.setupControls(camera: camera!, scene: self)
+            // Add Animation Component
+            entity.addComponent(P2_Animation())
+            
+            // Append entity
+            entities.append(entity)
+            
+            // Setup Player State Machine
+            (Player2 as? CharacterNode)?.setUpStateMachine()
+            // Setup Player Physics
+            (Player2 as? CharacterNode)?.createPhysics(categoryBitMask: ColliderType.PLAYER2)
+        }
+        
+        // Turn Base
+        TurnBase = TurnBaseNode(frame: self.frame)
+        camera?.addChild(TurnBase!)
         
         // Camera
         if self.childNode(withName: "Camera") != nil {
@@ -112,6 +157,16 @@ class GameScene: SKScene {
         // Add UIPanGesture
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dragShoot))
         view.addGestureRecognizer(panRecognizer)
+    }
+    
+    // Setup Controllers
+    func setupComtrollers () {
+        touchControlNode = TouchControlInputNode(frame: self.frame)
+        touchControlNode?.position = CGPoint.zero
+//        touchControlNode?.zPosition = 20
+//        touchControlNode?.inputDelegate = self
+        
+        camera!.addChild(touchControlNode!)
     }
     
     // Camera Follow
@@ -161,6 +216,30 @@ class GameScene: SKScene {
         // Calculate time since last update
         let dt = currentTime - self.lastUpdateTime
         
+        // Turn Base update
+        timer += Float((currentTime - self.lastUpdateTime))
+        if timer >= 1.0 {
+            TurnBase?.update()
+            timer = 0
+        }
+        
+        // Check if Change Turn
+        if TurnBase!.changeTurn {
+            TurnBase?.didChangeTurn()
+            // Turn controller
+            for entity in self.entities {
+                if entity.component(ofType: GKSKNodeComponent.self)?.node == childNode(withName: TurnBase!.turn) {
+                    touchControlNode?.inputDelegate = entity.component(ofType: GamePad.self)!
+                }
+            }
+            // Change Player
+            if self.childNode(withName: TurnBase!.turn) != nil {
+                thePlayer = childNode(withName: TurnBase!.turn) as! SKSpriteNode
+            }
+        }
+        
+//        print("thrPlayer: ", thePlayer, " Player1: ", Player1, " Player2: ", Player2)
+        
         // Update entities
         for entity in self.entities {
             entity.update(deltaTime: dt)
@@ -177,9 +256,13 @@ class GameScene: SKScene {
     
     func updateBomb () {
         // Delete bomb if exist too long
-        let player = thePlayer as? CharacterNode
-        if let bomb = thePlayer.childNode(withName: "bomb") {
-            if !(player?.aim)! {
+        guard let _ = childNode(withName: TurnBase!.turn) else {
+            print("GGGGG")
+            return
+        }
+        let player = childNode(withName: TurnBase!.turn) as! CharacterNode
+        if let bomb = player.childNode(withName: "bomb") {
+            if !(player.aim) {
                 bombTime += lastUpdateTime
                 if bombTime >= 40000000 {
                     print(bombTime)
@@ -193,10 +276,10 @@ class GameScene: SKScene {
         }
         else {
             bombTime = 0
-            if (player?.aim)! && (player?.bombReady)! {
-                player?.aim = false
-                player?.bombReady = false
-                player?.removeAimLine()
+            if (player.aim) && (player.bombReady) {
+                player.aim = false
+                player.bombReady = false
+                player.removeAimLine()
             }
         }
     }
@@ -225,49 +308,59 @@ class GameScene: SKScene {
     }
     
     func updatePowerBar (translation: CGPoint) {
-        if childNode(withName: "Player") != nil {
-            let thePlayer = childNode(withName: "Player") as! CharacterNode
-            
-            let changePower = -translation.x
-            let changeAngle = -translation.y
-            
-            let powerScale = 0.5 * thePlayer.facing
-            let angleScale = -150.0
-            
-            var power = Float(changePower) * Float(powerScale)
-            var angle = Float(changeAngle) / Float(angleScale)
-            
-            power = min(power, 100)
-            power = max(power, 0)
-            angle = min(angle, .pi/2)
-            angle = max(angle, 0)
-            
-            powerMeterFilledNode?.xScale = CGFloat(power/100.0)
-            if let aimline = thePlayer.childNode(withName: "aimLine") {
-                aimline.zRotation = CGFloat(angle)
-                aimline.xScale = CGFloat(power/200.0)
-                // Make camera further
-                cameraDistance(scale: 1.9)
-            }
-            thePlayer.currentPower = Double(power)
-            thePlayer.currentAngle = Double(angle)
+        guard let _ = childNode(withName: TurnBase!.turn) else {
+            print("GGGGG")
+            return
         }
+        let player = childNode(withName: TurnBase!.turn) as! CharacterNode
+        print("UpdatePwerBar: ", player)
+        
+        let changePower = -translation.x
+        let changeAngle = -translation.y
+        
+        let powerScale = 0.5 * player.facing
+        let angleScale = -150.0
+        
+        var power = Float(changePower) * Float(powerScale)
+        var angle = Float(changeAngle) / Float(angleScale)
+        
+        power = min(power, 100)
+        power = max(power, 0)
+        angle = min(angle, .pi/2)
+        angle = max(angle, 0)
+        
+        powerMeterFilledNode?.xScale = CGFloat(power/100.0)
+        if let aimline = thePlayer.childNode(withName: "aimLine") {
+            aimline.zRotation = CGFloat(angle)
+            aimline.xScale = CGFloat(power/200.0)
+            // Make camera further
+            cameraDistance(scale: 1.9)
+        }
+        player.currentPower = Double(power)
+        player.currentAngle = Double(angle)
+        
     }
     
     // MARK:- Bomb drag and shoot
     @objc func dragShoot (recognizer: UIPanGestureRecognizer) {
-        let player = (thePlayer as! CharacterNode)
+//        let player = (thePlayer as! CharacterNode)
+        
+        guard let _ = childNode(withName: TurnBase!.turn) else {
+            return
+        }
+        let player = childNode(withName: TurnBase!.turn) as! CharacterNode
         
         if player.stateMachine?.currentState is AimState {
             if recognizer.state == UIGestureRecognizer.State.began {
                 // do any initialization
+                print("Aim state? ", player)
             }
             
+            
             if recognizer.state == UIGestureRecognizer.State.changed {
-//                let viewLocation = recognizer.translation(in: self.view)
-//                print("x: \(viewLocation.x)  y: \(viewLocation.y)")
                 // position drag has moved
                 let translation = recognizer.translation(in: self.view)
+                print("x: \(translation.x)  y: \(translation.y)")
                 updatePowerBar(translation: translation)
             }
             
@@ -277,6 +370,8 @@ class GameScene: SKScene {
                 let currentImpluse = maxPowerImpluse * player.currentPower/100.0
                 
                 let strength = CGVector(dx: Double(player.facing) * currentImpluse * cos(player.currentAngle), dy: currentImpluse * sin(player.currentAngle))
+                
+                print(strength)
                 
                 // Throw Bomb
                 player.throwBomb(strength: strength)

@@ -64,13 +64,13 @@ class CharacterNode: SKSpriteNode {
     }
     
     // 為什麼手尻？ 因為他的xocde scene editor有他得bug
-    func createPhysics() {
-        self.physicsBody = SKPhysicsBody(texture: self.texture!, size: CGSize(width: 150, height: 151))
+    func createPhysics(categoryBitMask: UInt32) {
+        self.physicsBody = SKPhysicsBody(texture: self.texture!, size: self.size)
         physicsBody?.affectedByGravity = true
         physicsBody?.allowsRotation = false
         physicsBody?.restitution = 0.0
         physicsBody?.friction = 0.0087
-        physicsBody?.categoryBitMask = ColliderType.PLAYER
+        physicsBody?.categoryBitMask = categoryBitMask
         physicsBody?.collisionBitMask = (ColliderType.GROUND | ColliderType.WALL | ColliderType.BOUNDARY)
         physicsBody?.contactTestBitMask = ColliderType.GROUND
     }
@@ -93,8 +93,14 @@ class CharacterNode: SKSpriteNode {
         bomb.physicsBody?.affectedByGravity = false
         bomb.physicsBody?.mass = 1.3
         bomb.physicsBody?.categoryBitMask = ColliderType.BOMB
-        bomb.physicsBody?.collisionBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER
-        bomb.physicsBody?.contactTestBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER
+        if self.physicsBody?.categoryBitMask == ColliderType.PLAYER {
+            bomb.physicsBody?.collisionBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER2
+            bomb.physicsBody?.contactTestBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER2
+        }
+        else {
+            bomb.physicsBody?.collisionBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER
+            bomb.physicsBody?.contactTestBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER
+        }
         self.addChild(bomb)
 
         if let _ = bomb.physicsBody {
