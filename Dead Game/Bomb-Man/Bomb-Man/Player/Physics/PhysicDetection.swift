@@ -15,6 +15,7 @@ enum ColliderType {
     static let WALL : UInt32 = 0x1 << 2     // 4
     static let BOUNDARY: UInt32 = 0x1  << 3     // 8
     static let BOMB : UInt32 = 0x1 << 4     //16
+    static let PLAYER2: UInt32 = 0x1 << 5       // 32
 }
 
 class PhysicDetection: NSObject, SKPhysicsContactDelegate {
