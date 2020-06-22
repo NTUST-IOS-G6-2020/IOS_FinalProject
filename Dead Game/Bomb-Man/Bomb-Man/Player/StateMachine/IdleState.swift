@@ -79,7 +79,10 @@ class IdleState: GKState {
         
         // Aim
         if cNode.aim {
-            self.stateMachine?.enter(AimState.self)
+            // Enter Aim state if no bomb exist
+            if self.cNode.childNode(withName: "bomb") == nil {
+                self.stateMachine?.enter(AimState.self)
+            }
         }
         
         // Hit

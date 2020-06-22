@@ -18,6 +18,7 @@ class GameScene: SKScene {
     var powerMeterFilledNode: SKSpriteNode? = nil
     // Check if bomb exist too long
     var bombTime: TimeInterval = 0.0
+    var cameraFollowBomb : Bool = false
     
     // 背景捲軸
     var parallaxComponentSystem : GKComponentSystem<ParallaxComponent>?
@@ -102,7 +103,6 @@ class GameScene: SKScene {
             giveTilemapPhysicsBody(map: tilemap)
         }
         
-        
         // Physics
         self.physicsWorld.contactDelegate = physicsDelegate
         
@@ -116,11 +116,38 @@ class GameScene: SKScene {
     
     // Camera Follow
     func cameraOnNode(node: SKNode) {
-        theCamera.run(SKAction.move(to: CGPoint(x: node.position.x, y: node.position.y + 100), duration: 0.5))
+        if cameraFollowBomb {
+            let bombPosition = CGPoint(x: node.position.x + thePlayer.position.x, y: node.position.y + thePlayer.position.y)
+            theCamera.run(SKAction.move(to: CGPoint(x: bombPosition.x, y: bombPosition.y + 100), duration: 0.08))
+        }
+        else {
+            theCamera.run(SKAction.move(to: CGPoint(x: node.position.x, y: node.position.y + 100), duration: 0.5))
+        }
+    }
+    
+    // Change camera further or closer
+    func cameraDistance (scale: CGFloat) {
+        theCamera.run(SKAction.scale(to: scale, duration: 0.2))
     }
     
     override func didFinishUpdate() {
-        cameraOnNode(node: thePlayer);
+        // Update Camera follow bomb
+        if let bomb = thePlayer.childNode(withName: "bomb") {
+            cameraFollowBomb = true
+            cameraOnNode(node: bomb)
+        }
+        // Camera follow Player
+        else {
+            if cameraFollowBomb {
+                theCamera.run(SKAction.wait(forDuration: 0.387)) {
+                    self.cameraFollowBomb = false
+                }
+            }
+            else {
+                cameraOnNode(node: thePlayer)
+                cameraDistance(scale: 1.2)
+            }
+        }
     }
     
     // Called before each frame is rendered
@@ -143,23 +170,35 @@ class GameScene: SKScene {
         parallaxComponentSystem?.update(deltaTime: currentTime)
         
         // Delete bomb if exist too long
+        updateBomb()
+        
+        self.lastUpdateTime = currentTime
+    }
+    
+    func updateBomb () {
+        // Delete bomb if exist too long
+        let player = thePlayer as? CharacterNode
         if let bomb = thePlayer.childNode(withName: "bomb") {
-            let player = thePlayer as? CharacterNode
             if !(player?.aim)! {
                 bombTime += lastUpdateTime
-                // 10 second??
-                if bombTime >= 60000000 {
+                if bombTime >= 40000000 {
                     print(bombTime)
                     bomb.removeFromParent()
                     bombTime = 0
                 }
             }
+            else {
+                bombTime = 0
+            }
         }
         else {
             bombTime = 0
+            if (player?.aim)! && (player?.bombReady)! {
+                player?.aim = false
+                player?.bombReady = false
+                player?.removeAimLine()
+            }
         }
-        
-        self.lastUpdateTime = currentTime
     }
     
     // MARK:- Throw Power Bar
@@ -207,8 +246,9 @@ class GameScene: SKScene {
             if let aimline = thePlayer.childNode(withName: "aimLine") {
                 aimline.zRotation = CGFloat(angle)
                 aimline.xScale = CGFloat(power/200.0)
+                // Make camera further
+                cameraDistance(scale: 1.9)
             }
-            
             thePlayer.currentPower = Double(power)
             thePlayer.currentAngle = Double(angle)
         }

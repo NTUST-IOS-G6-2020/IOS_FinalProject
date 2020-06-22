@@ -91,7 +91,7 @@ class CharacterNode: SKSpriteNode {
         // Make bomb Physics
         bomb.physicsBody = SKPhysicsBody(circleOfRadius: 26, center: CGPoint(x: bomb.position.x - 60, y: bomb.position.y - 30))
         bomb.physicsBody?.affectedByGravity = false
-        bomb.physicsBody?.mass = 1.0
+        bomb.physicsBody?.mass = 1.3
         bomb.physicsBody?.categoryBitMask = ColliderType.BOMB
         bomb.physicsBody?.collisionBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER
         bomb.physicsBody?.contactTestBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER
@@ -118,7 +118,7 @@ class CharacterNode: SKSpriteNode {
                 let toss = SKAction.run() {
                     bomb.physicsBody?.applyImpulse(strength)
                     bomb.physicsBody?.affectedByGravity = true
-                    bomb.physicsBody?.applyAngularImpulse(0.2125)
+//                    bomb.physicsBody?.applyAngularImpulse(strength.dx/10000)
                     // Shoot only once
                     self.bombReady = false
                     self.aim = false
@@ -126,16 +126,19 @@ class CharacterNode: SKSpriteNode {
                 bomb.run(SKAction.sequence([toss]))
                 
                 // Remove aimline
-                if let aimline = self.childNode(withName: "aimLine") {
-                    let pause = SKAction.wait(forDuration: 0.287)
-                    let zeroOut = SKAction.scale(to: CGSize(width: 0, height: 0), duration: 0.187)
-                    let remove = SKAction.run {
-                        aimline.removeFromParent()
-                    }
-                    aimline.run(SKAction.sequence([pause, zeroOut, remove]))
-                }
-                
+                removeAimLine()
             }
+        }
+    }
+    
+    func removeAimLine () {
+        if let aimline = self.childNode(withName: "aimLine") {
+            let pause = SKAction.wait(forDuration: 0.287)
+            let zeroOut = SKAction.scale(to: CGSize(width: 0, height: 0), duration: 0.187)
+            let remove = SKAction.run {
+                aimline.removeFromParent()
+            }
+            aimline.run(SKAction.sequence([pause, zeroOut, remove]))
         }
     }
     

@@ -58,10 +58,10 @@ class ParallaxComponent: GKComponent {
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
         let difX = ((camera?.position.x)! - (previousPosition?.x)!) / dX
-        let difY = ((camera?.position.y)! - (previousPosition?.y)!) / dY
+//        let difY = ((camera?.position.y)! - (previousPosition?.y)!) / dY
         
-        // Only change the x position
-        node?.position = CGPoint(x: (node?.position.x)! + difX, y: (camera?.position.y)! + difY)
+        
+        node?.position = CGPoint(x: (node?.position.x)! + difX, y: (node?.position.y)!)
         
         previousPosition = camera?.position
     }
