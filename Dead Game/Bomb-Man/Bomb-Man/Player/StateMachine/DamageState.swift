@@ -11,20 +11,28 @@ import GameplayKit
 
 class DamageState : GKState {
     var cNode : CharacterNode
+    var hitStun: CGFloat
     
     init(with node : CharacterNode) {
         self.cNode = node
+        self.hitStun = cNode.hitStun
     }
     
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
         
         cNode.hspeed = approach(start: cNode.hspeed, end: 0, shift: 0.1)
-        cNode.hitStun = cNode.hitStun - 1
+        hitStun = hitStun - 1
         
-        if cNode.hitStun <= 0 {
+        if hitStun <= 0 {
+            // Refresh hit Stun
+            hitStun = cNode.hitStun
+            // stop
             cNode.hspeed = 0
             cNode.physicsBody?.velocity.dx = 0.0
+            // hit and loss one life
+            cNode.life -= 1
+            cNode.takeDamage = false
             self.stateMachine?.enter(IdleState.self)
         }
         

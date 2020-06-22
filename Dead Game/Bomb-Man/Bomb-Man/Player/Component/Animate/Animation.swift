@@ -73,6 +73,9 @@ class Animation : GKComponent {
         else if cNode?.stateMachine?.currentState is AttackState {
             playAnimation(with: "Attack")
         }
+        else if cNode?.stateMachine?.currentState is DamageState {
+            playAnimation(with: "Damage")
+        }
     }
     
     func playAnimation (with name:String) {

@@ -58,6 +58,9 @@ class GameScene: SKScene {
         addNode(name: "sCloud3", layer: 1)
         addNode(name: "sCloud4", layer: 1)
         addNode(name: "sCloud5", layer: 1)
+        addNode(name: "Cloud1", layer: 2)
+        addNode(name: "Cloud2", layer: 2)
+        addNode(name: "Cloud3", layer: 2)
     }
     
     // Setup all the sht
@@ -163,9 +166,6 @@ class GameScene: SKScene {
     func setupComtrollers () {
         touchControlNode = TouchControlInputNode(frame: self.frame)
         touchControlNode?.position = CGPoint.zero
-//        touchControlNode?.zPosition = 20
-//        touchControlNode?.inputDelegate = self
-        
         camera!.addChild(touchControlNode!)
     }
     
@@ -237,6 +237,9 @@ class GameScene: SKScene {
                 thePlayer = childNode(withName: TurnBase!.turn) as! SKSpriteNode
             }
         }
+        // Update player life
+        let life = (thePlayer as! CharacterNode).life
+        TurnBase?.updatePlayerHealth(life: life)
         
 //        print("thrPlayer: ", thePlayer, " Player1: ", Player1, " Player2: ", Player2)
         
@@ -257,7 +260,6 @@ class GameScene: SKScene {
     func updateBomb () {
         // Delete bomb if exist too long
         guard let _ = childNode(withName: TurnBase!.turn) else {
-            print("GGGGG")
             return
         }
         let player = childNode(withName: TurnBase!.turn) as! CharacterNode
@@ -309,11 +311,9 @@ class GameScene: SKScene {
     
     func updatePowerBar (translation: CGPoint) {
         guard let _ = childNode(withName: TurnBase!.turn) else {
-            print("GGGGG")
             return
         }
         let player = childNode(withName: TurnBase!.turn) as! CharacterNode
-        print("UpdatePwerBar: ", player)
         
         let changePower = -translation.x
         let changeAngle = -translation.y
@@ -353,14 +353,12 @@ class GameScene: SKScene {
         if player.stateMachine?.currentState is AimState {
             if recognizer.state == UIGestureRecognizer.State.began {
                 // do any initialization
-                print("Aim state? ", player)
             }
-            
             
             if recognizer.state == UIGestureRecognizer.State.changed {
                 // position drag has moved
                 let translation = recognizer.translation(in: self.view)
-                print("x: \(translation.x)  y: \(translation.y)")
+//                print("x: \(translation.x)  y: \(translation.y)")
                 updatePowerBar(translation: translation)
             }
             
@@ -370,8 +368,6 @@ class GameScene: SKScene {
                 let currentImpluse = maxPowerImpluse * player.currentPower/100.0
                 
                 let strength = CGVector(dx: Double(player.facing) * currentImpluse * cos(player.currentAngle), dy: currentImpluse * sin(player.currentAngle))
-                
-                print(strength)
                 
                 // Throw Bomb
                 player.throwBomb(strength: strength)

@@ -112,18 +112,34 @@ class PhysicDetection: NSObject, SKPhysicsContactDelegate {
             print("Boom!!")
             if let bomb = contact.bodyA.node as? Bomb {
                 bomb.explode(isWall: false)
+                // Take Damage
+                if let player1 = contact.bodyB.node as? CharacterNode {
+                    player1.takeDamage = true
+                }
             }
             else if let bomb = contact.bodyB.node as? Bomb {
                 bomb.explode(isWall: false)
+                // Take Damage
+                if let player1 = contact.bodyA.node as? CharacterNode {
+                    player1.takeDamage = true
+                }
             }
         }
         else if collision == ColliderType.BOMB | ColliderType.PLAYER2 {
             print("Boom!!")
             if let bomb = contact.bodyA.node as? Bomb {
                 bomb.explode(isWall: false)
+                // Take Damage
+                if let player2 = contact.bodyB.node as? CharacterNode {
+                    player2.takeDamage = true
+                }
             }
             else if let bomb = contact.bodyB.node as? Bomb {
                 bomb.explode(isWall: false)
+                // Take Damage
+                if let player2 = contact.bodyA.node as? CharacterNode {
+                    player2.takeDamage = true
+                }
             }
         }
         

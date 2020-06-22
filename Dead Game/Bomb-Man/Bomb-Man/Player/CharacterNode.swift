@@ -16,7 +16,7 @@ class CharacterNode: SKSpriteNode {
     
     // Attack
     var aim = false
-    var hitStun: CGFloat = 3
+    var hitStun: CGFloat = 60
     // Throw
     var currentPower = 100.0
     var currentAngle = 0.0
@@ -83,13 +83,15 @@ class CharacterNode: SKSpriteNode {
         bomb.alpha = bomb.image_alpha
         bomb.setScale(1.7)
         bomb.zPosition = 2
+        bomb.direction = self.facing
         // Bomb Position 
         bomb.position = CGPoint(x: bomb.xOffset, y: bomb.yOffset)
         // SKAction
         bomb.run(bomb.actionOn, withKey: "bombOn")
         
+        print(bomb.position)
         // Make bomb Physics
-        bomb.physicsBody = SKPhysicsBody(circleOfRadius: 26, center: CGPoint(x: bomb.position.x - 60, y: bomb.position.y - 30))
+        bomb.physicsBody = SKPhysicsBody(circleOfRadius: 26, center: CGPoint(x: bomb.position.x - 33, y: bomb.position.y - 28))
         bomb.physicsBody?.affectedByGravity = false
         bomb.physicsBody?.mass = 1.3
         bomb.physicsBody?.categoryBitMask = ColliderType.BOMB

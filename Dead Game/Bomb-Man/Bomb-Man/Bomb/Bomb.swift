@@ -11,15 +11,10 @@ import SpriteKit
 class Bomb: SKSpriteNode {
     
     var image_alpha: CGFloat = 1
-    var xOffset: CGFloat = 80
+    var xOffset: CGFloat = 40
     var yOffset: CGFloat = -5
     
-    var xHit: CGFloat = 0.0
-    var yHit: CGFloat = 0.0
-    var life: CGFloat = 0.0
-    var hitStun: CGFloat = 60
-    
-//    var ignore = false
+    var direction: CGFloat = 1
     
     // SKAction
     var actionOn : SKAction = SKAction(named: "bombOn")!

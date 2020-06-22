@@ -73,6 +73,9 @@ class P2_Animation : GKComponent {
         else if cNode?.stateMachine?.currentState is AttackState {
             playAnimation(with: "P2_Attack")
         }
+        else if cNode?.stateMachine?.currentState is DamageState {
+            playAnimation(with: "P2_Damage")
+        }
     }
     
     func playAnimation (with name:String) {
