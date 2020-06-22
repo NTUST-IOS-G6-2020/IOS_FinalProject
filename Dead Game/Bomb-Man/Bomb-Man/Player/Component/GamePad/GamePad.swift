@@ -36,9 +36,9 @@ class GamePad: GKComponent, ControlInputDelegate {
             case "stop X", "cancel X":
                 cNode?.jump = false
             case "O":
-                cNode?.attack = true
-            case "stop O", "cancel O":
-                cNode?.attack = false
+                cNode?.aim = true
+//            case "stop O", "cancel O":
+//                cNode?.aim = false
             default:
                 print("command: \(String(describing: command!))")
             }

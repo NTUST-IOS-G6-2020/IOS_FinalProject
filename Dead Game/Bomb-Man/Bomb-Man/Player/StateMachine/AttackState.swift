@@ -2,7 +2,7 @@
 //  AttackState.swift
 //  Bomb-Man
 //
-//  Created by shungfu on 2020/6/21.
+//  Created by shungfu on 2020/6/22.
 //  Copyright © 2020 IOS-G6. All rights reserved.
 //
 
@@ -10,13 +10,17 @@ import SpriteKit
 import GameplayKit
 
 class AttackState : GKState {
+    
     var cNode : CharacterNode?
     
-    var activeTime = 1.0
+    let animationTime = 1.0
+    var activeTime = 0.0
+    
     private var lastUpdateTime : TimeInterval = 0
     
     init(with node: CharacterNode) {
         cNode = node
+        print("Attack state")
     }
     
     override func update(deltaTime seconds: TimeInterval) {
@@ -25,18 +29,15 @@ class AttackState : GKState {
             self.lastUpdateTime = seconds
         }
         
-        // If attack button click animate and create Bomb
-        if activeTime >= 0 {
-            if activeTime == 1.0 {
-                cNode?.setNewBomb()
-                cNode?.throwBomb(strength: CGVector(dx: 1600, dy: 1100))
-            }
-            activeTime = activeTime - lastUpdateTime
-        }
-        else {
+        // 讓動畫飛一會
+        if activeTime >= animationTime {
+            activeTime = 0.0
             self.stateMachine?.enter(IdleState.self)
-            activeTime = 1.0
         }
+        else if activeTime < animationTime {
+            activeTime = activeTime + lastUpdateTime
+        }
+        
         
         lastUpdateTime = seconds
     }

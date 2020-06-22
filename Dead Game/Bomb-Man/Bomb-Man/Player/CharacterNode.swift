@@ -15,11 +15,10 @@ class CharacterNode: SKSpriteNode {
     var life : Int = 3
     
     // Attack
-    var readyToAttack = false
-    var attack = false
+    var aim = false
     var hitStun: CGFloat = 3
     // Throw
-    var prevThrowPower = 100.0
+    var prevThrowPower = 0.0
     var prevThrowAngle = 0.0
     var currentPower = 100.0
     var currentAngle = 0.0
@@ -61,8 +60,9 @@ class CharacterNode: SKSpriteNode {
     func setUpStateMachine() {
         let idleState = IdleState(with: self)
         let attackState = AttackState(with: self)
+        let aimState = AimState(with: self)
         let damageState = DamageState(with: self)
-        stateMachine = GKStateMachine(states: [idleState, attackState, damageState])
+        stateMachine = GKStateMachine(states: [idleState, aimState, attackState, damageState])
         stateMachine?.enter(IdleState.self)
     }
     
@@ -100,10 +100,9 @@ class CharacterNode: SKSpriteNode {
         bomb.physicsBody?.contactTestBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER
         self.addChild(bomb)
 
-        if let _ = self.physicsBody {
+        if let _ = bomb.physicsBody {
             bombReady = true
         }
-        
     }
     
     func throwBomb (strength: CGVector) {
@@ -113,12 +112,14 @@ class CharacterNode: SKSpriteNode {
                     bomb.physicsBody?.applyImpulse(strength)
                     bomb.physicsBody?.affectedByGravity = true
                     bomb.physicsBody?.applyAngularImpulse(0.2125)
+                    // Shoot only once
                     self.bombReady = false
+                    self.aim = false
                 }
                 bomb.run(SKAction.sequence([toss]))
                 // Update power and Angle
                 prevThrowPower = 0
-                prevThrowAngle = currentAngle
+                prevThrowAngle = 0
             }
         }
     }

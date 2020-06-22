@@ -24,8 +24,9 @@
 		4B9CFE8B2499FA35003E8EF4 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CFE8A2499FA35003E8EF4 /* IdleState.swift */; };
 		4BCECA9B249C060100C90692 /* PhysicDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCECA9A249C060100C90692 /* PhysicDetection.swift */; };
 		4BD5F5D6249D362900E28871 /* TerrainTile.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4BD5F5D5249D362900E28871 /* TerrainTile.sks */; };
+		4BDE2E5D24A09DD400B461EC /* AttackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDE2E5C24A09DD400B461EC /* AttackState.swift */; };
 		4BFEDD9B249E0EE60004D933 /* ParallaxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEDD9A249E0EE60004D933 /* ParallaxComponent.swift */; };
-		4BFEDD9D249F51730004D933 /* AttackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEDD9C249F51730004D933 /* AttackState.swift */; };
+		4BFEDD9D249F51730004D933 /* AimState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEDD9C249F51730004D933 /* AimState.swift */; };
 		4BFEDD9F249F551B0004D933 /* DamageState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEDD9E249F551B0004D933 /* DamageState.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,8 +50,9 @@
 		4B9CFE8A2499FA35003E8EF4 /* IdleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
 		4BCECA9A249C060100C90692 /* PhysicDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicDetection.swift; sourceTree = "<group>"; };
 		4BD5F5D5249D362900E28871 /* TerrainTile.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TerrainTile.sks; sourceTree = "<group>"; };
+		4BDE2E5C24A09DD400B461EC /* AttackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackState.swift; sourceTree = "<group>"; };
 		4BFEDD9A249E0EE60004D933 /* ParallaxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxComponent.swift; sourceTree = "<group>"; };
-		4BFEDD9C249F51730004D933 /* AttackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackState.swift; sourceTree = "<group>"; };
+		4BFEDD9C249F51730004D933 /* AimState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AimState.swift; sourceTree = "<group>"; };
 		4BFEDD9E249F551B0004D933 /* DamageState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamageState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,8 +139,9 @@
 			isa = PBXGroup;
 			children = (
 				4B9CFE8A2499FA35003E8EF4 /* IdleState.swift */,
-				4BFEDD9C249F51730004D933 /* AttackState.swift */,
+				4BFEDD9C249F51730004D933 /* AimState.swift */,
 				4BFEDD9E249F551B0004D933 /* DamageState.swift */,
+				4BDE2E5C24A09DD400B461EC /* AttackState.swift */,
 			);
 			path = StateMachine;
 			sourceTree = "<group>";
@@ -259,7 +262,7 @@
 				4BFEDD9B249E0EE60004D933 /* ParallaxComponent.swift in Sources */,
 				4B4B13C9249392ED00B0237F /* TouchControlInputNode.swift in Sources */,
 				4B9CFE892499F9D9003E8EF4 /* CharacterNode.swift in Sources */,
-				4BFEDD9D249F51730004D933 /* AttackState.swift in Sources */,
+				4BFEDD9D249F51730004D933 /* AimState.swift in Sources */,
 				4B61FB152493AE0A00808953 /* GamePad.swift in Sources */,
 				4B55874324938AB70029B457 /* GameScene.swift in Sources */,
 				4B9CFE8B2499FA35003E8EF4 /* IdleState.swift in Sources */,
@@ -267,6 +270,7 @@
 				4BFEDD9F249F551B0004D933 /* DamageState.swift in Sources */,
 				4B55873D24938AB70029B457 /* AppDelegate.swift in Sources */,
 				4B0DFBB3249CF6EF00B108DB /* Animation.swift in Sources */,
+				4BDE2E5D24A09DD400B461EC /* AttackState.swift in Sources */,
 				4BCECA9B249C060100C90692 /* PhysicDetection.swift in Sources */,
 				4B39C664249F8A0400589A0C /* Bomb.swift in Sources */,
 			);

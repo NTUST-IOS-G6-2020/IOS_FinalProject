@@ -77,9 +77,9 @@ class IdleState: GKState {
             cNode.landed = false
         }
         
-        // Attack
-        if cNode.attack {
-            self.stateMachine?.enter(AttackState.self)
+        // Aim
+        if cNode.aim {
+            self.stateMachine?.enter(AimState.self)
         }
         
         // Hit

@@ -65,12 +65,15 @@ class Animation : GKComponent {
                 }
             }
         }
-        else if cNode?.stateMachine?.currentState is AttackState {
-            if (cNode?.attack)! {
-                playAnimation(with: "Attack")
+        else if cNode?.stateMachine?.currentState is AimState {
+            if (cNode?.aim)! && (cNode?.bombReady)! == false {
+//                playAnimation(with: "Attack")
+                playAnimation(with: "AttackReady")
             }
         }
-        
+        else if cNode?.stateMachine?.currentState is AttackState {
+            playAnimation(with: "Attack")
+        }
     }
     
     func playAnimation (with name:String) {
