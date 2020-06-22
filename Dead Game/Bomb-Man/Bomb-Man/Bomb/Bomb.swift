@@ -11,7 +11,7 @@ import SpriteKit
 class Bomb: SKSpriteNode {
     
     var image_alpha: CGFloat = 1
-    var xOffset: CGFloat = 60
+    var xOffset: CGFloat = 80
     var yOffset: CGFloat = -5
     
     var xHit: CGFloat = 0.0

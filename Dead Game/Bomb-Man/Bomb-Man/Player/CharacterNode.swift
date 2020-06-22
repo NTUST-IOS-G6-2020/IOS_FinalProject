@@ -18,13 +18,10 @@ class CharacterNode: SKSpriteNode {
     var aim = false
     var hitStun: CGFloat = 3
     // Throw
-    var prevThrowPower = 0.0
-    var prevThrowAngle = 0.0
     var currentPower = 100.0
     var currentAngle = 0.0
     
     // Bomb
-    var pinBombToPlayer : SKPhysicsJointFixed?
     var bombReady = false
     
     // Take Damage
@@ -103,6 +100,16 @@ class CharacterNode: SKSpriteNode {
         if let _ = bomb.physicsBody {
             bombReady = true
         }
+        
+        // Add aim line
+        let aimLine = SKSpriteNode(imageNamed: "aimline")
+        aimLine.name = "aimLine"
+        aimLine.alpha = 1
+        aimLine.setScale(0.187)
+        aimLine.zPosition = 2
+        aimLine.position = CGPoint(x: 70, y: 10)
+        aimLine.anchorPoint = CGPoint(x: 0.087, y: 0.5)
+        self.addChild(aimLine)
     }
     
     func throwBomb (strength: CGVector) {
@@ -117,9 +124,17 @@ class CharacterNode: SKSpriteNode {
                     self.aim = false
                 }
                 bomb.run(SKAction.sequence([toss]))
-                // Update power and Angle
-                prevThrowPower = 0
-                prevThrowAngle = 0
+                
+                // Remove aimline
+                if let aimline = self.childNode(withName: "aimLine") {
+                    let pause = SKAction.wait(forDuration: 0.287)
+                    let zeroOut = SKAction.scale(to: CGSize(width: 0, height: 0), duration: 0.187)
+                    let remove = SKAction.run {
+                        aimline.removeFromParent()
+                    }
+                    aimline.run(SKAction.sequence([pause, zeroOut, remove]))
+                }
+                
             }
         }
     }

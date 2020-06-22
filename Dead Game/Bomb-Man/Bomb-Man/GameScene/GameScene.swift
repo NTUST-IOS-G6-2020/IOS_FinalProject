@@ -16,6 +16,8 @@ class GameScene: SKScene {
     // throw power bar
     var powerMeterNode: SKSpriteNode? = nil
     var powerMeterFilledNode: SKSpriteNode? = nil
+    // Check if bomb exist too long
+    var bombTime: TimeInterval = 0.0
     
     // 背景捲軸
     var parallaxComponentSystem : GKComponentSystem<ParallaxComponent>?
@@ -140,6 +142,23 @@ class GameScene: SKScene {
         // Update parallax background
         parallaxComponentSystem?.update(deltaTime: currentTime)
         
+        // Delete bomb if exist too long
+        if let bomb = thePlayer.childNode(withName: "bomb") {
+            let player = thePlayer as? CharacterNode
+            if !(player?.aim)! {
+                bombTime += lastUpdateTime
+                // 10 second??
+                if bombTime >= 60000000 {
+                    print(bombTime)
+                    bomb.removeFromParent()
+                    bombTime = 0
+                }
+            }
+        }
+        else {
+            bombTime = 0
+        }
+        
         self.lastUpdateTime = currentTime
     }
     
@@ -173,19 +192,22 @@ class GameScene: SKScene {
             let changePower = -translation.x
             let changeAngle = -translation.y
             
-            let powerScale = 2.0
+            let powerScale = 0.5 * thePlayer.facing
             let angleScale = -150.0
             
-            var power = Float(thePlayer.prevThrowPower) + Float(changePower) / Float(powerScale)
-            var angle = Float(thePlayer.prevThrowAngle) + Float(changeAngle) / Float(angleScale)
+            var power = Float(changePower) * Float(powerScale)
+            var angle = Float(changeAngle) / Float(angleScale)
             
             power = min(power, 100)
             power = max(power, 0)
             angle = min(angle, .pi/2)
             angle = max(angle, 0)
-                        
+            
             powerMeterFilledNode?.xScale = CGFloat(power/100.0)
-            powerMeterNode?.zRotation = CGFloat(angle)
+            if let aimline = thePlayer.childNode(withName: "aimLine") {
+                aimline.zRotation = CGFloat(angle)
+                aimline.xScale = CGFloat(power/200.0)
+            }
             
             thePlayer.currentPower = Double(power)
             thePlayer.currentAngle = Double(angle)
@@ -214,7 +236,7 @@ class GameScene: SKScene {
                 let maxPowerImpluse = 2500.0
                 let currentImpluse = maxPowerImpluse * player.currentPower/100.0
                 
-                let strength = CGVector(dx: currentImpluse * cos(player.currentAngle), dy: currentImpluse * sin(player.currentAngle))
+                let strength = CGVector(dx: Double(player.facing) * currentImpluse * cos(player.currentAngle), dy: currentImpluse * sin(player.currentAngle))
                 
                 // Throw Bomb
                 player.throwBomb(strength: strength)
@@ -227,10 +249,6 @@ class GameScene: SKScene {
                 powerMeterNode?.run(rotate)
             }
         }
-        else {
-            print("No shooting!!")
-        }
-        
     }
     
     // MARK:- Tile Map Physics
