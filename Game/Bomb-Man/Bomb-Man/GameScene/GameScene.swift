@@ -56,14 +56,14 @@ class GameScene: SKScene {
                 self.Music = SKAudioNode(url: url)
                 self.addChild(self.Music!)
                 self.Music?.run(SKAction.changeVolume(to: 0, duration: 0))
-                self.Music?.run(SKAction.changeVolume(to: 1.2, duration: 10))
+                self.Music?.run(SKAction.changeVolume(to: 0.8, duration: 10))
             }
         }
         else {
             Music = SKAudioNode(url: url)
             addChild(Music!)
             Music?.run(SKAction.changeVolume(to: 0, duration: 0))
-            Music?.run(SKAction.changeVolume(to: 1.2, duration: 10))
+            Music?.run(SKAction.changeVolume(to: 0.8, duration: 10))
         }
     }
     
