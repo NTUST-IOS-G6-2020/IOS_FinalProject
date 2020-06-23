@@ -9,9 +9,11 @@ import UIKit
 import Firebase
 
 class MessageTableViewController: UITableViewController, UIGestureRecognizerDelegate {
-
+    
     var messages = [Message]()
     var messageDictionary = [String: Message]()
+    
+    var user: Users?
     
     var timer: Timer?
     
@@ -114,11 +116,11 @@ class MessageTableViewController: UITableViewController, UIGestureRecognizerDele
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let message = messages[indexPath.row]
         
-        guard let charPartnerId = message.chatPartnerId() else{
+        guard let chatPartnerId = message.chatPartnerId() else{
             return
         }
         
-        let ref = Database.database().reference().child("users").child(charPartnerId)
+        let ref = Database.database().reference().child("users").child(chatPartnerId)
         
         ref.observeSingleEvent(of: .value, with: {(snapshot) in
             guard let dictionary = snapshot.value as? [String: AnyObject]
@@ -126,15 +128,8 @@ class MessageTableViewController: UITableViewController, UIGestureRecognizerDele
                     return
             }
             
-            let user = Users()
-            user.birthday = dictionary["birthday"] as? String
-            user.name = dictionary["display name"] as? String
-            user.email = dictionary["email"] as? String
-            user.gender = dictionary["gender"] as? String
-            user.image = dictionary["profileImageUrl"] as? String
-            user.uid = dictionary["uid"] as? String
-            
-            user.uid = charPartnerId
+            let user = Users(dictionary: dictionary)
+            user.uid = chatPartnerId
             
             self.showChatControllerForUser(user: user)
         },withCancel:  nil)
@@ -146,82 +141,29 @@ class MessageTableViewController: UITableViewController, UIGestureRecognizerDele
         }
         else{
             fetchUserAndSetupNaviBarTitle()
+            let ref = Database.database().reference().child("profile").child(Auth.auth().currentUser!.uid)
+            ref.observeSingleEvent(of: .value, with: {(snapshot) in
+                if snapshot.exists() == false{
+                    ref.updateChildValues(["bother": ""])
+                    ref.updateChildValues(["enjoy": ""])
+                    ref.updateChildValues(["likecountry": ""])
+                    ref.updateChildValues(["relation": ""])
+                    ref.updateChildValues(["school": ""])
+                }else{
+                    print("noooooo")
+                }
+            })
         }
     }
     
     func fetchUserAndSetupNaviBarTitle(){
-        guard let uid = Auth.auth().currentUser?.uid else{
-            // handle uid not found 的情況
-            return
-        }
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                self.navigationItem.title = dictionary["display name"] as? String
-                
-                let user = Users()
-                user.birthday = dictionary["birthday"] as? String
-                user.name = dictionary["display name"] as? String
-                user.email = dictionary["email"] as? String
-                user.gender = dictionary["gender"] as? String
-                user.image = dictionary["profileImageUrl"] as? String
-                user.uid = dictionary["uid"] as? String
-                self.setupNaviBarWithUser(user: user)
-            }
-        }, withCancel: nil)
-    }
-    
-    func setupNaviBarWithUser(user: Users){
-        
         messages.removeAll()
         messageDictionary.removeAll()
         tableView.reloadData()
         
         observerUserMesssges()
-        
-        let titleView = UIView()
-        
-        titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
-        titleView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        titleView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        let containerView = UIView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        titleView.addSubview(containerView)
-        
-        let profileImageView = UIImageView()
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.layer.cornerRadius = 20
-        profileImageView.clipsToBounds = true
-        if let profileImageUrl = user.image{
-            profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
-        }
-        
-        containerView.addSubview(profileImageView)
-        
-        // add image constraint
-        profileImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        profileImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        profileImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        profileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        let nameLabel = UILabel()
-        
-        containerView.addSubview(nameLabel)
-        nameLabel.text = user.name
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        // add name constraint
-        nameLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor,constant: 8).isActive = true
-        nameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor).isActive = true
-        nameLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
-        nameLabel.heightAnchor.constraint(equalTo: profileImageView.heightAnchor).isActive = true
-        
-        containerView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor).isActive = true
-        containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
-        
-        self.navigationItem.titleView = titleView
+        self.navigationItem.title = "Message"
     }
-
     
     @objc func showChatControllerForUser(user: Users){
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
@@ -244,8 +186,8 @@ class MessageTableViewController: UITableViewController, UIGestureRecognizerDele
         }
         
         DispatchQueue.main.async(execute: {
-            let vc = WelcomeViewController()
-            self.present(vc, animated: true, completion: nil)
+            self.navigationController?.parent?.navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.removeFromParent()
         })
     }
     

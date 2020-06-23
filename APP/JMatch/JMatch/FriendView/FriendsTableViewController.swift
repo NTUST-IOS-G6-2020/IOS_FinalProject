@@ -1,28 +1,54 @@
 //
-//  NewMessageViewController.swift
+//  FriendsTableViewController.swift
 //  JMatch
 //
-//  Created by 柯元豪 on 2020/6/20.
+//  Created by 柯元豪 on 2020/6/22.
 //  Copyright © 2020 IOS-G6. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class NewMessageViewController: UITableViewController {
+class FriendsTableViewController: UITableViewController {
+
+    var user: Users?
     let cellId = "cellId"
     var users = [Users]()
-    var messageController: MessageTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+        
+        //checkIfUserIsLoggedIn()
+        self.navigationItem.title = "Friends"
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         
         fetchUser()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        ProfileViewController.canEdit = true
+    }
+    
+    func checkIfUserIsLoggedIn(){
+        guard let uid = Auth.auth().currentUser?.uid else{
+            // handle uid not found 的情況
+            return
+        }
+        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                self.navigationItem.title = dictionary["display name"] as? String
+                
+                let user = Users(dictionary: dictionary)
+                
+                self.user = user
+                self.navigationItem.titleView = self.user?.setupNaviBarWithUser()
+            }
+        }, withCancel: nil)
+    }
+    
     
     func fetchUser(){
         let current = Auth.auth().currentUser!.uid
@@ -43,17 +69,8 @@ class NewMessageViewController: UITableViewController {
             }
         }, withCancel: nil)
     }
-    
-    @objc func handleCancel(){
-        dismiss(animated: true, completion: nil)
-    }
 
     // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -81,8 +98,21 @@ class NewMessageViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true, completion: {
             let user = self.users[indexPath.row]
-            self.messageController?.showChatControllerForUser(user: user)
+            let mainstoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let profileController = mainstoryboard.instantiateViewController(identifier: "profile") as ProfileViewController
+           // let profileController = mainstoryboard.instantiateViewController(identifier: "profileNavi")
+            ProfileViewController.user = user
+            ProfileViewController.canEdit = false
+
+//            self.navigationController?.pushViewController(profileController, animated: true)
+            let naviController = UINavigationController(rootViewController: profileController)
+            self.present(naviController, animated: true, completion: nil)
+           // self.present(profileController,animated: true,completion: nil)
+            //self.navigationController?.pushViewController(profileController, animated: true)
+            
+            
+            //self.present(naviController, animated: true, completion: nil)
         })
     }
-    
+
 }
