@@ -313,6 +313,7 @@ class GameScene: SKScene {
         // Check if pause btn pressed, back to start Scene
         if PauseSpriteNode.pause {
             self.run(SKAction.wait(forDuration: 0)) {
+                PauseSpriteNode.pause = false
                 self.view?.presentScene(StartGameScene(), transition: .fade(withDuration: 1))
             }
         }
