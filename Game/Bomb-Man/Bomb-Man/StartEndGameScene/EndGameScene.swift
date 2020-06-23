@@ -32,6 +32,7 @@ class EndGameScene :SKScene {
         youLossLabel.zPosition = 2
         youLossLabel.fontColor = UIColor.black
         youLossLabel.setScale(0.005)
+        youLossLabel.yScale = 0.0065
         
         let player = SKSpriteNode(imageNamed: "bomb_off_1")
         if TurnBaseNode.winner == "P1" {
@@ -43,42 +44,16 @@ class EndGameScene :SKScene {
             player.run(SKAction(named: "P2_Idle")!, withKey: "P2_Idle")
         }
         player.position = CGPoint(x: self.frame.midX, y: self.frame.minY + 0.5)
-        player.size = CGSize(width: 0.2, height: 0.3)
+        player.size = CGSize(width: 0.15, height: 0.3)
         player.zPosition = 1
-        
         
         self.addChild(player)
         self.addChild(bgd)
         self.addChild(youLossLabel)
     }
     
-    func reloadGameScene () {
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-        // including entities and graphs.
-        if let scene = GKScene(fileNamed: "GameScene") {
-            // Get the SKScene from the loaded GKScene
-            if let sceneNode = scene.rootNode as! GameScene? {
-                // Copy gameplay related content over to the scene
-                sceneNode.entities = scene.entities
-                sceneNode.graphs = scene.graphs
-                // Set the scale mode to scale to fit the window
-                sceneNode.scaleMode = .aspectFill
-                
-                // Present the scene
-                if let view = self.view {
-                    view.presentScene(sceneNode, transition: .doorway(withDuration: 2))
-                    view.ignoresSiblingOrder = true
-                    
-                    view.showsFPS = true
-                    view.showsNodeCount = true
-//                    view.showsPhysics = true
-                    view.isMultipleTouchEnabled = true
-                }
-            }
-        }
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        reloadGameScene()
+//        reloadGameScene()
+        self.view?.presentScene(StartGameScene(), transition: .doorsCloseHorizontal(withDuration: 0.5))
     }
 }

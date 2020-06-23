@@ -34,10 +34,22 @@ class GameScene: SKScene {
     
     // 背景捲軸
     var parallaxComponentSystem : GKComponentSystem<ParallaxComponent>?
+    // Music
+    var Music : SKAudioNode?
     
     override func sceneDidLoad() {
         self.lastUpdateTime = 0
         view?.isMultipleTouchEnabled = true
+        addMusic(mp3: "BGM1")
+    }
+    
+    func addMusic (mp3: String) {
+        guard let url = Bundle.main.url(forResource: mp3, withExtension: "mp3") else{
+            print(mp3, " Not Found")
+            return
+        }
+        Music = SKAudioNode(url: url)
+        addChild(Music!)
     }
     
     func addNode(name: String, layer: Int) {
@@ -201,13 +213,13 @@ class GameScene: SKScene {
         // Camera follow Player
         else {
             if cameraFollowBomb {
-                theCamera.run(SKAction.wait(forDuration: 0.387)) {
+                theCamera.run(SKAction.wait(forDuration: 0.787)) {
                     self.cameraFollowBomb = false
                 }
             }
             else {
                 if cameraNeedTurn {
-                    theCamera.run(SKAction.wait(forDuration: 0.387)) {
+                    theCamera.run(SKAction.wait(forDuration: 0.787)) {
                         self.cameraNeedTurn = false
                     }
                 }
@@ -246,9 +258,6 @@ class GameScene: SKScene {
         // Check if Change Turn
         if TurnBase!.changeTurn {
             TurnBase?.didChangeTurn()
-            
-            // Camera Follow flag update
-            cameraNeedTurn = true
             // Simulate touchConrtoller touchup to stop idiot keep touching node
             touchControlNode?.touchUp(touches: .init(), withEvent: nil)
             // Turn controller
@@ -263,6 +272,8 @@ class GameScene: SKScene {
             if self.childNode(withName: TurnBase!.turn) != nil {
                 thePlayer = childNode(withName: TurnBase!.turn) as! SKSpriteNode
             }
+            // Camera Follow flag update
+            cameraNeedTurn = true
         }
         
         // Update the player's life
@@ -274,7 +285,7 @@ class GameScene: SKScene {
         // Check if End Game
         if TurnBase?.endGame == true {
 //            print("Winner is: ", TurnBaseNode.winner)
-            self.run(SKAction.wait(forDuration: 1)) {
+            self.run(SKAction.wait(forDuration: 3)) {
                 self.view?.presentScene(EndGameScene(), transition: .fade(withDuration: 1))
             }
         }

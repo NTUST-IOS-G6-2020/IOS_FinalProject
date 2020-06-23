@@ -69,7 +69,8 @@ class CharacterNode: SKSpriteNode {
         let attackState = AttackState(with: self)
         let aimState = AimState(with: self)
         let damageState = DamageState(with: self)
-        stateMachine = GKStateMachine(states: [idleState, aimState, attackState, damageState])
+        let deadState = DeadState(with: self)
+        stateMachine = GKStateMachine(states: [idleState, aimState, attackState, damageState, deadState])
         stateMachine?.enter(IdleState.self)
     }
     

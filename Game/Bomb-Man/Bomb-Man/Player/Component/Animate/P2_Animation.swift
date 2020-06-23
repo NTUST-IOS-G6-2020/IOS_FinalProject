@@ -17,7 +17,7 @@ class P2_Animation : GKComponent {
     lazy var node: SKSpriteNode! = self.entity!.component(ofType: GKSKNodeComponent.self)?.node as? SKSpriteNode
     
     // Animation
-    let animationName = ["P2_Idle", "P2_Run", "P2_JumpUp", "P2_JumpDown", "P2_JumpLand", "P2_Attack", "P2_AttackReady", "P2_Damage"]
+    let animationName = ["P2_Idle", "P2_Run", "P2_JumpUp", "P2_JumpDown", "P2_JumpLand", "P2_Attack", "P2_AttackReady", "P2_Damage", "P2_Dead"]
     var actions = [String : SKAction]()
     
     override init() {
@@ -75,6 +75,9 @@ class P2_Animation : GKComponent {
         }
         else if cNode?.stateMachine?.currentState is DamageState {
             playAnimation(with: "P2_Damage")
+        }
+        else if cNode?.stateMachine?.currentState is DeadState {
+            playAnimation(with: "P2_Dead")
         }
     }
     

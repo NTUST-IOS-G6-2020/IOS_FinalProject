@@ -11,6 +11,11 @@
 		4B0EC681249CF1D1003190CE /* P1Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4B0EC680249CF1D1003190CE /* P1Actions.sks */; };
 		4B39C664249F8A0400589A0C /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B39C663249F8A0400589A0C /* Bomb.swift */; };
 		4B39C666249F8B9100589A0C /* BombActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4B39C665249F8B9100589A0C /* BombActions.sks */; };
+		4B3D36A024A25890007A94E5 /* DeadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3D369F24A25890007A94E5 /* DeadState.swift */; };
+		4B3D36A924A265DA007A94E5 /* BGM1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4B3D36A624A265D9007A94E5 /* BGM1.mp3 */; };
+		4B3D36AA24A265DA007A94E5 /* BGM2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4B3D36A724A265DA007A94E5 /* BGM2.mp3 */; };
+		4B3D36AB24A265DA007A94E5 /* BGM0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4B3D36A824A265DA007A94E5 /* BGM0.mp3 */; };
+		4B3D36AD24A2672D007A94E5 /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4B3D36AC24A2672D007A94E5 /* bomb.mp3 */; };
 		4B4B13C5249392BF00B0237F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4B4B13C4249392BF00B0237F /* GameScene.sks */; };
 		4B4B13C9249392ED00B0237F /* TouchControlInputNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B13C7249392ED00B0237F /* TouchControlInputNode.swift */; };
 		4B55873D24938AB70029B457 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B55873C24938AB70029B457 /* AppDelegate.swift */; };
@@ -42,6 +47,11 @@
 		4B0EC680249CF1D1003190CE /* P1Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = P1Actions.sks; sourceTree = "<group>"; };
 		4B39C663249F8A0400589A0C /* Bomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
 		4B39C665249F8B9100589A0C /* BombActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BombActions.sks; sourceTree = "<group>"; };
+		4B3D369F24A25890007A94E5 /* DeadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadState.swift; sourceTree = "<group>"; };
+		4B3D36A624A265D9007A94E5 /* BGM1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BGM1.mp3; sourceTree = "<group>"; };
+		4B3D36A724A265DA007A94E5 /* BGM2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BGM2.mp3; sourceTree = "<group>"; };
+		4B3D36A824A265DA007A94E5 /* BGM0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BGM0.mp3; sourceTree = "<group>"; };
+		4B3D36AC24A2672D007A94E5 /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
 		4B4B13C4249392BF00B0237F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		4B4B13C7249392ED00B0237F /* TouchControlInputNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchControlInputNode.swift; sourceTree = "<group>"; };
 		4B55873924938AB70029B457 /* Bomb-Man.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bomb-Man.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +129,17 @@
 			path = Bomb;
 			sourceTree = "<group>";
 		};
+		4B3D36A124A26090007A94E5 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				4B3D36A824A265DA007A94E5 /* BGM0.mp3 */,
+				4B3D36A624A265D9007A94E5 /* BGM1.mp3 */,
+				4B3D36AC24A2672D007A94E5 /* bomb.mp3 */,
+				4B3D36A724A265DA007A94E5 /* BGM2.mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		4B55873024938AB70029B457 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +159,7 @@
 		4B55873B24938AB70029B457 /* Bomb-Man */ = {
 			isa = PBXGroup;
 			children = (
+				4B3D36A124A26090007A94E5 /* Music */,
 				4BDE2E5E24A0FAD300B461EC /* CentralGameControl */,
 				4B39C662249F89F200589A0C /* Bomb */,
 				4BCECA99249C05BA00C90692 /* Physics */,
@@ -163,6 +185,7 @@
 				4BFEDD9C249F51730004D933 /* AimState.swift */,
 				4BFEDD9E249F551B0004D933 /* DamageState.swift */,
 				4BDE2E5C24A09DD400B461EC /* AttackState.swift */,
+				4B3D369F24A25890007A94E5 /* DeadState.swift */,
 			);
 			path = StateMachine;
 			sourceTree = "<group>";
@@ -283,10 +306,14 @@
 				4B55874824938AB70029B457 /* Main.storyboard in Resources */,
 				4B4B13C5249392BF00B0237F /* GameScene.sks in Resources */,
 				4B55874A24938AB80029B457 /* Assets.xcassets in Resources */,
+				4B3D36AB24A265DA007A94E5 /* BGM0.mp3 in Resources */,
 				4BD5F5D6249D362900E28871 /* TerrainTile.sks in Resources */,
 				4B39C666249F8B9100589A0C /* BombActions.sks in Resources */,
+				4B3D36AA24A265DA007A94E5 /* BGM2.mp3 in Resources */,
 				4B0EC681249CF1D1003190CE /* P1Actions.sks in Resources */,
 				4B55874D24938AB80029B457 /* LaunchScreen.storyboard in Resources */,
+				4B3D36AD24A2672D007A94E5 /* bomb.mp3 in Resources */,
+				4B3D36A924A265DA007A94E5 /* BGM1.mp3 in Resources */,
 				4BC8800824A24AD2007EB6D1 /* Opening.sks in Resources */,
 				4BFF19C424A11F4700F36063 /* P2Actions.sks in Resources */,
 			);
@@ -312,6 +339,7 @@
 				4B55874524938AB70029B457 /* GameViewController.swift in Sources */,
 				4BFEDD9F249F551B0004D933 /* DamageState.swift in Sources */,
 				4B55873D24938AB70029B457 /* AppDelegate.swift in Sources */,
+				4B3D36A024A25890007A94E5 /* DeadState.swift in Sources */,
 				4B0DFBB3249CF6EF00B108DB /* Animation.swift in Sources */,
 				4BDE2E5D24A09DD400B461EC /* AttackState.swift in Sources */,
 				4BCECA9B249C060100C90692 /* PhysicDetection.swift in Sources */,

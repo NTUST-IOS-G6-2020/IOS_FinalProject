@@ -12,9 +12,20 @@ import GameplayKit
 class StartGameScene: SKScene {
     
     var startBtn: SKSpriteNode!
+    var Music : SKAudioNode?
     
     override func didMove(to view: SKView) {
         createScene()
+        addMusic(mp3: "BGM0")
+    }
+    
+    func addMusic (mp3: String) {
+        guard let url = Bundle.main.url(forResource: mp3, withExtension: "mp3") else{
+            print(mp3, " Not Found")
+            return
+        }
+        Music = SKAudioNode(url: url)
+        addChild(Music!)
     }
     
     func createScene() {
@@ -99,7 +110,7 @@ class StartGameScene: SKScene {
                 
                 // Present the scene
                 if let view = self.view {
-                    view.presentScene(sceneNode, transition: .fade(withDuration: 2))
+                    view.presentScene(sceneNode, transition: .fade(withDuration: 1.5))
                     view.ignoresSiblingOrder = true
                     
                     view.showsFPS = true

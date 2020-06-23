@@ -80,7 +80,6 @@ class IdleState: GKState {
             }
         }
         
-        
         // Aim
         if cNode.action != ACTION.Move && cNode.aim {
             // Enter Aim state if no bomb exist
@@ -92,9 +91,13 @@ class IdleState: GKState {
         // Hit
         if cNode.takeDamage {
             squashAndStretch(xScale: 1.3, yScale: 1.3)
-            self.stateMachine?.enter(DamageState.self)
+            if cNode.life == 0 {
+                cNode.stateMachine?.enter(DeadState.self)
+            }
+            else {
+                self.stateMachine?.enter(DamageState.self)
+            }
         }
-        
         
         // Animation
         cNode.xScale = approach(start: cNode.xScale, end: cNode.facing, shift: 0.05)
