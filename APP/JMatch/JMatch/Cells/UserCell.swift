@@ -57,7 +57,7 @@ class UserCell: UITableViewCell{
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "HH:MM:SS"
+       // label.text = "HH:MM:SS"
         label.font = UIFont.systemFont(ofSize: 10)
         label.textColor = UIColor.lightGray
         label.translatesAutoresizingMaskIntoConstraints = false

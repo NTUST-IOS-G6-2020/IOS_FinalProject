@@ -62,10 +62,10 @@ class LoginViewController: UIViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
                     // Delay 1.1 Sec and delegate
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarVC")
-                    self.present(vc, animated: true, completion: nil)
-                    self.navigationController?.viewControllers.removeAll()
+//                    self.present(vc, animated: true, completion: nil)
+//                    self.navigationController?.viewControllers.removeAll()
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
-                
             }
         }
         
