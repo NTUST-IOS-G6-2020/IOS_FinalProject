@@ -80,7 +80,7 @@ class CharacterNode: SKSpriteNode {
         physicsBody?.affectedByGravity = true
         physicsBody?.allowsRotation = false
         physicsBody?.restitution = 0.0
-        physicsBody?.friction = 0.0087
+        physicsBody?.friction = 1.5287
         physicsBody?.categoryBitMask = categoryBitMask
         physicsBody?.collisionBitMask = (ColliderType.GROUND | ColliderType.WALL | ColliderType.BOUNDARY)
         physicsBody?.contactTestBitMask = ColliderType.GROUND
@@ -104,6 +104,7 @@ class CharacterNode: SKSpriteNode {
         bomb.physicsBody = SKPhysicsBody(circleOfRadius: 26, center: CGPoint(x: bomb.position.x - 33, y: bomb.position.y - 28))
         bomb.physicsBody?.affectedByGravity = false
         bomb.physicsBody?.mass = 1.3
+        bomb.physicsBody?.friction = 10
         bomb.physicsBody?.categoryBitMask = ColliderType.BOMB
         if self.physicsBody?.categoryBitMask == ColliderType.PLAYER {
             bomb.physicsBody?.collisionBitMask = ColliderType.WALL | ColliderType.GROUND | ColliderType.PLAYER2

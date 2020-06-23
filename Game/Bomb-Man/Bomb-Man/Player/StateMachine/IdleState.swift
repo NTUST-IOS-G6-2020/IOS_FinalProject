@@ -22,63 +22,61 @@ class IdleState: GKState {
         var accSpeed: CGFloat = 0.0
         var decSpeed: CGFloat = 0.0
         
-        // IF Action Move
-        if cNode.action == ACTION.Move {
-            // Ground
-            if (cNode.grounded) {
-                accSpeed = cNode.groundAccel
-                decSpeed = cNode.groundDecel
+        // Ground
+        if (cNode.grounded) {
+            accSpeed = cNode.groundAccel
+            decSpeed = cNode.groundDecel
+        }
+        // Air
+        else {
+            accSpeed = cNode.airAccel
+            decSpeed = cNode.airDecel
+        }
+        
+        // Walking
+        if cNode.right {
+            cNode.facing = 1.0
+            cNode.xScale = 1.0
+            cNode.hspeed = approach(start: cNode.hspeed, end: cNode.walkSpeed, shift: accSpeed)
+        }
+        else if cNode.left {
+            cNode.facing = -1.0
+            cNode.xScale = -1.0
+            cNode.hspeed = approach(start: cNode.hspeed, end: -cNode.walkSpeed, shift: accSpeed)
+        }
+        // Stop walking
+        else {
+            cNode.hspeed = approach(start: cNode.hspeed, end: 0.0, shift: decSpeed)
+        }
+        
+        // On the floor
+        if cNode.grounded {
+            // On the ground, but not landed
+            if !cNode.landed {
+                squashAndStretch(xScale: 1.3, yScale: 0.7)
+                cNode.physicsBody?.velocity = CGVector(dx: (cNode.physicsBody?.velocity.dx)!, dy: 0.0)
+                cNode.landed = true
             }
-            // Air
-            else {
-                accSpeed = cNode.airAccel
-                decSpeed = cNode.airDecel
-            }
-            
-            // Walking
-            if cNode.right {
-                cNode.facing = 1.0
-                cNode.xScale = 1.0
-                cNode.hspeed = approach(start: cNode.hspeed, end: cNode.walkSpeed, shift: accSpeed)
-            }
-            else if cNode.left {
-                cNode.facing = -1.0
-                cNode.xScale = -1.0
-                cNode.hspeed = approach(start: cNode.hspeed, end: -cNode.walkSpeed, shift: accSpeed)
-            }
-            // Stop walking
-            else {
-                cNode.hspeed = approach(start: cNode.hspeed, end: 0.0, shift: decSpeed)
-            }
-            
-            // On the floor
-            if cNode.grounded {
-                // On the ground, but not landed
-                if !cNode.landed {
-                    squashAndStretch(xScale: 1.3, yScale: 0.7)
-                    cNode.physicsBody?.velocity = CGVector(dx: (cNode.physicsBody?.velocity.dx)!, dy: 0.0)
-                    cNode.landed = true
-                }
-                // On the ground, but start to jump
-                if cNode.jump {
-                    cNode.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: cNode.maxJump))
-                    cNode.grounded = false
-                    squashAndStretch(xScale: 0.7, yScale: 1.3)
-                }
-            }
-            // In the Air
-            if !cNode.grounded {
-                // Falling
-                if (cNode.physicsBody?.velocity.dy)! < CGFloat(0.0) {
-                    cNode.jump = false
-                }
-                // Jumping but stop pressing
-                if (cNode.physicsBody?.velocity.dy)! > CGFloat(0.0) && !cNode.jump {
-                    cNode.physicsBody?.velocity.dy *= 0.5
-                }
-                cNode.landed = false
+            // On the ground, but start to jump
+            if cNode.jump {
+                cNode.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: cNode.maxJump))
+                cNode.grounded = false
+                squashAndStretch(xScale: 0.7, yScale: 1.3)
             }
         }
+        // In the Air
+        if !cNode.grounded {
+            // Falling
+            if (cNode.physicsBody?.velocity.dy)! < CGFloat(0.0) {
+                cNode.jump = false
+            }
+            // Jumping but stop pressing
+            if (cNode.physicsBody?.velocity.dy)! > CGFloat(0.0) && !cNode.jump {
+                cNode.physicsBody?.velocity.dy *= 0.5
+            }
+            cNode.landed = false
+        }
+        
         
         // Aim
         if cNode.action != ACTION.Move && cNode.aim {

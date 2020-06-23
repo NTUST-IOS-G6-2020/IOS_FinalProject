@@ -236,6 +236,7 @@ class GameScene: SKScene {
                 if cameraNeedTurn {
                     theCamera.run(SKAction.wait(forDuration: 0.787)) {
                         self.cameraNeedTurn = false
+                        self.touchInteractionChanged()
                     }
                 }
                 else {
@@ -273,22 +274,27 @@ class GameScene: SKScene {
         // Check if Change Turn
         if TurnBase!.changeTurn {
             TurnBase?.didChangeTurn()
-            // Simulate touchConrtoller touchup to stop idiot keep touching node
-            touchControlNode?.touchUp(touches: .init(), withEvent: nil)
-            // Turn controller
-            for entity in self.entities {
-                if entity.component(ofType: GKSKNodeComponent.self)?.node == childNode(withName: TurnBase!.turn) {
-                    touchControlNode?.inputDelegate = entity.component(ofType: GamePad.self)!
-                }
-            }
             // Refresh Player Action
             (thePlayer as! CharacterNode).action = ACTION.None
+            (thePlayer as! CharacterNode).jump = false
+            (thePlayer as! CharacterNode).landed = true
+            (thePlayer as! CharacterNode).grounded = true
+            (thePlayer as! CharacterNode).physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
             // Change Player
             if self.childNode(withName: TurnBase!.turn) != nil {
                 thePlayer = childNode(withName: TurnBase!.turn) as! SKSpriteNode
             }
             // Camera Follow flag update
             cameraNeedTurn = true
+            // Simulate touchConrtoller touchup to stop idiot keep touching node
+            touchControlNode?.touchUp(touches: .init(), withEvent: nil)
+            touchInteractionChanged()
+            // Turn controller
+            for entity in self.entities {
+                if entity.component(ofType: GKSKNodeComponent.self)?.node == childNode(withName: TurnBase!.turn) {
+                    touchControlNode?.inputDelegate = entity.component(ofType: GamePad.self)!
+                }
+            }
         }
         
         // Update the player's life
@@ -323,6 +329,10 @@ class GameScene: SKScene {
         updateBomb()
         
         self.lastUpdateTime = currentTime
+    }
+    
+    func touchInteractionChanged () {
+        touchControlNode?.isUserInteractionEnabled = !touchControlNode!.isUserInteractionEnabled
     }
     
     func checkBGM(){
