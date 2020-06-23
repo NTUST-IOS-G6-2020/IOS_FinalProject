@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="landscape" appearance="dark"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lw" translatesAutoresizingMaskIntoConstraints="NO" id="Ozi-0b-yU5">
+                                <rect key="frame" x="212" y="53" width="497" height="361"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Ozi-0b-yU5" secondAttribute="height" multiplier="497:361" id="Qbk-H2-H6h"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ozi-0b-yU5" secondAttribute="trailing" constant="143" id="RSN-cr-43S"/>
+                            <constraint firstAttribute="bottom" secondItem="Ozi-0b-yU5" secondAttribute="bottom" id="ZLo-mj-UJb"/>
+                            <constraint firstItem="Ozi-0b-yU5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="53" id="aex-w7-FSc"/>
+                            <constraint firstItem="Ozi-0b-yU5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="168" id="duu-tb-sdi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-93.080357142857139" y="308.69565217391306"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="lw" width="570" height="1040"/>
+    </resources>
+</document>
