@@ -28,7 +28,9 @@ class GameScene: SKScene {
     var powerMeterFilledNode: SKSpriteNode? = nil
     // Check if bomb exist too long
     var bombTime: TimeInterval = 0.0
+    // Camer Follow Flag
     var cameraFollowBomb : Bool = false
+    var cameraNeedTurn: Bool = false
     
     // 背景捲軸
     var parallaxComponentSystem : GKComponentSystem<ParallaxComponent>?
@@ -131,6 +133,9 @@ class GameScene: SKScene {
             (Player2 as? CharacterNode)?.setUpStateMachine()
             // Setup Player Physics
             (Player2 as? CharacterNode)?.createPhysics(categoryBitMask: ColliderType.PLAYER2)
+            // Makes it face left
+            (Player2 as? CharacterNode)?.facing = -1
+            (Player2 as? CharacterNode)?.xScale = -1
         }
         
         // Turn Base
@@ -200,8 +205,15 @@ class GameScene: SKScene {
                 }
             }
             else {
-                cameraOnNode(node: thePlayer)
-                cameraDistance(scale: 1.2)
+                if cameraNeedTurn {
+                    theCamera.run(SKAction.wait(forDuration: 0.387)) {
+                        self.cameraNeedTurn = false
+                    }
+                }
+                else {
+                    cameraOnNode(node: thePlayer)
+                    cameraDistance(scale: 1.2)
+                }
             }
         }
     }
@@ -230,18 +242,22 @@ class GameScene: SKScene {
             TurnBase?.refresh()
         }
         
-        
         // Check if Change Turn
         if TurnBase!.changeTurn {
             TurnBase?.didChangeTurn()
-            // Refresh Player Action
-            (thePlayer as! CharacterNode).action = ACTION.None
+            
+            // Camera Follow flag update
+            cameraNeedTurn = true
+            // Simulate touchConrtoller touchup to stop idiot keep touching node
+            touchControlNode?.touchUp(touches: .init(), withEvent: nil)
             // Turn controller
             for entity in self.entities {
                 if entity.component(ofType: GKSKNodeComponent.self)?.node == childNode(withName: TurnBase!.turn) {
                     touchControlNode?.inputDelegate = entity.component(ofType: GamePad.self)!
                 }
             }
+            // Refresh Player Action
+            (thePlayer as! CharacterNode).action = ACTION.None
             // Change Player
             if self.childNode(withName: TurnBase!.turn) != nil {
                 thePlayer = childNode(withName: TurnBase!.turn) as! SKSpriteNode
