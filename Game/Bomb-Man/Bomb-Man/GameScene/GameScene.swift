@@ -310,6 +310,12 @@ class GameScene: SKScene {
                 self.view?.presentScene(EndGameScene(), transition: .fade(withDuration: 1))
             }
         }
+        // Check if pause btn pressed, back to start Scene
+        if PauseSpriteNode.pause {
+            self.run(SKAction.wait(forDuration: 0)) {
+                self.view?.presentScene(StartGameScene(), transition: .fade(withDuration: 1))
+            }
+        }
         
         // Change BGN if player has only one life left
         if !changeBGM {
