@@ -172,7 +172,8 @@ class GameScene: SKScene {
     // Camera Follow
     func cameraOnNode(node: SKNode) {
         if cameraFollowBomb {
-            let bombPosition = CGPoint(x: node.position.x + thePlayer.position.x, y: node.position.y + thePlayer.position.y)
+            let facing = (thePlayer as! CharacterNode).facing
+            let bombPosition = CGPoint(x: node.position.x * facing + thePlayer.position.x, y: node.position.y + thePlayer.position.y)
             theCamera.run(SKAction.move(to: CGPoint(x: bombPosition.x, y: bombPosition.y + 100), duration: 0.08))
         }
         else {
@@ -216,16 +217,25 @@ class GameScene: SKScene {
         // Calculate time since last update
         let dt = currentTime - self.lastUpdateTime
         
-        // Turn Base update
-        timer += Float((currentTime - self.lastUpdateTime))
-        if timer >= 1.0 {
-            TurnBase?.update()
-            timer = 0
+        // If Player Move then start timer
+        if (thePlayer as! CharacterNode).action == ACTION.Move {
+            // TurnBase update
+            timer += Float((currentTime - self.lastUpdateTime))
+            if timer >= 1.0 {
+                TurnBase?.update()
+                timer = 0
+            }
         }
+        else if (thePlayer as! CharacterNode).action == ACTION.Shoot {
+            TurnBase?.refresh()
+        }
+        
         
         // Check if Change Turn
         if TurnBase!.changeTurn {
             TurnBase?.didChangeTurn()
+            // Refresh Player Action
+            (thePlayer as! CharacterNode).action = ACTION.None
             // Turn controller
             for entity in self.entities {
                 if entity.component(ofType: GKSKNodeComponent.self)?.node == childNode(withName: TurnBase!.turn) {
@@ -237,11 +247,17 @@ class GameScene: SKScene {
                 thePlayer = childNode(withName: TurnBase!.turn) as! SKSpriteNode
             }
         }
-        // Update player life
-        let life = (thePlayer as! CharacterNode).life
-        TurnBase?.updatePlayerHealth(life: life)
         
-//        print("thrPlayer: ", thePlayer, " Player1: ", Player1, " Player2: ", Player2)
+        // Update the player's life
+        if (Player1 as! CharacterNode).takeDamage || (Player2 as! CharacterNode).takeDamage {
+            let p1_life = (Player1 as! CharacterNode).life
+            let p2_life = (Player2 as! CharacterNode).life
+            TurnBase?.updatePlayerHealth(p1_life: p1_life, p2_life: p2_life)
+        }
+        // Check if End Game
+        if TurnBase?.endGame == true {
+            print("Winner is: ", TurnBase!.winner)
+        }
         
         // Update entities
         for entity in self.entities {

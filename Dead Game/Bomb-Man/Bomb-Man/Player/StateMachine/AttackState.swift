@@ -32,6 +32,7 @@ class AttackState : GKState {
         if activeTime >= animationTime {
             activeTime = 0.0
             if cNode?.childNode(withName: "bomb") == nil {
+                cNode?.action = ACTION.Shoot
                 self.stateMachine?.enter(IdleState.self)
             }
         }

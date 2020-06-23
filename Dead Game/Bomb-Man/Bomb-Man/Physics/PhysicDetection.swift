@@ -115,6 +115,9 @@ class PhysicDetection: NSObject, SKPhysicsContactDelegate {
                 // Take Damage
                 if let player1 = contact.bodyB.node as? CharacterNode {
                     player1.takeDamage = true
+                    player1.life -= 1
+                    player1.hitFacing = bomb.direction
+                    print(player1.life)
                 }
             }
             else if let bomb = contact.bodyB.node as? Bomb {
@@ -122,6 +125,9 @@ class PhysicDetection: NSObject, SKPhysicsContactDelegate {
                 // Take Damage
                 if let player1 = contact.bodyA.node as? CharacterNode {
                     player1.takeDamage = true
+                    player1.life -= 1
+                    player1.hitFacing = bomb.direction
+                    print(player1.life)
                 }
             }
         }
@@ -132,6 +138,9 @@ class PhysicDetection: NSObject, SKPhysicsContactDelegate {
                 // Take Damage
                 if let player2 = contact.bodyB.node as? CharacterNode {
                     player2.takeDamage = true
+                    player2.life -= 1
+                    player2.hitFacing = bomb.direction
+                    print(player2.life)
                 }
             }
             else if let bomb = contact.bodyB.node as? Bomb {
@@ -139,6 +148,9 @@ class PhysicDetection: NSObject, SKPhysicsContactDelegate {
                 // Take Damage
                 if let player2 = contact.bodyA.node as? CharacterNode {
                     player2.takeDamage = true
+                    player2.life -= 1
+                    player2.hitFacing = bomb.direction
+                    print(player2.life)
                 }
             }
         }

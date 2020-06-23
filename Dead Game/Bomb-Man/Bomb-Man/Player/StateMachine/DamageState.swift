@@ -30,13 +30,11 @@ class DamageState : GKState {
             // stop
             cNode.hspeed = 0
             cNode.physicsBody?.velocity.dx = 0.0
-            // hit and loss one life
-            cNode.life -= 1
             cNode.takeDamage = false
             self.stateMachine?.enter(IdleState.self)
         }
-        
-        cNode.xScale = approach(start: cNode.xScale, end: cNode.facing, shift: 0.07)
+        cNode.facing = cNode.hitFacing
+        cNode.xScale = approach(start: cNode.xScale, end: cNode.facing, shift: 1.0)
         cNode.yScale = approach(start: cNode.yScale, end: 1, shift: 0.07)
         
         cNode.position.x = cNode.position.x + cNode.hspeed

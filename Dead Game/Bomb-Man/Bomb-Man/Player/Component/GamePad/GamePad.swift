@@ -25,18 +25,22 @@ class GamePad: GKComponent, ControlInputDelegate {
             switch command {
             case "left":
                 cNode?.left = true
+                cNode?.action = ACTION.Move
             case "cance left", "stop left":
                 cNode?.left = false
             case "right":
                 cNode?.right = true
+                cNode?.action = ACTION.Move
             case "cance right", "stop right":
                 cNode?.right = false
             case "X":
                 cNode?.jump = true
+                cNode?.action = ACTION.Move
             case "stop X", "cancel X":
                 cNode?.jump = false
             case "O":
                 cNode?.aim = true
+//                cNode?.action = ACTION.Shoot
 //            case "stop O", "cancel O":
 //                cNode?.aim = false
             default:

@@ -15,6 +15,7 @@ enum TURN {
 }
 
 let MAX_LIFE = 3
+let MAX_TIME = 5
 
 class TurnBaseNode : SKSpriteNode {
     
@@ -22,22 +23,27 @@ class TurnBaseNode : SKSpriteNode {
 //    var turnLabel = SKLabelNode(fontNamed: "Courier-Bold")
     var turn : String = TURN.P1
     var changeTurn : Bool = false
+    // End Game and Winner
+    var winner: String = TURN.P1
+    var endGame: Bool = false
     
     var p1_health1 = SKSpriteNode(imageNamed: "heart_1")
     var p1_health2 = SKSpriteNode(imageNamed: "heart_1")
     var p1_health3 = SKSpriteNode(imageNamed: "heart_1")
     var p1_label = SKLabelNode(fontNamed: "Courier-Bold")
+    var p1_healthBar = [SKSpriteNode]()
     
     var p2_health1 = SKSpriteNode(imageNamed: "heart_1")
     var p2_health2 = SKSpriteNode(imageNamed: "heart_1")
     var p2_health3 = SKSpriteNode(imageNamed: "heart_1")
     var p2_label = SKLabelNode(fontNamed: "Courier-Bold")
+    var p2_healthBar = [SKSpriteNode]()
     
     var p1_health = MAX_LIFE
     var p2_health = MAX_LIFE
     
-    let turnLimit : Int = 15
-    var timer: Int = 15
+//    let turnLimit : Int = 5
+    var timer: Int = MAX_TIME
     
     // Creating the rectangle of the size of the screen
     init(frame: CGRect) {
@@ -53,10 +59,10 @@ class TurnBaseNode : SKSpriteNode {
         self.changeTurn = !self.changeTurn
     }
     
+    // Start update Timer
     func update () {
         // Update Timer
         self.timer -= 1
-        self.timerLabel.text = String("\(self.timer)")
         
         if self.timer <= 0 {
             // Change Turn
@@ -72,19 +78,33 @@ class TurnBaseNode : SKSpriteNode {
             }
             self.changeTurn = true
             // zero timer
-            self.timer = self.turnLimit
+            self.timer = MAX_TIME
+        }
+        self.timerLabel.text = String("\(self.timer)")
+    }
+    
+    func updatePlayerHealth(p1_life: Int, p2_life: Int) {
+        
+        for i in 0..<(MAX_LIFE - p1_life) {
+            p1_healthBar[i].isHidden = true
+        }
+        for i in 0..<(MAX_LIFE - p2_life) {
+            p2_healthBar[i].isHidden = true
+        }
+        
+        if p1_life <= 0 {
+            endGame = true
+            winner = TURN.P2
+        }
+        else if p2_life <= 0 {
+            endGame = true
+            winner = TURN.P1
         }
     }
     
-    func updatePlayerHealth(life: Int) {
-//        self.health1.isHidden = true
-        for _ in 0...(3-life) {
-            
-        }
-    }
-    
+    // Change Turn
     func refresh() {
-        self.timer = 15
+        self.timer = MAX_TIME
         self.timerLabel.text = String("\(self.timer)")
         // Change Turn
         if self.turn == TURN.P1 {
@@ -108,6 +128,9 @@ class TurnBaseNode : SKSpriteNode {
                   name: "health2", scale: 2)
         addHealth(button: p1_health3, position: CGPoint(x: -(size.width / 3 ) + 65, y: size.height / 3.3),
                   name: "health3", scale: 2)
+        p1_healthBar.append(p1_health1)
+        p1_healthBar.append(p1_health2)
+        p1_healthBar.append(p1_health3)
         
         addHealth(button: p2_health1, position: CGPoint(x: (size.width / 3 ) - 65, y: size.height / 3.3),
             name: "health1", scale: 2)
@@ -115,6 +138,9 @@ class TurnBaseNode : SKSpriteNode {
                   name: "health2", scale: 2)
         addHealth(button: p2_health3, position: CGPoint(x: (size.width / 3 ) + 65, y: size.height / 3.3),
                   name: "health3", scale: 2)
+        p2_healthBar.append(p2_health1)
+        p2_healthBar.append(p2_health2)
+        p2_healthBar.append(p2_health3)
         
         // Add player Label
         addLabel(label: p1_label, position: CGPoint(x: -(size.width / 3 ), y: size.height / 3), name: TURN.P1, fontSize: 50)
@@ -122,7 +148,7 @@ class TurnBaseNode : SKSpriteNode {
         addLabel(label: p2_label, position: CGPoint(x: (size.width / 3 ), y: size.height / 3), name: TURN.P2, fontSize: 50)
         
         // Add Timer
-        timerLabel.text = String("\(turnLimit)")
+        timerLabel.text = String("\(MAX_TIME)")
         timerLabel.fontSize = 80
         timerLabel.fontColor = UIColor.red
         timerLabel.zPosition = 10

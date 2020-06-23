@@ -9,10 +9,16 @@
 import SpriteKit
 import GameplayKit
 
+enum ACTION {
+    static let Move: String = "M"
+    static let Shoot: String = "S"
+    static let None: String = "N"
+}
+
 class CharacterNode: SKSpriteNode {
     
     // Life
-    var life : Int = 3
+    var life : Int = MAX_LIFE
     
     // Attack
     var aim = false
@@ -20,6 +26,10 @@ class CharacterNode: SKSpriteNode {
     // Throw
     var currentPower = 100.0
     var currentAngle = 0.0
+    // Hit Direction
+    var hitFacing :CGFloat = 1
+    // Player Action
+    var action : String = ACTION.None
     
     // Bomb
     var bombReady = false
@@ -83,13 +93,12 @@ class CharacterNode: SKSpriteNode {
         bomb.alpha = bomb.image_alpha
         bomb.setScale(1.7)
         bomb.zPosition = 2
-        bomb.direction = self.facing
+        bomb.direction = -self.facing
         // Bomb Position 
         bomb.position = CGPoint(x: bomb.xOffset, y: bomb.yOffset)
         // SKAction
         bomb.run(bomb.actionOn, withKey: "bombOn")
         
-        print(bomb.position)
         // Make bomb Physics
         bomb.physicsBody = SKPhysicsBody(circleOfRadius: 26, center: CGPoint(x: bomb.position.x - 33, y: bomb.position.y - 28))
         bomb.physicsBody?.affectedByGravity = false
