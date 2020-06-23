@@ -36,6 +36,8 @@ class GameScene: SKScene {
     var parallaxComponentSystem : GKComponentSystem<ParallaxComponent>?
     // Music
     var Music : SKAudioNode?
+    // BGM
+    var changeBGM: Bool = false
     
     override func sceneDidLoad() {
         self.lastUpdateTime = 0
@@ -48,8 +50,21 @@ class GameScene: SKScene {
             print(mp3, " Not Found")
             return
         }
-        Music = SKAudioNode(url: url)
-        addChild(Music!)
+        if Music != nil {
+            Music?.run(SKAction.changeVolume(to: 0, duration: 2)) {
+                self.Music?.removeFromParent()
+                self.Music = SKAudioNode(url: url)
+                self.addChild(self.Music!)
+                self.Music?.run(SKAction.changeVolume(to: 0, duration: 0))
+                self.Music?.run(SKAction.changeVolume(to: 1.2, duration: 10))
+            }
+        }
+        else {
+            Music = SKAudioNode(url: url)
+            addChild(Music!)
+            Music?.run(SKAction.changeVolume(to: 0, duration: 0))
+            Music?.run(SKAction.changeVolume(to: 1.2, duration: 10))
+        }
     }
     
     func addNode(name: String, layer: Int) {
@@ -290,6 +305,12 @@ class GameScene: SKScene {
             }
         }
         
+        // Change BGN if player has only one life left
+        if !changeBGM {
+            checkBGM()
+        }
+        
+        
         // Update entities
         for entity in self.entities {
             entity.update(deltaTime: dt)
@@ -302,6 +323,13 @@ class GameScene: SKScene {
         updateBomb()
         
         self.lastUpdateTime = currentTime
+    }
+    
+    func checkBGM(){
+        if (Player1 as! CharacterNode).life == 1 || (Player2 as! CharacterNode).life == 1 {
+            changeBGM = true
+            addMusic(mp3: "BGM2")
+        }
     }
     
     func updateBomb () {

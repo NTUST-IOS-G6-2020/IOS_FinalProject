@@ -38,14 +38,23 @@ class Bomb: SKSpriteNode {
         
         // remove the bomb
         self.removeFromParent()
-
+        
+        // Add Bomb sound effect
+        let soudEffect = SKAction.run {
+            let bombSound: SKAudioNode?
+            if let url = Bundle.main.url(forResource: "bomb", withExtension: ".mp3") {
+                bombSound = SKAudioNode(url: url)
+                bombSound?.run(SKAction.changeVolume(to: 300, duration: 0))
+                explotion.addChild(bombSound!)
+            }
+        }
         let expand = SKAction.scale(to: 3.0, duration: 0.01)
         let animation = self.actionExplotion
         let remove = SKAction.run {
             explotion.removeFromParent()
         }
 
-        let boom = SKAction.sequence([expand, animation, remove])
+        let boom = SKAction.sequence([soudEffect, expand, animation, remove])
         explotion.run(boom)
     }
 }
