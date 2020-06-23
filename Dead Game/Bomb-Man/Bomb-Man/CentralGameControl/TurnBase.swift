@@ -24,7 +24,7 @@ class TurnBaseNode : SKSpriteNode {
     var turn : String = TURN.P1
     var changeTurn : Bool = false
     // End Game and Winner
-    var winner: String = TURN.P1
+    static var winner: String = TURN.P1
     var endGame: Bool = false
     
     var p1_health1 = SKSpriteNode(imageNamed: "heart_1")
@@ -94,11 +94,11 @@ class TurnBaseNode : SKSpriteNode {
         
         if p1_life <= 0 {
             endGame = true
-            winner = TURN.P2
+            TurnBaseNode.winner = TURN.P2
         }
         else if p2_life <= 0 {
             endGame = true
-            winner = TURN.P1
+            TurnBaseNode.winner = TURN.P1
         }
     }
     

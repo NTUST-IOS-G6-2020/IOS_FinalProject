@@ -25,19 +25,20 @@ class GameViewController: UIViewController {
                 sceneNode.graphs = scene.graphs
                 // Set the scale mode to scale to fit the window
                 sceneNode.scaleMode = .aspectFill
-                
+
                 // Present the scene
                 if let view = self.view as! SKView? {
                     view.presentScene(sceneNode)
                     view.ignoresSiblingOrder = true
-                    
+
                     view.showsFPS = true
                     view.showsNodeCount = true
-                    view.showsPhysics = true
+//                    view.showsPhysics = true
                     view.isMultipleTouchEnabled = true
                 }
             }
         }
+//        (self.view as! SKView).presentScene(EndGameScene())
     }
 
     override var shouldAutorotate: Bool {

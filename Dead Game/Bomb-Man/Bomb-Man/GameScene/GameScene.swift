@@ -37,6 +37,7 @@ class GameScene: SKScene {
     
     override func sceneDidLoad() {
         self.lastUpdateTime = 0
+        view?.isMultipleTouchEnabled = true
     }
     
     func addNode(name: String, layer: Int) {
@@ -272,7 +273,8 @@ class GameScene: SKScene {
         }
         // Check if End Game
         if TurnBase?.endGame == true {
-            print("Winner is: ", TurnBase!.winner)
+            print("Winner is: ", TurnBaseNode.winner)
+            self.view?.presentScene(EndGameScene(), transition: .flipHorizontal(withDuration: 1))
         }
         
         // Update entities

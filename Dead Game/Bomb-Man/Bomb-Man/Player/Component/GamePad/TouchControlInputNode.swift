@@ -158,6 +158,7 @@ class TouchControlInputNode: SKSpriteNode {
     
     // 10:
     func touchUp(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        
         for touch in touches! {
             let location = touch.location(in: parent!)
             let previousLocation = touch.previousLocation(in: parent!)
@@ -180,7 +181,18 @@ class TouchControlInputNode: SKSpriteNode {
                 }
             }
         }
+        
+        // Fake click to avoid idiot keep pressing buttons
+        if event == nil {
+            while pressedButtons.count != 0 {
+                if ((inputDelegate) != nil) {
+                    inputDelegate?.follow(command: "stop \(String(describing: pressedButtons.last!.name!))")
+                }
+                pressedButtons.removeLast()
+            }
+        }
     }
+    
 }
 
 // Recevies the buttons and redirect them as needed when they are pressed

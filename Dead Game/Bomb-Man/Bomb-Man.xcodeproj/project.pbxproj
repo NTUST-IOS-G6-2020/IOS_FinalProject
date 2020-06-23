@@ -20,6 +20,7 @@
 		4B55874A24938AB80029B457 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B55874924938AB80029B457 /* Assets.xcassets */; };
 		4B55874D24938AB80029B457 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B55874B24938AB80029B457 /* LaunchScreen.storyboard */; };
 		4B61FB152493AE0A00808953 /* GamePad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B61FB142493AE0A00808953 /* GamePad.swift */; };
+		4B9A878524A206E200A96C1F /* EndGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9A878424A206E200A96C1F /* EndGameScene.swift */; };
 		4B9CFE892499F9D9003E8EF4 /* CharacterNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CFE882499F9D9003E8EF4 /* CharacterNode.swift */; };
 		4B9CFE8B2499FA35003E8EF4 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9CFE8A2499FA35003E8EF4 /* IdleState.swift */; };
 		4BCECA9B249C060100C90692 /* PhysicDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCECA9A249C060100C90692 /* PhysicDetection.swift */; };
@@ -50,6 +51,7 @@
 		4B55874C24938AB80029B457 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4B55874E24938AB80029B457 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4B61FB142493AE0A00808953 /* GamePad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePad.swift; sourceTree = "<group>"; };
+		4B9A878424A206E200A96C1F /* EndGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameScene.swift; sourceTree = "<group>"; };
 		4B9CFE882499F9D9003E8EF4 /* CharacterNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterNode.swift; sourceTree = "<group>"; };
 		4B9CFE8A2499FA35003E8EF4 /* IdleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
 		4BCECA9A249C060100C90692 /* PhysicDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicDetection.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				4BCECA99249C05BA00C90692 /* Physics */,
 				4BBEE6CF249BFDAE00A524EF /* Player */,
 				4B9CFE872499F995003E8EF4 /* GameScene */,
+				4B9A878324A206CB00A96C1F /* EndGameScene */,
 				4B55873C24938AB70029B457 /* AppDelegate.swift */,
 				4B55874424938AB70029B457 /* GameViewController.swift */,
 				4B55874624938AB70029B457 /* Main.storyboard */,
@@ -157,6 +160,14 @@
 				4BDE2E5C24A09DD400B461EC /* AttackState.swift */,
 			);
 			path = StateMachine;
+			sourceTree = "<group>";
+		};
+		4B9A878324A206CB00A96C1F /* EndGameScene */ = {
+			isa = PBXGroup;
+			children = (
+				4B9A878424A206E200A96C1F /* EndGameScene.swift */,
+			);
+			path = EndGameScene;
 			sourceTree = "<group>";
 		};
 		4B9CFE862499F95C003E8EF4 /* GamePad */ = {
@@ -287,6 +298,7 @@
 				4BFEDD9D249F51730004D933 /* AimState.swift in Sources */,
 				4B61FB152493AE0A00808953 /* GamePad.swift in Sources */,
 				4B55874324938AB70029B457 /* GameScene.swift in Sources */,
+				4B9A878524A206E200A96C1F /* EndGameScene.swift in Sources */,
 				4B9CFE8B2499FA35003E8EF4 /* IdleState.swift in Sources */,
 				4BFF19C224A11A1200F36063 /* TurnBase.swift in Sources */,
 				4B55874524938AB70029B457 /* GameViewController.swift in Sources */,

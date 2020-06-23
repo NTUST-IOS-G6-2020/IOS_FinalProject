@@ -39,7 +39,9 @@ class GamePad: GKComponent, ControlInputDelegate {
             case "stop X", "cancel X":
                 cNode?.jump = false
             case "O":
-                cNode?.aim = true
+                if cNode?.action != ACTION.Move {
+                    cNode?.aim = true
+                }
 //                cNode?.action = ACTION.Shoot
 //            case "stop O", "cancel O":
 //                cNode?.aim = false
