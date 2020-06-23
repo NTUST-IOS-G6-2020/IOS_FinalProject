@@ -44,32 +44,32 @@ class TouchControlInputNode: SKSpriteNode {
     
     //5: Method used to add all buttons
     func setUpControls(size: CGSize) {
-        addButton(button: buttonDirUp,
-                  position: CGPoint(x: -(size.width / 3 ),y: -size.height / 4.5 + 90),
-                  name: "up",
-                  scale: 0.2)
+//        addButton(button: buttonDirUp,
+//                  position: CGPoint(x: -(size.width / 3 ),y: -size.height / 4.5 + 90),
+//                  name: "up",
+//                  scale: 0.2)
         addButton(button: buttonDirLeft,
                   position: CGPoint(x: -(size.width / 3 ) - 90, y: -size.height / 4.5),
                   name: "left",
                   scale: 0.2)
-        addButton(button: buttonDirDown,
-                  position: CGPoint(x: -(size.width / 3 ), y: -size.height / 4.5 - 90),
-                  name: "down",
-                  scale: 0.2)
+//        addButton(button: buttonDirDown,
+//                  position: CGPoint(x: -(size.width / 3 ), y: -size.height / 4.5 - 90),
+//                  name: "down",
+//                  scale: 0.2)
         addButton(button: buttonDirRight,
                   position: CGPoint(x: -(size.width / 3 ) + 90, y: -size.height / 4.5),
                   name: "right",
                   scale: 0.2)
-        addButton(button: buttonT,
-                  position: CGPoint(x: (size.width / 3 ), y: -size.height / 4.5 + 90),
-                  name: "T",
-                  scale: 0.17)
-        addButton(button: buttonS,
-                  position: CGPoint(x: (size.width / 3 ) - 90, y: -size.height / 4.5),
-                  name: "S",
-                  scale: 0.17)
+//        addButton(button: buttonT,
+//                  position: CGPoint(x: (size.width / 3 ), y: -size.height / 4.5 + 90),
+//                  name: "T",
+//                  scale: 0.17)
+//        addButton(button: buttonS,
+//                  position: CGPoint(x: (size.width / 3 ), y: -size.height / 4.5),
+//                  name: "S",
+//                  scale: 0.17)
         addButton(button: buttonX,
-                  position: CGPoint(x: (size.width / 3 ), y: -size.height / 4.5 - 90),
+                  position: CGPoint(x: (size.width / 3 ) - 90, y: -size.height / 4.5),
                   name: "X",
                   scale: 0.17)
         addButton(button: buttonO,

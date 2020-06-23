@@ -56,13 +56,13 @@ class StartGameScene: SKScene {
         bombLabel.xScale = 0.005
         
         
-        let player1 = SKSpriteNode(imageNamed: "p1_idel_1")
+        let player1 = SKSpriteNode(imageNamed: "p1_idel_2")
         player1.run(SKAction(named: "P1_Opening")!, withKey: "P1_Opening")
         player1.position = CGPoint(x: self.frame.midX - 0.45, y: self.frame.minY + 0.427)
         player1.size = CGSize(width: 0.3, height: 0.6)
         player1.zPosition = 1
         
-        let player2 = SKSpriteNode(imageNamed: "p2_idle_1")
+        let player2 = SKSpriteNode(imageNamed: "p2_idle_2")
         player2.run(SKAction(named: "P2_Opening")!, withKey: "P2_Opening")
         player2.position = CGPoint(x: self.frame.midX + 0.4, y: self.frame.minY + 0.5)
         player2.size = CGSize(width: 0.35, height: 0.8)
