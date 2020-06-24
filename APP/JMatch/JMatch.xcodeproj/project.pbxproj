@@ -131,15 +131,8 @@
 		4B349C3A247BAB40002C8AB2 /* JMatch */ = {
 			isa = PBXGroup;
 			children = (
-				EF6F0D6524A11008002FB729 /* FriendView */,
-				EF6F0D6424A10FD3002FB729 /* MatchView */,
-				EF6F0D5B24A09B4C002FB729 /* CardUI */,
-				EF6F0D52249FAFA2002FB729 /* MessageView */,
-				EF6F0D4D249E7041002FB729 /* Cells */,
-				EF6F0D42249DF8CD002FB729 /* Model */,
+				EF95CC4024A3006F00AA47C0 /* MainView */,
 				EF6F0D33249B9A90002FB729 /* Extensions */,
-				EF6F0D2E249B9A05002FB729 /* Controller */,
-				4BAA283F2490CB3F00ED2EBF /* ProfileView */,
 				4BAA283C2490C95900ED2EBF /* HelloScene */,
 				4B349C3D247BAB40002C8AB2 /* SceneDelegate.swift */,
 				4B349C41247BAB40002C8AB2 /* Main.storyboard */,
@@ -147,8 +140,8 @@
 				4B349C46247BAB40002C8AB2 /* LaunchScreen.storyboard */,
 				4B048A1C247BF3AB006D4055 /* Icon */,
 				4B349C49247BAB40002C8AB2 /* Info.plist */,
+				4B349C3B247BAB40002C8AB2 /* AppDelegate.swift */,
 				4B7F363D247CF72500695696 /* GoogleService-Info.plist */,
-				4BDEB448247EA0410057D276 /* CustomHUD.swift */,
 			);
 			path = JMatch;
 			sourceTree = "<group>";
@@ -185,18 +178,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EF6F0D2E249B9A05002FB729 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				4B349C3B247BAB40002C8AB2 /* AppDelegate.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		EF6F0D33249B9A90002FB729 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				EF6F0D47249E1C0E002FB729 /* Extensions.swift */,
+				4BDEB448247EA0410057D276 /* CustomHUD.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -256,6 +242,20 @@
 				EF6F0D55249FCEA9002FB729 /* FriendsTableViewController.swift */,
 			);
 			path = FriendView;
+			sourceTree = "<group>";
+		};
+		EF95CC4024A3006F00AA47C0 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				EF6F0D5B24A09B4C002FB729 /* CardUI */,
+				EF6F0D42249DF8CD002FB729 /* Model */,
+				EF6F0D4D249E7041002FB729 /* Cells */,
+				4BAA283F2490CB3F00ED2EBF /* ProfileView */,
+				EF6F0D52249FAFA2002FB729 /* MessageView */,
+				EF6F0D6424A10FD3002FB729 /* MatchView */,
+				EF6F0D6524A11008002FB729 /* FriendView */,
+			);
+			path = MainView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
