@@ -22,8 +22,6 @@ class MessageTableViewController: UITableViewController, UIGestureRecognizerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        
         let image = UIImage(named: "edit")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
         
@@ -137,7 +135,7 @@ class MessageTableViewController: UITableViewController, UIGestureRecognizerDele
     
     func checkIfUserIsLoggedIn(){
         if Auth.auth().currentUser?.uid == nil{
-            performSelector(inBackground: #selector(handleLogout), with: nil)
+            return
         }
         else{
             fetchUserAndSetupNaviBarTitle()
@@ -176,19 +174,6 @@ class MessageTableViewController: UITableViewController, UIGestureRecognizerDele
         newMessageController.messageController = self
         let naviController = UINavigationController(rootViewController: newMessageController)
         present(naviController, animated: true, completion: nil)
-    }
-    
-    @objc func handleLogout(){
-        do {
-            try Auth.auth().signOut()
-        } catch let logoutError{
-            print(logoutError)
-        }
-        
-        DispatchQueue.main.async(execute: {
-            self.navigationController?.parent?.navigationController?.popToRootViewController(animated: true)
-            self.navigationController?.removeFromParent()
-        })
     }
     
 

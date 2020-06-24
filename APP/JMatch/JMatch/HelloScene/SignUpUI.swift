@@ -39,6 +39,7 @@ extension SignUpViewController {
     func setTextField(TextField : UITextField, keyboardType: UIKeyboardType, returnKeyType: UIReturnKeyType) {
         TextField.delegate = self
         TextField.borderStyle = .roundedRect
+        TextField.layer.borderColor = UIColor.lightGray.cgColor
         TextField.clearButtonMode = .whileEditing
         TextField.keyboardType = keyboardType
         TextField.returnKeyType = returnKeyType

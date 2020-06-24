@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class WelcomeViewController: UIViewController {
 
@@ -21,6 +22,13 @@ class WelcomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         login_btn.layer.cornerRadius = 30.0
         signup_btn.layer.cornerRadius = 30.0
+        
+        // Get Current User, if get it then login
+        if let _ = Auth.auth().currentUser {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarVC")
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

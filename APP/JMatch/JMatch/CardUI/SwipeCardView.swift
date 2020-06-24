@@ -37,7 +37,6 @@ class SwipeCardView : UIView {
         }
     }
     
-    
     //MARK: - Init
      override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -87,10 +86,10 @@ class SwipeCardView : UIView {
     
     func configureLabelView() {
         swipeView.addSubview(label)
-        label.backgroundColor = .white
+        label.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont(name: "Chalkboard SE", size: 30)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.leftAnchor.constraint(equalTo: swipeView.leftAnchor).isActive = true
         label.rightAnchor.constraint(equalTo: swipeView.rightAnchor).isActive = true
@@ -102,7 +101,7 @@ class SwipeCardView : UIView {
     func configureImageView() {
         imageView = UIImageView()
         swipeView.addSubview(imageView)
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
         imageView.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true

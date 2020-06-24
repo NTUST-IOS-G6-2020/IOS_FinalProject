@@ -39,6 +39,7 @@ extension LoginViewController {
         TextField.delegate = self
         
         TextField.borderStyle = .roundedRect
+        TextField.layer.borderColor = UIColor.lightGray.cgColor
         TextField.clearButtonMode = .whileEditing
         TextField.keyboardType = keyboardType
         TextField.returnKeyType = returnKeyType

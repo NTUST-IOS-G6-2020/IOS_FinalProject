@@ -53,11 +53,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         },withCancel: nil)
     }
     
-    lazy var inputTextField: UITextField = {
+    var inputTextField: UITextField = {
         var textField = UITextField()
         textField.placeholder = "Enter message..."
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.delegate = self
+//        textField.delegate = self
         return textField
     }()
     
@@ -262,16 +262,23 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        CustomHUD().ErrorHUD(view: self.view, Message: "GG")
+    }
+    
     private func sendMessageWithImageUrl(imageUrl: String, image: UIImage){
         let properties: [String: Any] = ["imageUrl": imageUrl, "imageWidth": image.size.width, "imageHeight": image.size.height]
         sendMessageWithProperties(properties: properties)
     }
     
     @objc func handleSend(){
-        let properties = ["text": inputTextField.text!]
-        sendMessageWithProperties(properties: properties)
+        if inputTextField.text! != ""{
+            let properties = ["text": inputTextField.text!]
+            sendMessageWithProperties(properties: properties)
 
-        inputTextField.text = ""
+            inputTextField.text = ""
+        }
     }
     
     private func sendMessageWithProperties(properties: [String: Any]){

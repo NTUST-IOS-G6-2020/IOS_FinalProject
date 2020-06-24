@@ -107,12 +107,9 @@ class FriendsTableViewController: UITableViewController {
 //            self.navigationController?.pushViewController(profileController, animated: true)
             let naviController = UINavigationController(rootViewController: profileController)
             self.present(naviController, animated: true, completion: nil)
-           // self.present(profileController,animated: true,completion: nil)
-            //self.navigationController?.pushViewController(profileController, animated: true)
-            
-            
-            //self.present(naviController, animated: true, completion: nil)
         })
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

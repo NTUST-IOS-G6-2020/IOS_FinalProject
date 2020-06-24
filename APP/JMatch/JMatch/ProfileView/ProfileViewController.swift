@@ -131,8 +131,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         } else{
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         }
         
+    }
+    
+    @objc func handleLogout(){
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError{
+            print(logoutError)
+        }
+        
+        DispatchQueue.main.async(execute: {
+            self.navigationController?.parent?.navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.removeFromParent()
+        })
     }
     
     @objc func handleCancel(){
@@ -154,8 +168,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             ref.updateChildValues([String(element.key): element.value])
         })
         
+        let load_hud = CustomHUD().LoadHUD(view: self.view)
+        
         let userRef = Database.database().reference().child("users").child(uid)
-        userRef.updateChildValues(["display name": String(self.DisplayName.text!)])
+        userRef.updateChildValues(["display name": String(self.DisplayName.text!)]){ (error, red) in
+            if error != nil{
+                load_hud.hide(animated: true)
+                CustomHUD().ErrorHUD(view: self.view, Message: error!.localizedDescription)
+                return
+            }
+            load_hud.hide(animated: true)
+        }
+        CustomHUD().SuccessHUD(view: self.view, Message: "Success")
     }
     
     func observeProfileContent(){
@@ -163,6 +187,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             // handle uid not found 的情況
             return
         }
+        
+//        if navigationItem.leftBarButtonItem?.title == "Cancel"{
+//            print("cencel")
+//            uid = ProfileViewController.user!.uid!
+//        } else{
+//            print(navigationItem.leftBarButtonItem?.title)
+//        }
         
         if ProfileViewController.canEdit == false{
             uid = ProfileViewController.user!.uid!
@@ -208,9 +239,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.ProfileImage.translatesAutoresizingMaskIntoConstraints = false
         self.ProfileImage.layer.masksToBounds = true
-        self.ProfileImage.layer.cornerRadius = 75
+        self.ProfileImage.layer.cornerRadius = 80
         self.ProfileImage.contentMode = .scaleAspectFill
-        self.ProfileImage.layer.borderColor = UIColor(red: 70 / 255, green: 130 / 255, blue: 180 / 255, alpha: 0.5).cgColor
+        self.ProfileImage.layer.borderColor = UIColor.lightGray.cgColor
         self.ProfileImage.layer.borderWidth = 3
         self.ProfileImage.isUserInteractionEnabled = true
         self.ProfileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(presentPicker)))

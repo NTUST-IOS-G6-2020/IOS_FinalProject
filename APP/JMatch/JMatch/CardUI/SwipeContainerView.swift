@@ -68,7 +68,10 @@ class StackContainerView: UIView, SwipeCardsDelegate {
         
         for i in 0..<min(numberOfCardsToShow,cardsToBeVisible) {
             addCardView(cardView: datasource.card(at: i), atIndex: i)
+            print("TEST",i)
         }
+        
+        
     }
 
     //MARK: - Configurations
@@ -100,9 +103,10 @@ class StackContainerView: UIView, SwipeCardsDelegate {
     }
     
     func swipeDidEnd(on view: SwipeCardView) {
+        MatchViewController.numberOfCards -= 1
         guard let datasource = dataSource else { return }
         view.removeFromSuperview()
-
+        
         if remainingcards > 0 {
             let newIndex = datasource.numberOfCardsToShow() - remainingcards
             addCardView(cardView: datasource.card(at: newIndex), atIndex: 2)

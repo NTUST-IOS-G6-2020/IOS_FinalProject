@@ -17,11 +17,13 @@ class MatchViewController: UIViewController {
     var stackContainer : StackContainerView!
     var SearchBtn:  UIButton!
     
+    static var numberOfCards = 0
+    
     //MARK: - Init
     
     override func loadView() {
         view = UIView()
-        view.backgroundColor = UIColor(red:1, green:1, blue:1, alpha:1.0)
+        view.backgroundColor = .systemBackground
         stackContainer = StackContainerView()
         view.addSubview(stackContainer)
         configureStackContainer()
@@ -32,11 +34,11 @@ class MatchViewController: UIViewController {
         
         stackContainer.translatesAutoresizingMaskIntoConstraints = false
         SearchBtn.translatesAutoresizingMaskIntoConstraints = false
-        SearchBtn.setTitleColor(UIColor.lightGray, for: .normal)
-        SearchBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 30)
-        SearchBtn.setTitle("Search", for: .normal)
-        SearchBtn.layer.borderColor = UIColor.lightGray.cgColor
-        SearchBtn.layer.borderWidth = 1
+        SearchBtn.imageView?.image = UIImage(systemName: "rays")
+        SearchBtn.imageView?.frame = CGRect(x: SearchBtn.bounds.midX - 40, y: SearchBtn.bounds.midY - 40, width: SearchBtn.bounds.width / 4 - 10, height: SearchBtn.bounds.height / 2 - 30)
+        SearchBtn.imageView?.isHidden = false
+        SearchBtn.imageView?.contentMode = .scaleAspectFill
+        SearchBtn.imageView?.tintColor = UIColor.lightGray
         SearchBtn.layer.cornerRadius = 16
         SearchBtn.isEnabled = true
         SearchBtn.addTarget(self, action: #selector(resetTapped), for: .touchUpInside)
@@ -48,8 +50,8 @@ class MatchViewController: UIViewController {
     func configureStackContainer() {
         stackContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -60).isActive = true
-        stackContainer.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        stackContainer.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        stackContainer.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        stackContainer.heightAnchor.constraint(equalToConstant: 450).isActive = true
     }
     
     func configureSearchBtn(){
@@ -70,6 +72,7 @@ class MatchViewController: UIViewController {
         //fetchUser()
         SearchBtn.isEnabled = false
         SearchBtn.isHidden = true
+        MatchViewController.numberOfCards = viewModelData.count
     }
     
     var user: Users?
@@ -130,6 +133,7 @@ class MatchViewController: UIViewController {
             }
             //print(snapshot)
         }, withCancel: nil)
+    
     }
 
     
@@ -138,6 +142,7 @@ class MatchViewController: UIViewController {
 extension MatchViewController : SwipeCardsDataSource {
 
     func numberOfCardsToShow() -> Int {
+        MatchViewController.numberOfCards = viewModelData.count
         return viewModelData.count
     }
     

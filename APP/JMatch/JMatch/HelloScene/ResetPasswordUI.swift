@@ -24,6 +24,7 @@ extension ResetPasswordViewController {
         TextField.delegate = self
         TextField.borderStyle = .roundedRect
         TextField.clearButtonMode = .whileEditing
+        TextField.layer.borderColor = UIColor.lightGray.cgColor
         TextField.keyboardType = keyboardType
         TextField.returnKeyType = returnKeyType
         TextField.textColor = UIColor.systemPink
