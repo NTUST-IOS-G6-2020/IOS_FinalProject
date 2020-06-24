@@ -17,6 +17,15 @@ enum TURN {
 let MAX_LIFE = 3
 let MAX_TIME = 5
 
+class PauseSpriteNode : SKSpriteNode {
+    static var pause: Bool = false
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        PauseSpriteNode.pause = true
+        print("pause")
+    }
+}
+
 class TurnBaseNode : SKSpriteNode {
     
     var timerLabel = SKLabelNode(fontNamed: "Courier-Bold")
@@ -26,6 +35,10 @@ class TurnBaseNode : SKSpriteNode {
     // End Game and Winner
     static var winner: String = TURN.P1
     var endGame: Bool = false
+    // Pause
+    var pause: Bool = false
+    var pauseBtn = PauseSpriteNode(imageNamed: "Close")
+    
     
     var p1_health1 = SKSpriteNode(imageNamed: "heart_1")
     var p1_health2 = SKSpriteNode(imageNamed: "heart_1")
@@ -141,6 +154,14 @@ class TurnBaseNode : SKSpriteNode {
         p2_healthBar.append(p2_health1)
         p2_healthBar.append(p2_health2)
         p2_healthBar.append(p2_health3)
+        
+        pauseBtn.position = CGPoint(x: (size.width / 4 ) - 230, y: size.height / 3)
+        pauseBtn.name = "pause"
+        pauseBtn.setScale(3)
+        pauseBtn.zPosition = 11
+        pauseBtn.alpha = 1
+        pauseBtn.isUserInteractionEnabled = true
+        self.addChild(pauseBtn)
         
         // Add player Label
         addLabel(label: p1_label, position: CGPoint(x: -(size.width / 3 ), y: size.height / 3), name: TURN.P1, fontSize: 50)
